@@ -1,0 +1,208 @@
+{% extends "layout_admin.html" %}
+{% block title %}Verity Account{% endblock %}
+{% block js %}
+{% endblock %}
+{% block main %}
+<div class="row">
+   <div class="col-md-12">
+      <div class="card">
+         <div class="content">
+            <h4 class="title">Verity Account</h4>
+            <div class="toolbar">
+              
+            </div>
+            <div class="col-md-8 col-md-push-2">    
+
+              
+            </div>
+            <div class="material-datatables">
+               <form  action="/admin/verity-account/{{data.ids}}" enctype="multipart/form-data" method="post">
+                  <div class="content">
+                     <div class="col-md-4">
+                        <div class="form-group ">
+                           <label class="control-label">
+                              Select document   
+                              <star>*</star>
+                           </label>
+                           <select readonly="true" name="document" class="form-control" required="true">
+                                <option {% if data.user['personal_info']['document'] == 'Passport' %} selected="selected" {% endif %} value="Passport">Passport</option>
+                                <option {% if data.user['personal_info']['document'] == 'ID' %} selected="selected" {% endif %} value="ID">ID</option>
+                           </select>
+                        </div>
+                        <div class="clearfix"></div>
+                         <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group ">
+                                 <label class="control-label">
+                                    Country 
+                                    <star>*</star>
+                                 </label>
+                                 <select readonly="true" class="form-control" name="country" required="required" >
+                                       {% for item in data.data_country %} 
+                                       <option {% if data.user['personal_info']['country'] == item.country_name %} selected="selected" {% endif %}
+                                           data-id="{{item.dialling_code}}" value="{{item.country_name}}">{{item.country_name}}</option>
+                                       {% endfor %} 
+                                    </select>
+                                 
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group ">
+                                 <label class="control-label">
+                                    Gender 
+                                    <star>*</star>
+                                 </label>
+                                 <select readonly="true" name="gender" class="form-control" required="true">
+                                      <option {% if data.user['personal_info']['gender'] == 'Male' %} selected="selected" {% endif %} value="Male">Male</option>
+                                      <option {% if data.user['personal_info']['gender'] == 'Female' %} selected="selected" {% endif %} value="Female">Female</option>
+                                 </select>
+                              </div>
+                           </div>
+                         </div>
+
+                        <div class="form-group ">
+                           <label class="control-label">
+                              ZipCode  
+                              <star>*</star>
+                           </label>
+                           <input class="form-control" value="{{data.user['personal_info']['zipcode']}}" required="true" name="zipcode" type="text" readonly="true">
+                        </div>  
+                        
+                        
+                        <div class="form-group ">
+                           <label class="control-label">
+                              Passport/ID/DL image (Fontside)   
+                              <star>*</star>
+                           </label>
+                           
+                           <div class="text-center">
+                              <a href="{{data.user['personal_info']['img_passport_fontside']}}" target="_blank">
+                              <img width="80" src="{{data.user['personal_info']['img_passport_fontside']}}">
+                              </a>
+                           </div>
+                           
+                        </div>
+                        
+                     </div>
+
+                     <div class="col-md-4">
+                        <div class="form-group ">
+                           <label class="control-label">
+                              Passport/ID/DL number
+                              <star>*</star>
+                           </label>
+                           <input class="form-control" value="{{data.user['personal_info']['passport']}}" required="true" name="passport" type="text" readonly="true">
+                        </div>
+                        <div class="form-group ">
+                           <label class="control-label">
+                              Address 
+                              <star>*</star>
+                           </label>
+                           <input class="form-control" value="{{data.user['personal_info']['address']}}" required="true" name="address" type="text" readonly="true">
+                        </div>
+                        <div class="form-group ">
+                           <label class="control-label">
+                              State/Region  
+                              <star>*</star>
+                           </label>
+                           <input class="form-control"  value="{{data.user['personal_info']['state']}}" required="true" name="state" type="text"  readonly="true">
+                        </div>
+                        
+                        <div class="form-group ">
+                           <label class="control-label">
+                              Passport/ID/DL image (Backside)  
+                              <star>*</star>
+                           </label>
+                           
+                           
+                           <div class="text-center">
+                              <a href="{{data.user['personal_info']['img_passport_backside']}}" target="_blank">
+                              <img width="80" src="{{data.user['personal_info']['img_passport_backside']}}">
+                              </a>
+                           </div>
+                           
+                        </div>
+                        
+                     </div>
+
+                     <div class="col-md-4">
+                        <div class="form-group">
+                           <label class="control-label">
+                              Id Date
+                              <star>*</star>
+                           </label>
+                           <input class="form-control" value="{{data.user['personal_info']['date_passport']}}"  name="date_passport" type="date"  required="true" readonly="true">
+                        </div>
+
+                        <div class="form-group">
+                           <label class="control-label">
+                              City/Town
+                              <star>*</star>
+                           </label>
+                           <input class="form-control" value="{{data.user['personal_info']['city']}}"  name="city" type="text" required="true" readonly="true">
+                        </div>
+                        <div class="form-group ">
+                           <label class="control-label">
+                              Phone 
+                              <star>*</star>
+                           </label>
+                           <input class="form-control" value="{{data.user['personal_info']['phone']}}"  required="true" name="phone" type="text" readonly="true">
+                        </div>
+                        
+                        
+                        <div class="form-group ">
+                           <label class="control-label">
+                              Proof of Addresses *
+                              <star>*</star>
+                           </label>
+                           
+                           
+                           <div class="text-center">
+                              <a href="{{data.user['personal_info']['img_address']}}" target="_blank">
+                              <img width="80" src="{{data.user['personal_info']['img_address']}}">
+                              </a>
+                           </div>
+                           
+                        </div>
+                        
+                     </div>
+                     
+                     <div class="col-md-12">
+                        <div class="form-group ">
+                           <label class="control-label" style="height: 20px; margin-bottom: 0px;">
+                              Status Verity
+                              <star></star>
+                           </label>
+                        <textarea style="background: #fff; color: #000" class="form-control" name="admin_node"></textarea>
+                        </div>
+                     </div>
+
+                     <div class="col-md-12">
+                        <div class="form-group ">
+                           <label class="control-label" style="height: 20px; margin-bottom: 0px;">
+                              Admin Node 
+                              <star></star>
+                           </label>
+                           <select style="background: #fff; color: #000" readonly="true" name="status_verity" class="form-control" >
+                                 <option  selected="selected"  value="1">Verity</option>
+                                 <option  value="0">Not Verity</option>
+                           </select>
+                        </div>
+                     </div>
+                     
+                     <input type="hidden" name="token_crt" value="{{data.token_crt}}">
+                     
+                     <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-fill btn-wd">Verity Account</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+         <!-- end content-->
+      </div>
+      <!--  end card  -->
+   </div>
+   <!-- end col-md-12 -->
+</div>
+{% endblock %}

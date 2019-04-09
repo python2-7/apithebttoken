@@ -1,0 +1,71 @@
+{% extends "layout_admin.html" %}
+{% block title %}Dash{% endblock %}
+{% block js %}
+  
+{% endblock %}
+{% block main %}
+<div class="row">
+   <div class="col-md-12">
+   
+      <div class="card">
+         <div class="content">
+            <h4 class="title">Support and Ticket</h4>
+            <div class="toolbar">
+               <!--        Here you can write extra buttons/actions for the toolbar              -->
+            </div>
+            <div class="col-md-12">
+    <div class="input-group input-daterange">
+
+      <input type="text" id="min-date" class="form-control date-range-filter" data-date-format="yyyy-mm-dd" placeholder="From:">
+
+      <div class="input-group-addon">to</div>
+
+      <input type="text" id="max-date" class="form-control date-range-filter" data-date-format="yyyy-mm-dd" placeholder="To:">
+
+    </div>
+  </div>
+            <div class="material-datatables">
+               <table id="datatables" class="table table-bordered" style="width:100%;cellspacing:0">
+                  <thead>
+                     <tr>
+                        <th>Date</th>
+                        <th>Username</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                        <th>Status</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% if data.support %}
+                     {% for item in data.support %}
+                     <tr>
+                        <td>{{ item.date_added | format_date }}</td>
+                         <td>{{ item.username }}</td>
+                        <td><a href="/admin/support/{{item._id}}" class="">{{ item.subject }}</a> </td>
+                        <td>{{ item.message }}</td>
+                        <td>
+                            {% if item.status == 0 %}
+                                <a href="/admin/support/{{item._id}}" class="label label-warning">NOT ANSWERED</a>
+
+                            {% endif %}
+                            {% if item.status == 1 %}
+                               <a href="/admin/support/{{item._id}}" class="label label-success">ANSWERED</a>
+                            {% endif %}
+                           
+                       </td>
+                     </tr>
+                     {% endfor %}
+                     {% endif %}
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <!-- end content-->
+      </div>
+      <!--  end card  -->
+   </div>
+   <!-- end col-md-12 -->
+</div>
+
+{% endblock %}
+

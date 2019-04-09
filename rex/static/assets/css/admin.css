@@ -1,0 +1,47 @@
+body .wrapper{
+  background: #4CAF50;
+}
+#min-date,#max-date,#min-date-history,#max-date-history{
+  border-radius: 5px;
+  background: #fff;
+}
+.content_setup_profit input{
+  background: #fff;
+  border: 1px solid #ababad;
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+}
+.content_setup_profit
+.table > tbody > tr > td {
+    padding: 0px 11px;
+}
+#username_select{
+  display: none;
+}
+
+.material-datatables .dt-buttons{
+  
+  width: 100%;
+  margin-bottom: 20px;
+  float: left;
+
+}
+.material-datatables .dt-button{
+  padding: 10px;
+  background: #eee;
+  float: right;
+  margin-left: 10px;
+}
+.navbar .navbar-nav > li > a.btn.btn-warning.btn-fill, .btn-warning.btn-fill {
+    background: #FF5722;
+    padding: 12px 20px;
+    font-weight: 500;
+    color: #fff;
+    font-size: 18px;
+    width: 100%;
+    border-radius: 0px;
+    border: none;
+    text-transform: uppercase;
+    border-radius: 10px;
+}

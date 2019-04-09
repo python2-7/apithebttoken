@@ -1,0 +1,186 @@
+{% extends "layout.html" %}
+{% block title %}Transfer{% endblock %}
+{% block css %}
+<link href="/static/assets/css/jstree.css" rel="stylesheet" >
+{% endblock %}
+{% block js %}
+<script src="/static/assets/js/getinfo.js"></script>
+<script type="text/javascript" src="/static/assets/js/jstree.min.js"> </script>
+<script type="text/javascript">
+   $('#TreeSystem').jstree({
+           'core' : {
+              'data' : {
+                 "url" : "/account/json_tree_ico/{{data.uid}}",
+                 "dataType" : "json",
+        'data' : function (node) {
+                 return { 'id' : node.id };
+             }
+              }
+           }
+        });
+</script>
+{% endblock %}
+{% block main %}
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">TRANSFER</strong>
+      </div>
+      <div class="card-body">
+         
+         <form action="" method="post" class="form-horizontal form-bordered form-account">
+            <div class="form-group">
+            <div class="col-md-6 col-md-push-3"> 
+               <div class="row">
+                  {% if data.val_quantity != '' or data.val_user_id != '' or data.val_authen != '' or data.val_balance != '' or data.val_max_transfer != ''%}
+                     <div class="alert alert-danger">
+                        <span class="badge badge-pill badge-danger">Error</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                           <span aria-hidden="true">×</span>
+                        </button>
+                        <hr>
+
+                        {% if data.val_user_id == 'empty' %}
+                        <p><i class="fa fa-star"></i> Please enter the receiver ID.</p>
+                        {% endif %}
+                        {% if data.val_user_id == 'not' %}
+                        <p><i class="fa fa-star"></i> The wrong username. Please try again.</p>
+                        {% endif %}
+                        {% if data.val_user_id == 'not_node' %}
+                        <p><i class="fa fa-star"></i> Members are not in your system.</p>
+                        {% endif %}
+                        {% if data.val_quantity == 'empty' %}
+                        <p><i class="fa fa-star"></i> Minimum transfer amount is $ 50.</p>
+                        {% endif %}
+                       
+                        {% if data.val_authen == 'empty' %}
+                        <p><i class="fa fa-star"></i> Please enter your authen code.</p>
+                        {% endif %}
+                        {% if data.val_authen == 'not' %}
+                        <p><i class="fa fa-star"></i> Authen code is incorrect. Please check again.</p>
+                        {% endif %}
+                        
+                        {% if data.val_balance == 'not' %}
+                        <p><i class="fa fa-star"></i> Account Balance is not enough to set the command. Please try again.</p>
+                        {% endif %}
+
+                        {% if data.val_max_transfer != '' %}
+                        <p><i class="fa fa-star"></i> You can transfer ${{data.val_max_transfer | format_usd}} in today</p>
+                        {% endif %}
+                     </div>
+                  {% endif %}
+
+
+                  {% if data.val_transfer == 'complete'  %}
+                     <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                           <span aria-hidden="true">×</span>
+                        </button> 
+                        <p><i class="fa fa-star"></i> Successful transfer.</p>
+                     </div>
+                  {% endif %}
+                  </div>
+               </div>
+               <div class="clearfix"></div>
+               <div class="row">
+                  <label class="col-md-3 control-label" for="Comm_Type"> Total Balance<span class="text-danger">*</span></label>
+                  <div class="col-md-6">
+                     <select id="Comm_Type" name="Comm_Type" class="form-control">
+                        <option value="1" selected="">Balance-wallet (${{data.user['balance_wallet'] | format_usd}})</option>
+                     </select>
+                  </div>
+               </div>
+              
+               <div class="row" style="margin-top: 15px;">
+                  <label class="col-md-3 control-label" for="Comm_Money">To user <span class="text-danger">*</span></label>
+                  <div class="col-md-6">
+                     <!-- <input type="text"  placeholder="An user's ID" id="input_user_id" name="user_id" class="form-control" > -->
+                     <input style="margin-top: 5px;" type="text"  placeholder="Username" id="input_user_name" name="username" class="form-control">
+                  </div>
+               </div>
+               <div class="row" style="margin-top: 15px;">
+                  <label class="col-md-3 control-label" for="Comm_Money">Quantity <span class="text-danger">*</span></label>
+                  <div class="col-md-6">
+                     <input type="text"  placeholder="Quantity" name="quantity" class="form-control" >
+                  </div>
+               </div>
+            </div>
+            <input type="hidden" name="token_crt" value="{{data.token_crt}}">
+            <div class="form-group form-actions">
+               <div class="row">
+                  <label class="col-md-3 control-label" for="User_RePassword2">&nbsp;</label>
+                  <div class="col-lg-6 col-md-6 col-sm-6 ">
+                     <div class="input-group"> 
+                        <input type="text" name="authen" value="" class="form-control" placeholder="Two-factor Auth">
+                        <span class="input-group-btn"> <button type="submit" name="submit_transfer" class="btn btn-effect-ripple btn-primary" style="overflow: hidden; position: relative;">External Withdraw</button> </span> 
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </form>
+         
+      </div>
+   </div>
+</div>
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">TRANSFER HISTORY</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            <div class="material-datatables">
+               <table id="datatables_transfer" class="table table-bordered" style="width:100%;cellspacing:0">
+                  <thead>
+                     <tr>
+                        <th class="text-center">No.</th>
+                        <th>Datetime</th>
+                        <th>From Acount</th>
+                        <th>To Acount</th>
+                        <th>Receive</th>
+                        <th>Send</th>
+                        <th>Status</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% if data.transfer %}
+                     {% for item in data.transfer %}
+                     <tr>
+                        <td class="text-center">></td>
+                        <td>{{ item.date_added | format_date }}</td>
+                        <td>{{ item.from }}</td>
+                        <td>{{ item.to }}</td>
+                        <td class="text-center">
+                        {% if item.type == "receive" %}
+                           {{item.amount | format_usd }}
+                        {% endif %}
+                        </td>
+                        <td class="text-center">
+                        {% if item.type == "send" %}
+                           {{item.amount | format_usd }}
+                        {% endif %}
+                        
+                        </td>
+                        <td class="text-center">
+                           <label style="color:green">Success</label>
+                        </td>
+                     </tr>
+                     {% endfor %}
+                     {% endif %}
+                  </tbody>
+                  <tfoot>
+                     <tr>
+                         
+                        <th colspan="4" class="text-right">Total</th>
+                        <th class="text-center"></th> 
+                        <th class="text-center" colspan="1"></th> 
+                        <th ></th>
+                     </tr>
+                 </tfoot>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block title %}Generations Bonus{% endblock %}
+{% block css %}
+
+{% endblock %}
+{% block js %}
+
+{% endblock %}
+	
+
+{% block main %}
+
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">Generations Bonus</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            <div class="material-datatables">
+              
+               <table id="datatables_history" class="table table-bordered" style="width:100%;cellspacing:0">
+                  <thead>
+                     <tr>
+                        <th class="text-center">No.</th>
+                        <th class="text-center">Datetime</th>
+                        <th class="text-center">Detail</th>
+                        <th class="text-center">Total</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% if data.history %}
+                     {% for item in data.history %}
+                     <tr>
+                        <td class="text-center"></td>
+                        <td class="text-center">{{ item.date_added | format_only_date }}</td>
+                        <td class="text-center">{{ item.detail }}</td>
+                        <td class="text-center">{{ item.amount | format_usd }}</td>
+                     </tr>
+                     {% endfor %}
+                     {% endif %}
+                  </tbody>
+                  <tfoot>
+                  <th colspan="3" class="text-right">Total</th>
+                  <th  class="text-center"></th>
+                  <tfoot>
+               </table>
+            </div>
+            </div>
+         </div>
+      </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,275 @@
+{% extends "layout.html" %}
+{% block title %} | World Trade{% endblock %}
+{% block js %}
+
+
+<script src="/static/assets/js/getinfo.js"></script>
+<script src="/static/assets/js/main.js"></script>
+<script src="/static/assets/js/ico.js"></script>
+
+
+
+{% endblock %}
+{% block main %}
+
+<div class="modal fade" id="modalExchangeToken" tabindex="-1" role="dialog" aria-labelledby="modalExchangeLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+            <h4 class="modal-title" id="ModalTransfer-label">Exchange Token to XVG</h4>
+         </div>
+         <form role="form" class="form-horizontal" id="frmTransfer" novalidate="novalidate">
+            <div class="modal-body">
+               <div class="well">
+                  <div class="text-black"> Exchange rate : <strong>10 Token</strong> = <strong> 1</span> XVG</strong> </div>
+               </div>
+               <div class="well">
+                  <div class="text-black"> Token Wallet : <strong class="s_token">{{ (data.float(data.user.s_token)) | format_usd}}</strong> </div>
+               </div>
+               <div class="well">
+                  <div class="text-black"> XVG Wallet : <strong class="sva_balance">{{ (data.float(data.user.sva_balance)) | format_usd}} XVG</strong> </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-md-12">Amount Token</label> 
+                  <div class="col-sm-6">
+                     <div class="input-group"> <input type="text" placeholder="Amount" class="form-control amount_token" name="amount_token" id="amount_token"> <span class="input-group-addon">Token</span> </div>
+                  </div>
+                  <div class="col-sm-6">
+                     <div class="input-group"> <input type="text" class="form-control amount_coin_token" readonly="" id="amount_coin_token" name="amount_coin_token"> <span class="input-group-addon">XVG</span> </div>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer"> <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button> <button type="button" id="btn-transfer-token" class="btn btn-primary btnConfirm" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing Order">Transfer Token To XVG Wallet</button> </div>
+         </form>
+      </div>
+   </div>
+</div>
+<a href="#" id="ppimg" data-toggle="modal" data-target=".pop-up-2"></a>
+<div class="modal fade pop-up-2" tabindex="-1" role="dialog"  aria-hidden="true" style="z-index: 3">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content" style=" background: transparent; box-shadow: none; ">
+         <!--   <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            
+            </div> -->
+         <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style=" padding: 10px 14px; background: #b31166; opacity: 1; color: #fff; border-radius: 50%; ">×</button>
+            <img src="#" class="img-responsive img-rounded center-block" alt="">
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-md-8 col-md-offset-2">
+      <div class="input-group p-b-10">
+                                     <input id="refferal_link" class="form-control" name="refferal_link" type="text" value="{{data.refferal_link}}" readonly>
+                                     <span class="input-group-btn">
+                                         <button id="copy--address" class="btn btn-primary copy" data-clipboard-action="copy" data-clipboard-target="#refferal_link" type="button">Copy</button>
+                                     </span>
+                                 </div>
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-lg-6 col-md-6 col-sm-6">
+      <div class="card card-wallet" data-color="orange">
+         <div class="content">
+            <div class="row">
+               <div class="col-xs-12">
+                  <div class="numbers">
+                     <p>XVG Wallet</p>
+                     <span class="sva_balance">{{ (data.float(data.user.sva_balance)) | format_usd}}</span> XVG
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer">
+            <div class="stats">
+               <i class="ti-wallet text-warning"></i> 
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-6 col-md-6 col-sm-6">
+      <div class="card card-wallet" data-color="lightseagreen">
+         <div class="content">
+            <div class="row">
+               <div class="col-xs-12">
+                  <div class="numbers">
+                     <p>BTC Wallet</p>
+                      <span class="btc_balance">
+                        {{data.user.btc_balance | format_round}}
+                      <!-- -->
+                   </span> BTC
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer">
+            <div class="stats">
+               <i class="ti-wallet text-warning"></i> 
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-6" style="display:none;">
+      <div class="card card-wallet" data-color="mediumaquamarine">
+         <div class="content">
+            <div class="row">
+               <div class="col-xs-12">
+                  <div class="numbers">
+                     <p>Token:<span class="s_token"> {{ (data.user.s_token) | format_usd}} </span></p>
+                      <i class="btn btn-fill btn-danger ti-arrows-horizontal" data-toggle="modal" data-target="#modalExchangeToken" style="padding-top: 0px; padding-bottom: 0px;"> Exchange</i>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer">
+            <div class="stats">
+               <i class="ti-wallet text-warning"></i> 
+            </div>
+         </div>
+      </div>
+   </div>
+
+ 
+</div>
+<div class="row">
+   <div class="col-md-6">
+      <div class="card" style=" min-height: 428px; ">
+        
+            <div class="header">
+               <h4 class="title">
+                 BUY XVG
+               </h4>
+              
+            </div>
+         
+            <div class="content">
+              
+             
+                   <label for="Username" class="">Quantity XVG<span class="text-danger">*</span><small class="text-danger">(Min 50 XVG)</small></label>
+                     <div class="input-group">
+                        
+                         <input class="form-control" name="sva_quantity" type="text" id="sva_quantity" placeholder="Amount XVG">
+                          <span class="input-group-addon btn btn-default" >XVG</span>
+                      </div>
+                   
+                      <label for="amount" class="">Quantity in BTC <span class="text-danger">*</span> <small class="text-danger">(1 XVG = <span class="text-danger rate_sva_usd"> ...</span>)</small></label>
+                     <div class="input-group">
+                        
+                         <input class="form-control" name="btc_amount" type="text" id="btc_amount" placeholder="Quantity BTC" readonly="">
+                           <span class="input-group-addon btn btn-dashboard" data-btc="{{ (data.float(data.user.btc_balance)) }}" id="MaxBtc" >Max</span>
+                     </div>
+                
+                     <div class="form-group">
+                        <label>Password <span class="text-danger">*</span></label>
+                        <input type="password" placeholder="Password" name="password" class="form-control" required="required" aria-required="true" id="password_ico">
+                     </div>
+                     <div class="form-group">
+                      <label>Two Factor Auth <span class="text-danger">*</span></label>
+                      <input class="form-control input-no-border" placeholder="2FA Code (Required)" name="one_time_password" id="onetime_ico" type="text">
+                  </div>
+             
+                     <div class="text-center">
+                       <button type="button" id="btnBuyICO" class="btn btn-fill btn-warning btnConfirm" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing">Buy XVG</button>
+                     </div>
+               
+                
+            </div>
+         
+
+      </div>
+      <div class="modal fade" id="modalDepositBTC" tabindex="-1" role="dialog" aria-labelledby="modalDepositBTCLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+                  <h4 class="modal-title" id="ModalTransfer-label">Deposit Bitcoin (BTC)</h4>
+               </div>
+               <form role="form" class="form-horizontal" id="frmDepBitcoin" novalidate="novalidate">
+                  <div class="modal-body">
+                     <div class="input-group">
+                          <input id="btc_address" class="form-control" name="btc_address" type="text" value="{{ data.btc_address}}" readonly>
+                          <span class="input-group-btn">
+                              <button id="copy-btc-address" class="btn btn-primary copy" data-clipboard-action="copy" data-clipboard-target="#btc_address" type="button">Copy</button>
+                          </span>
+                      </div>
+                     <p class="text-center" id="qrBTC">
+                        <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=bitcoin:{{ data.btc_address}}?amount=0" alt="Deposit Bitcoin">
+                     </p>
+                  </div>
+                  <div class="modal-footer"> <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button> </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-md-6">
+      <div class="card">
+        
+       
+            <div class="header" >
+               <h4 class="title">
+                  Transfer World Trade()
+               </h4>
+            </div>
+            <div class="content">
+                 <label for="Username" class="text-white">Recipient's Username</label>
+               <div class="input-group">
+                  
+                   <input class="form-control" name="username" type="text" id="Username" placeholder="Recipient's Username">
+                    <span class="input-group-addon btn btn-dashboard" id="checkUsername" >Check</span>
+                </div>
+             
+                <label for="amount" class="text-white">Quantity in Worldtrader</label>
+               <div class="input-group">
+                  
+                   <input class="form-control" name="amount" type="text" id="sva_amount" placeholder="Quantity SVA">
+                     <span class="input-group-addon btn btn-dashboard" data-sva="{{ (data.float(data.user.sva_balance)) }}" id="Max" >Max</span>
+               </div>
+          
+               <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" placeholder="Password" name="password" class="form-control" required="required" aria-required="true" id="password">
+               </div>
+               <div class="form-group">
+                    <label>Two Factor Auth</label>
+                    <input class="form-control input-no-border" req placeholder="2FA Code (Only if you enabled 2FA)" name="one_time_password" id="onetime_transfer" type="text">
+                </div>
+               <button type="button" id="btnTransferMember" class="btn btn-fill btn-warning btnConfirm" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing">Transfer</button>
+            </div>
+        
+      </div>
+      <div class="modal fade" id="modalDepositBTC" tabindex="-1" role="dialog" aria-labelledby="modalDepositBTCLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+                  <h4 class="modal-title" id="ModalTransfer-label">Deposit Bitcoin (BTC)</h4>
+               </div>
+               <form role="form" class="form-horizontal" id="frmDepBitcoin_" novalidate="novalidate">
+                  <div class="modal-body">
+                     <div class="input-group">
+                          <input id="btc_address_" class="form-control" name="btc_address" type="text" value="{{ data.btc_address}}" readonly>
+                          <span class="input-group-btn">
+                              <button id="copy-btcc-address" class="btn btn-primary copy" data-clipboard-action="copy" data-clipboard-target="#btc_address" type="button">Copy</button>
+                          </span>
+                      </div>
+                     <p class="text-center" id="qrBTC">
+                        <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=bitcoin:{{ data.btc_address}}?amount=0" alt="Deposit Bitcoin">
+                     </p>
+                  </div>
+                  <div class="modal-footer"> <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button> </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   
+</div>
+
+
+{% endblock %}

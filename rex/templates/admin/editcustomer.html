@@ -1,0 +1,159 @@
+{% extends "layout_admin.html" %}
+{% block title %}Edit Customer{% endblock %}
+
+{% block js %}
+    
+    <script type="text/javascript">
+        $('#frmChangePasswordr').click(function(evt) {
+            $.ajax({
+                url: "/admin/updatePassword",
+                data: {
+                    wallet : $('#new_wallet').val(),
+                    password: $('#new_password').val(),
+                    repeat_password: $('#repeat_new_password').val(),
+                    user_id: $('#user_id').val(),
+                    email : $('#new_email').val(),
+                    telephone : $('#new_telephone').val()
+                },
+                type: "POST",
+               
+                success: function(data) {
+                  
+                    var data = $.parseJSON(data);
+                    data.status == 'error' ? (
+                        showNotification('top', 'right', data.message, 'danger')
+                    ) : (
+                        showNotification('top', 'right', data.message, 'success'),
+                        $('#new_password').val(''),
+                        $('#repeat_new_password').val('')
+                    )
+                }
+            });
+        });
+
+        $('#UpdatesPnode').click(function(evt) {
+            $.ajax({
+                url: "/admin/updateSponsor",
+                data: {
+                    p_node: $('#p_node').val(),
+                    user_id: $('#user_id').val()
+                },
+                type: "POST",
+                success: function(data) {
+                    var data = $.parseJSON(data);
+                    data.status == 'error' ? (
+                        showNotification('top', 'right', data.message, 'danger')
+                    ) : (
+                        showNotification('top', 'right', data.message, 'success')
+                    )
+                }
+            });
+        });
+        $('#checkPbinary').click(function(evt) {
+            $.ajax({
+                url: "/admin/updatePbinary",
+                data: {
+                    p_binary: $('#p_binary').val(),
+                    user_id: $('#user_id').val()
+                },
+                type: "POST",
+                success: function(data) {
+                    var data = $.parseJSON(data);
+                    data.status == 'error' ? (
+                        showNotification('top', 'right', data.message, 'danger')
+                    ) : (
+                        showNotification('top', 'right', data.message, 'success')
+                    )
+                }
+            });
+        });
+        function showNotification(from, align, msg, type) {
+                /* type = ['','info','success','warning','danger','rose','primary'];*/
+                var color = Math.floor((Math.random() * 6) + 1);
+                $.notify({
+                    icon: "notifications",
+                    message: msg
+                }, {
+                    type: type,
+                    timer: 3000,
+                    placement: {
+                        from: from,
+                        align: align
+                    }
+                });
+            }
+    </script>
+
+
+{% endblock %}
+
+
+{% block main %}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="content">            
+               <h4 class="title">Update infomation: {{data.user['username']}}</h4>
+
+               <form  action="/admin/customer/{{data.user_id}}" enctype="multipart/form-data" method="post">
+                    
+                  <div class="content">
+                     
+                    
+                     <div class="row" style="margin-bottom: 10px">
+                        <label style="margin-top: 10px;" class="col-md-5 control-label text-right" for="Comm_Type"> New Password</label>
+                        <div class="col-md-7">
+                           <input class="form-control" value="" name="password" type="text" >
+                        </div>
+                     </div>
+
+                     <div class="row" style="margin-bottom: 10px">
+                        <label style="margin-top: 10px;" class="col-md-5 control-label text-right" for="Comm_Type"> New Password Transaction</label>
+                        <div class="col-md-7">
+                           <input class="form-control" value="" name="password_transaction" type="text" >
+                        </div>
+                     </div>
+                     
+
+                     <div class="row" style="margin-bottom: 10px">
+                        <label style="margin-top: 10px;" class="col-md-5 control-label text-right" for="Comm_Type"> Status</label>
+                        <div class="col-md-7">
+                           <select name="status" class="form-control" required="true">
+                                <option {% if data.user['status'] == 0 %} selected="selected" {% endif %} value="0">Enlable</option>
+                                <option {% if data.user['status'] == 1 %} selected="selected" {% endif %} value="1">Disable</option>
+                           </select>
+                        </div>
+                     </div>
+
+
+                     
+
+                        
+                     <input type="hidden" name="token_crt" value="{{data.token_crt}}">
+                     
+                  </div>
+
+                  <div class="text-center">
+                        <button type="submit" class="btn btn-rose btn-fill btn-wd">Update</button>
+                     </div>
+               </form>
+
+
+
+               
+               
+            </div>
+            <!-- end content-->
+        </div>
+        <!--  end card  -->
+    </div>
+    <!-- end col-md-12 -->
+</div>
+<div class="row" style="display: none;" >
+    
+</div>
+
+{% endblock %}
+

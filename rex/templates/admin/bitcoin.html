@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title></title>
+      <link rel="stylesheet" href="">
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+      <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"> </script>
+      <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"> </script>
+      <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"> </script>
+      <script type="text/javascript">
+         $(document).ready(function() { 
+           $('#example').dataTable({
+           
+               "bFilter": true,
+               "bInfo": false,
+              
+          });
+         } );
+      </script>
+   </head>
+   <body>
+   <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Admin STC</a>
+    </div>
+    <ul class="nav navbar-nav">
+    
+      <li><a href="/santa/dashboard">Dashboard</a></li>
+      <li><a href="/santa/customer">Customer</a></li>
+      <li><a href="/santa/invest">Lending</a></li>
+      <li><a href="/santa/ico">Ico</a></li>
+      <li><a href="/santa/withdraws">Withdraw STC</a></li>
+      <li><a href="/santa/withdraw-btc">Withdraw BTC</a></li>
+      <li><a href="/santa/logout">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+      <div style="padding: 20px;"></div>
+      
+      <div class="container-fluid">
+       <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="well text-center">
+              Balance: {{data.balance}} BTC
+            </div>
+          </div>
+          
+        </div>
+        <div class="row">
+          <di class="col-md-12">
+            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                 <tr>
+                    <th>address</th>
+                    <th>category</th>
+                    <th>amount</th>
+                      <th>confirmations</th>
+                    
+                   
+                    <th>txid</th>
+                 </tr>
+              </thead>
+              <tfoot>
+                 <tr>
+                    <th>address</th>
+                    <th>category</th>
+                    <th>amount</th>
+                      <th>confirmations</th>
+                 
+                  
+                    <th>txid</th>
+                 </tr>
+              </tfoot>
+              <tbody>
+                 {% if data.listtransactions %}
+                 {% for item in data.listtransactions %}
+                 <tr>
+                  
+                    <td><a href="/admin/balance/{{ item.address }}" target="_blank">{{ item.address }}</a></td>
+                    <td>{{ item.category}}</td>
+                    <td>{{ item.amount}}</td>
+                   <td>{{ item.confirmations}}</td>
+        
+               
+                  
+          
+                     <td><a href="https://blockchain.info/tx/{{ item.txid }}" target="_blank">{{ item.txid }}</a></td>
+                    
+                 </tr>
+                 {% endfor %}
+                 {% endif %}
+              </tbody>
+           </table>
+          </di>
+        </div>
+      </div>
+   </body>
+</html>

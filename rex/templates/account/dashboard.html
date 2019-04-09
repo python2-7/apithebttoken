@@ -1,0 +1,346 @@
+{% extends "layout.html" %}
+{% block title %}Dashboard {% endblock %}
+
+{% block js %}
+
+<script src="/static/assets/js/main.js"></script>
+<link rel="stylesheet" href="/static/assets/css/jquery.bxslider.css">
+<script src="/static/assets/js/jquery.bxslider.min.js"></script>
+<script>
+   $(document).ready(function () {
+      $('.slider').bxSlider({
+         auto: true,
+         speed: 1000,
+         pause: 3000,
+         captions: false,
+         touchEnabled:false,
+         hideControlOnEnd : true
+      });
+   });
+</script>
+
+{% endblock %}
+{% block main %}
+
+
+<div class="row price_dashboard">
+   <div class="items">
+      BTC/USD: {{data.data_ticker['btc_usd'] | format_usd}}
+   </div>
+   <div class="items">
+      ETH/USD: {{data.data_ticker['eth_usd'] | format_usd}}
+   </div>
+   <div class="items">
+      LTC/USD: {{data.data_ticker['ltc_usd'] | format_usd}}
+   </div>
+   <div class="items">
+      BCH/USD: {{data.data_ticker['bch_usd'] | format_usd}}
+   </div>
+   <div class="items">
+      USDT/USD: 1.00
+   </div>
+</div>
+
+{% if data.notification_all != None%}
+<div class="row">
+   <div class="card-body col-lg-12" style="padding:0px;">
+      <div class="sufee-alert alert with-close alert-primary alert-primary_note alert-dismissible ">
+
+         {% autoescape on %}{{data.notification_all['content']}}{% endautoescape %}
+         
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">×</span>
+         </button>
+         <div class="clearfix"></div>
+      </div>
+   </div>
+</div>
+{% endif %}
+
+<div class="row">
+   <div class="card-body col-lg-12" style="padding:0px;">
+      <div class="sufee-alert alert with-close alert-primary alert-dismissible">
+         <span style="margin-bottom: 3px;" class="badge badge-pill badge-primary">Your Personal Referral Link</span>
+         <div class="row">
+            
+            <p class="url" id="url_ref" style="line-height: 120%;     width: 45%;float:left; border: 1px solid #ccc;"><input style="color: #004085; background: none;    border: none;font-size: 17px;" id="refferal_link" class="form-control" name="refferal_link" type="text" value="{{data.refferal_link}}" readonly></p>
+            <button id="copy-btc-address" class="btn btn-default btn-copy btn  copy" data-clipboard-action="copy" data-clipboard-target="#refferal_link" type="button"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
+            
+             
+         </div>
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">×</span>
+         </button>
+      </div>
+   </div>
+</div>
+
+<div class="section-heading row">
+<div class=" col-lg-9 col-md-8 col-sm-7 col-xs-12">
+   <h1 class="title text-uppercase"></h1>
+</div>
+   <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 pull-right count-down-box">
+   
+   </div>
+</div>
+
+
+
+<div class="row wallet_item">
+   <div class="col-md-6 nopadding-left">
+      <div class="item">
+       <h4>DMCC </h4>
+       <span style="font-size:26px;">{{data.user['coin_wallet'] | format_usds}}</span>
+      </div>
+   </div>
+   <div class="col-md-6 nopadding-right" onclick="window.location.href='/account/withdraw'">
+       <div class="item">
+          <h4>Wallet </h4>
+          <span style="font-size:26px;">${{data.user['balance_wallet'] | format_usd}}</span>
+      </div>
+   </div>
+
+   <div class="col-md-6 nopadding-left" onclick="window.location.href='/account/investment-history'" >
+      <div class="item" style="min-height: 105px;">
+       <h4>Total Investment</h4>
+       <span style="font-size:26px;">${{data.user['investment'] | format_usd}}</span>
+      </div>
+   </div>
+   <div class="col-md-6 nopadding-right" onclick="window.location.href='/account/total-income'">
+       <div class="item">
+          <h4>Total Income  </h4>
+          <span style="font-size:26px;">${{data.user['total_earn'] | format_usd}}</span>
+          <div class="clearfix"></div>
+          <p style="font-size:19px">Profit Statitics {{data.Profit_Statitics}}%</p>
+      </div>
+   </div>
+</div>
+
+
+<div class="row panel-body" style="margin-top: 20px">
+   
+   <div class="col-lg-3 nopadding">
+      <div class="card" style="margin-bottom:0px; background:none;cursor: pointer" onclick="window.location.href='/account/daily-income-history'">
+         <div class="card-header" style="border-bottom:0px">
+            Principal &amp; Interest
+         </div>
+         <div class="card-body">
+            <div class="box blue-1">
+                  <p></p>
+                  <span style="font-size:26px;">${{data.user['d_wallet'] | format_usd}}</span>
+                  <p></p>
+               </div>
+         </div>
+      </div>
+   </div>
+   <!-- End item !-->      
+   <div class="col-lg-3 nopadding">
+      <div class="card" style="margin-bottom:0px; background:none;cursor: pointer" onclick="window.location.href='/account/direct-sales-onus'">
+         <div class="card-header" style="border-bottom:0px">
+            Direct sales Bonus      
+         </div>
+         <div class="card-body">
+            <div class="box blue-1">
+               <p></p>
+               <span style="font-size:26px;">${{data.user['r_wallet'] | format_usd}}</span>
+               <p></p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- End item !-->
+  
+   
+   
+   <!-- End item !-->
+   <div class="col-lg-3 nopadding">
+      <div class="card" style="margin-bottom:0px; background:none; cursor: pointer; "  onclick="window.location.href='/account/network-bonus'">
+         <div class="card-header" style="border-bottom:0px">
+            Network Bonus 
+         </div>
+         <div class="card-body">
+            <div class="half pull-left l-s-t-30">
+               <!-- BOX -->
+               <div class="box blue-1">
+                  <p></p>
+                  <span style="font-size:26px;">${{data.user['s_wallet'] | format_usd}}</span>
+                  
+               </div>
+               <!-- /BOX -->
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- End item !-->
+   <div class="col-lg-3 nopadding">
+      <div class="card" style="margin-bottom:0px; background:none;cursor: pointer;" onclick="window.location.href='/account/generations-bonus'">
+         <div class="card-header" style="border-bottom:0px">
+            Generations Bonus     
+         </div>
+         <div class="card-body">
+            <div class="half pull-left l-s-t-30">
+               <div class="box blue-1">
+                  <p></p>
+                  <span style="font-size:26px;">${{data.user['g_wallet'] | format_usd}}</span>
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- End item !-->
+   
+   <!-- End item !-->
+   <div class="col-lg-3 nopadding">
+      <div class="card" style="margin-bottom:0px; background:none; min-height:160px">
+         <div class="card-header" style="border-bottom:0px">
+            Directly Sponsored 
+         </div>
+         <div class="card-body" style="padding: 0">
+            <div class="">
+               <div class="box blue-1" >
+                  <p></p>
+                  <div class="pull-left" style="width: 50%">
+                     <p class="text-center" style="font-size:15px; color: #fff;
+                     padding: 0; font-weight: bold;">Left</p>
+                     <p class="text-center" style="font-size:19px; color: #fff;
+                     padding: 0">{{data.total_node_lefts}} </p>
+                     
+                  </div>
+                  <div class="pull-right" style="width: 50%">
+                     <p class="text-center" class="text-center" style="font-size:15px;; color: #fff;
+                     padding: 0;font-weight: bold;">Right</p>
+                     <p class="text-center" style="font-size:19px; color: #fff;
+                     padding: 0">{{data.total_node_rights}} </p>
+                     
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-3 nopadding">
+      <div class="card" style="margin-bottom:0px; background:none; min-height:160px">
+         <div class="card-header" style="border-bottom:0px">
+            Member 
+         </div>
+         <div class="card-body" style="padding: 0">
+            <div class="">
+               <div class="box blue-1" >
+                  <p></p>
+                  <div class="pull-left" style="width: 50%">
+                     <p class="text-center" style="font-size:15px; color: #fff;
+                     padding: 0; font-weight: bold;">Left</p>
+                     <p class="text-center" style="font-size:19px; color: #fff;
+                     padding: 0">{{data.total_binary_left}} </p>
+                     
+                  </div>
+                  <div class="pull-right" style="width: 50%">
+                     <p class="text-center" class="text-center" style="font-size:15px;; color: #fff;
+                     padding: 0;font-weight: bold;">Right</p>
+                     <p class="text-center" style="font-size:19px; color: #fff;
+                     padding: 0">{{data.total_binary_right}} </p>
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- End item !-->
+   <div class="col-lg-3 nopadding">
+      <div class="card" style="margin-bottom:0px; background:none; min-height:160px">
+         <div class="card-header" style="border-bottom:0px">
+            System
+         </div>
+         <div class="card-body" style="padding: 0">
+            <div class="">
+               <!-- BOX -->
+               <div class="box blue-1" >
+                  <p></p>
+                  <div class="pull-left" style="width: 50%">
+
+                     <p class="text-center" style="font-size:15px; color: #fff;
+                     padding: 0; font-weight: bold;">Points Left</p>
+                     <p class="text-center" style="font-size:19px; color: #fff;
+                     padding: 0">${{data.user['total_pd_left'] | format_usd}} </p>
+                     
+                  </div>
+                  <div class="pull-right" style="width: 50%">
+                     <p class="text-center" class="text-center" style="font-size:15px; color: #fff;
+                     padding: 0;font-weight: bold;">Points Right</p>
+                     <p class="text-center" style="font-size:19px; color: #fff;
+                     padding: 0">${{data.user['total_pd_right'] | format_usd}} </p>
+                     
+                  </div>
+                  
+                  <p></p>
+               </div>
+               <!-- /BOX -->
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-3 nopadding">
+      <div class="card" style="margin-bottom:0px; background:none; min-height:160px">
+         <div class="card-header" style="border-bottom:0px">
+            System All
+         </div>
+         <div class="card-body" style="padding: 0">
+            <div class="">
+               <!-- BOX -->
+               <div class="box blue-1" >
+                  <p></p>
+                  <div class="pull-left" style="width: 50%">
+                     <p class="text-center" style="font-size:15px; color: #fff;
+                     padding: 0; font-weight: bold;">Points Left</p>
+                     
+                     <p class="text-center" style="font-size:19px; color: #fff;
+                     padding: 0">${{data.user['total_amount_left'] | format_usd}}</p>
+                  </div>
+                  <div class="pull-right" style="width: 50%">
+                     <p class="text-center" class="text-center" style="font-size:15px; color: #fff;
+                     padding: 0;font-weight: bold;">Points Right</p>
+                     
+                     <p class="text-center" style="font-size:19px; color: #fff;
+                     padding: 0">${{data.user['total_amount_right'] | format_usd}}</p>
+                  </div>
+                  
+                  <p></p>
+               </div>
+               <!-- /BOX -->
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- End item !-->
+   
+   
+</div>
+
+<div class="row">
+   <div class="slider">
+       <div>
+         <img class="img-responsive" src="/static/img/XE.png">
+       </div>
+       <div><img class="img-responsive"  src="/static/img/XE1.png"></div>
+     </div>
+</div>
+
+<div class="row " style="margin-bottom: 20px;">  
+   <div class="row">   
+   <div class="col-lg-6 content_img_banner" style="padding-right:5px">
+      <div class="">
+           <img src="/static/img/rsz_bigstock-global-network-mesh-social-co-85856486.jpg" alt="" border="0">
+      </div>
+      </div>
+         <div class="col-lg-6 content_img_banner" style="padding-left:5px">
+            <div class="">
+           <img src="/static/img/photo_2018-08-04_11-15-00.jpg" alt="" border="0">
+            </div>
+      </div>
+      </div>
+   </div>
+
+{% endblock %}

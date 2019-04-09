@@ -1,0 +1,427 @@
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.0 Normalize
+2.0 Header
+  2.1 Loader Css
+  2.2 Slide Show Css
+  2.3 Nav Menu Css
+3.0 Main
+  3.1 What is sva  
+  3.2 Staking
+  3.3 Ecosystem
+  3.4 Let's See Demo
+  3.5 FAQ
+4.0 Footer
+  4.1 Copyright
+  4.2 Social 
+  4.3 Scroll Up 
+5.0 Breadcrumbs 
+6.0 Content 
+7.0 Popup 
+9.0 Components
+  9.1 Buttons
+10.0 Media Querie
+11.0 KeyFrames Css  
+--------------------------------------------------------------*/
+
+/*
+1.0 Normalize
+*/
+html {
+  background-color: #363636;
+  font: normal 16px "Myriad Pro",arial,sans-serif;
+}
+body{
+  background-color: #363636 !important;
+  color: #fff !important;
+  font: normal 16px "Myriad Pro",arial,sans-serif;
+}
+a {
+  cursor: pointer;
+}
+h1.section-title {font-family: 'Myriad Pro',sans-serif;font-weight: 600;}
+.fixed {position: fixed;top:0;left: 0;width: 100%;z-index: 200;}
+#page-content .table thead th {vertical-align: middle;}
+.noborder { border:0px !important; }
+/*-------------------------------------------------------------
+2.1: Loader Css
+-------------------------------------------------------------*/
+#loader {
+	position: absolute;
+	width: 100%;
+	top:35%;
+	text-align: center;  	
+}
+.animate-small-width {
+	-webkit-animation-name: animatesmallwidth;
+  -webkit-animation-duration: 1s;
+  animation-name: animatesmallwidth;
+  animation-duration: 1s
+}
+
+#animated-loader-spin {
+	width: 100%;
+}
+.loader-spin {
+  z-index: 1;
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 45px;
+  height: 45px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  margin:0 auto;
+  margin-top:20px;
+}
+
+/*-------------------------------------------------------------
+2.2: Slide Show Css
+-------------------------------------------------------------*/
+#stage {
+	-webkit-animation-name: animateopacity;
+  -webkit-animation-duration: 1s;
+  animation-name: animateopacity;
+  animation-duration: 1s
+}
+
+#logo-slide {
+	position: absolute;
+	width: 100%;	 
+	z-index: 3;
+	top: 20%;
+	margin: 0 auto;
+	text-align: center;
+}
+#logo-slide img { 
+	width: 180px; 
+	-webkit-animation-name: spinlogo;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 8s;
+
+  animation-name: spinlogo;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 8s;
+
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+#logo-slide .logo-slide-caption{
+  white-space: nowrap;
+  font-size: 27px;
+  line-height: 40px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  letter-spacing: -2px;
+  font-family: Poppins;
+  text-transform: uppercase;
+  visibility: inherit;
+  max-width: 320px;
+  margin:20px auto 0px;
+  text-shadow: 0 0 1px rgba(0,0,0,1);
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 100px;
+  width:100%;
+  z-index: 10;
+}
+.scroll-down a {
+  padding-top: 80px;
+}
+.scroll-down a span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin-left: -12px;
+  border-left: 5px solid #fff;
+  border-bottom: 5px solid #fff;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-animation: scrolldown 2s infinite;
+  animation: scrolldown 2s infinite;
+  opacity: 0;
+  box-sizing: border-box;
+}
+.scroll-down a span:nth-of-type(1) {
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+.scroll-down a span:nth-of-type(2) {
+  top: 16px;
+  -webkit-animation-delay: .15s;
+  animation-delay: .15s;
+}
+.scroll-down a span:nth-of-type(3) {
+  top: 32px;
+  -webkit-animation-delay: .3s;
+  animation-delay: .3s;
+}
+
+/*-------------------------------------------------------------
+2.3: Nav Menu Css
+-------------------------------------------------------------*/
+#menu {background: #222;height: 64px;}
+#menu .page-top-header {background: #222;}
+#menu .navbar-nav-fullwidth {display: block; position: fixed; left: -256px; top: 0; bottom: 0; z-index: 100; width: 256px; overflow-y: auto;-webkit-overflow-scrolling: touch; transition: -webkit-transform 300ms ease;   transform: translate3d(0,0,0);background: #fff;}
+#menu .navbar-nav-fullwidth img {padding:4.5px 0px;}
+#menu .navbar-nav-fullwidth li {border-bottom: 1px solid #eee;}
+#menu .navbar-nav-fullwidth .nav-link {padding: 10px 0px;font-weight: 700;text-transform: uppercase;color: #7fb401;}
+#menu .navbar-nav-fullwidth .nav-link:hover {color:  #9c9c9c;}
+#menu .price-menu-fullwidth {font-weight: 700; color:#7fb401 ;padding:20px 15px;line-height: 64px;}
+#menu .btn-sva-primary {font-weight: 700;padding:10px 20px;text-transform: uppercase;border:1px solid #fff;margin-top:9px;}
+#menu .btn-sva-primary:hover {color:#fff;background: #9c9c9c;}
+#menu-toggle-top i {color:#7fb401;}
+#menu .navbar-nav-fullwidth.active {display:block;background: #fff; display: block;transition: -webkit-transform 300ms ease;transform: translate3d(256px,0,0);}
+#bg-close-menu{position: fixed; top: 0; left: 0;  width: 0;  height: 0;  opacity: 0;  z-index: 99; background: rgba(0,0,0,0.8);}
+#bg-close-menu:before, #bg-close-menu:after {content: "\f2d7"; font: normal normal normal 40px/1 Ionicons; position: absolute;  left: 20px;  color: #fff; text-shadow: 1px 1px 5px #333; top: 10px;z-index: -1; opacity: 0; visibility: hidden;}
+#bg-close-menu:after { left: auto;  right: 20px;}
+#bg-close-menu.active {width:100%;height: 100%;opacity: 1;}
+#bg-close-menu.active:after,#bg-close-menu.active:before {-ms-transform: rotate(360deg);-webkit-transform: rotate(360deg);transform: rotate(360deg);transition: all .8s;z-index: 2;  opacity: 1; visibility: visible;}
+#menu .navbar-nav-fullwidth .active {color:#222;}
+/*-------------------------------------------------------------
+3.0 Main
+-------------------------------------------------------------*/
+#main {margin: 40px 0px;}
+#main img {width: 100%;height: auto;}
+#main hr {border-color:rgba(127, 180, 1, 0.82)}
+#main .what-is-intro {text-align: justify;}
+#main .section {padding: 30px 0px 0px;}
+#main .section:first-child {margin-top:0px;}
+#main .staking-intro {list-style: none;padding-left: 0px;}
+#main .staking-intro span {padding-right:20px;}
+#main .staking-intro li {padding: 10px;}
+
+/*-------------------------------------------------------------
+3.1 What is sva , 3.2 Staking
+-------------------------------------------------------------*/
+#sva-what-is h1.section-title {margin-top:30px;}
+#sva-what-is h1.section-title,#sva-staking h1.section-title {text-align: center;}
+#sva-what-is hr,#sva-staking hr {width: 120px;}
+#sva-staking {text-overflow: hidden;}
+#sva-staking img {
+  -webkit-animation-name: spin;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 30s;
+
+  animation-name: spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 30s;
+}
+
+/*-------------------------------------------------------------
+3.3 Ecosystem
+-------------------------------------------------------------*/
+#ecosystem {background: url(../images/ecosystem-bg.jpg) center center no-repeat;background-size: 100% 100%;padding:30px 0px;margin-top:40px;}
+#ecosystem img {width: 50%;}
+#ecosystem-logo {text-align: center;padding: 20px;}
+#ecosystem .single_ecosystem_deatels {text-align: center}
+#ecosystem .single_ecosystem_deatels i { color: #BD9E6F; font-size: 80px; margin-bottom: 10px; display: inline-block;line-height: 60px;}
+#ecosystem .single_ecosystem_deatels h5 {font-size: 20px; line-height: 22px; font-weight: 600; font-family: "Myriad Pro",sans-serif; text-transform: uppercase; margin: 20px 0px; text-decoration: none;}
+#ecosystem .single_ecosystem_deatels p {font: normal 16px "Myriad Pro",arial,sans-serif;margin-top:15px;}
+
+
+/*-------------------------------------------------------------
+3.4 Let's See Demo
+-------------------------------------------------------------*/
+
+#sva-demo {text-align: center;background: #86868626;padding:30px 0px;margin-top:40px;}
+#sva-demo hr {width: 120px; margin-bottom: 40px;}
+#sva-demo iframe {max-width: 320px;}
+
+
+/*-------------------------------------------------------------
+3.5 FAQ
+-------------------------------------------------------------*/
+
+#sva-faq h1 {text-align: center;}
+#sva-faq hr {width: 120px;margin-bottom:40px;}
+#accordion .card {margin-bottom:10px;background: transparent;}
+#accordion .card .card-header a{text-decoration: none;color:#7fb401;}
+
+/*-------------------------------------------------------------
+4.0 Footer
+-------------------------------------------------------------*/
+#footer {background: #222;padding:20px 0px;}
+
+/*-------------------------------------------------------------
+4.1 Copyright
+-------------------------------------------------------------*/
+#footer .copyright{line-height: 50px;}
+
+/*-------------------------------------------------------------
+4.2 Social
+-------------------------------------------------------------*/
+
+#footer .social-footer a {border-radius: 50%;margin-right:10px;background: #7fb401;    width: 50px; height: 50px;text-align: center;color:#fff;}
+#footer .social-footer li:last-child a {margin-right:0px;}
+#footer .social-footer li {margin-top:10px;}
+#footer .social-footer a:hover {background-color:#9c9c9c;}
+#footer .social-footer a i {font-size: 20px;line-height: 33px;}
+#footer .social {justify-content: flex-start !important;}
+
+/*-------------------------------------------------------------
+4.2 Social
+-------------------------------------------------------------*/
+a#scroll-up.active {bottom: 20px;right: 20px;transition: all 0.5s;color: #fff; font-weight: 800; font-size: 28px;}
+a#scroll-up {bottom: -100px; position: fixed; right: 20px; background: #9c9c9c52;  padding: 1px 14px 1px; opacity: 0.9; filter: alpha(opacity=50); transition: all 0.5s; border-radius: 5px 5px;border:1px solid #fff;}
+
+/*-------------------------------------------------------------
+5.0: Breadcrumbs
+-------------------------------------------------------------*/
+#page-breadcrumbs {background: url(../images/bg-breadcrumb.jpg) center center no-repeat;background-size: 100% 100% ;padding:5.8% 0px;text-align: center;}
+#page-breadcrumbs .breadcrumb {background-color: transparent;margin-bottom:0px; display: inline-flex;font-size: 16px;text-transform: uppercase;padding: 0px;}
+#page-breadcrumbs h2 {font-weight: 700;text-transform: uppercase;font-size: 60px;font-family: 'Myriad Pro',sans-serif;}
+
+/*-------------------------------------------------------------
+6.0 Content
+-------------------------------------------------------------*/
+
+#page-content {padding:50px 0px;}
+#page-content .page-content-title{text-align: center;font-weight: 700;text-transform: uppercase;}
+#page-content hr {width: 50px;background: #7fb401;height: 3px;margin: 15px auto 40px;}
+#page-content .entry-content { padding: 30px;background: rgba(156, 156, 156, 0.15);border:2px solid #8282827a;border-radius: 5px 5px;}
+#page-content .entry-content .description {margin-bottom:30px;}
+#page-content .entry-content thead {background: #f9a01b;}
+#page-content .entry-content .binary {margin-top:40px;}
+#page-content .entry-content .binary thead {background: #389a91;}
+
+/*-------------------------------------------------------------
+6.0 Content
+-------------------------------------------------------------*/
+#pop-up { position: fixed;width: 100%;height: 100%;text-align: center; }
+
+/*-------------------------------------------------------------
+9.0: Components
+  9.1: Buttons
+-------------------------------------------------------------*/
+
+.btn-sva-primary { background: #7fb401;color:#fff; }
+.btn-sva-menu-toggle { font-size: 40px;line-height: 64px;}
+
+
+/*-------------------------------------------------------------
+10.0: Media Queries
+-------------------------------------------------------------*/
+@media screen and ( min-width:768px ){
+  #sva-demo iframe {max-width: 450px;}
+  #sva-what-is h1.section-title {margin-top:0px;}
+  #sva-what-is h1.section-title,#sva-staking h1.section-title {text-align: left;}
+  #sva-what-is hr,#sva-staking hr {width: 100%;}
+}
+
+
+@media screen and ( min-width:1024px ){
+  #menu-toggle-top {display: none;}
+  #menu .navbar-nav-fullwidth {position: static;width:100%;background: transparent;}
+  #menu .navbar-nav-fullwidth img {padding:4.5px 15px}
+  #menu .navbar-nav-fullwidth li {border-bottom: 0px solid #eee;}
+  #menu .navbar-nav-fullwidth .nav-link {padding: 20px 15px;font-weight: 700;text-transform: uppercase;color: #7fb401;}
+  #menu .navbar-nav-fullwidth .active {color:#fff;}
+  #logo-slide .logo-slide-caption {font-size: 40px;max-width: 650px;}
+  #logo-slide img {  width: 250px; }
+  #sva-what-is h1.section-title {margin-top:0px;}
+  #sva-what-is h1.section-title,#sva-staking h1.section-title {text-align: left;}
+  #sva-what-is hr,#sva-staking hr {width: 100%;}
+  #ecosystem .single_ecosystem_deatels {text-align: inherit;}
+  #sva-demo iframe {max-width: 600px;}
+  #footer .social {justify-content: flex-end !important;}
+  #footer .social-footer li {margin-top:0px;}
+  #ecosystem img {width: 100%}
+}
+
+/*-------------------------------------------------------------
+11.0: KeyFrames Css
+-------------------------------------------------------------*/
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@-webkit-keyframes animatesmallwidth {
+  from { transform: scale(1); opacity:1 } 
+  to { transform: scale(0.0); opacity:0.6 }
+}
+
+@keyframes animatesmallwidth { 
+  from { transform: scale(1); opacity:1 } 
+  to { transform: scale(0.0); opacity:0.6 }
+}
+
+@-webkit-keyframes animateopacity {
+  from {  opacity:0.1 } 
+  to { opacity:1 }
+}
+
+@keyframes animateopacity { 
+  from { opacity:0.1 } 
+  to {  opacity:1 }
+}
+
+@-webkit-keyframes spinlogo {
+   from { -webkit-transform: rotateY(0deg);    }
+   to   { -webkit-transform: rotateY(-360deg); }
+}
+
+@keyframes spinlogo { 
+   from {
+      -moz-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }
+    to {
+      -moz-transform: rotateY(-360deg);
+      -ms-transform: rotateY(-360deg);
+      transform: rotateY(-360deg);
+    }
+}
+
+@-webkit-keyframes scrolldown {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes scrolldown {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/*Custom*/
+#modalNotification .modal-body p{
+  color: #222;
+}
+#modalNotification button{
+  cursor: pointer;
+}
+#modalNotification .close{
+  margin: 0px;
+}

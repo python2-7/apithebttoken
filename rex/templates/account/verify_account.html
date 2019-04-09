@@ -1,0 +1,207 @@
+{% extends "layout.html" %}
+{% block title %}Verify account{% endblock %}
+{% block js %}
+<script src="/static/assets/js/script.js"></script>
+<script src="/static/assets/js/getinfo.js"></script>
+{% endblock %}
+{% block main %}
+<div class="section__content section__content--p30 verify_account">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">VERIFY ACCOUNT</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            <div class="">
+               {% if data.user['status_verify'] == 0%}
+               <form  action="/user/updateaccount" enctype="multipart/form-data" method="post">
+                  <div class="content">
+                     <div class="f-fl" style="margin-bottom: 30px">
+                        <p class="step-title ng-binding">Basic Information</p>
+                     </div>
+
+                     <div class="row" style="margin-bottom: 10px">
+                        <label class="col-md-2 control-label text-right" for="Comm_Type"> First Name</label>
+                        <div class="col-md-6">
+                           <input class="form-control" value="{{data.user['personal_info']['firstname']}}" required="true" name="firstname" type="text" >
+                        </div>
+                     </div>
+                     <div class="row" style="margin-bottom: 10px">
+                        <label class="col-md-2 control-label text-right" for="Comm_Type"> Last Name</label>
+                        <div class="col-md-6">
+                           <input class="form-control" value="{{data.user['personal_info']['lastname']}}" required="true" name="lastname" type="text" >
+                        </div>
+                     </div>
+                     <div class="row" style="margin-bottom: 10px">
+                        <label class="col-md-2 control-label text-right" for="Comm_Type"> Date of birth</label>
+                        <div class="col-md-6">
+                           <input class="form-control" value="{{data.user['personal_info']['date_birthday']}}" required="true" name="date_birthday" type="date" >
+                        </div>
+                     </div>
+
+                     <div class="f-fl" style="margin-bottom: 30px; margin-top: 50px">
+                        <p class="step-title ng-binding">Residential address</p>
+                     </div>
+                     
+                     <div class="row" style="margin-bottom: 10px">
+                        <label class="col-md-2 control-label text-right" for="Comm_Type"> Address</label>
+                        <div class="col-md-8">
+                           <textarea style="height: 60px;" class="form-control" required="true" name="address">{{data.user['personal_info']['address']}}</textarea>
+                        </div>
+                     </div>
+                     <div class="row" style="margin-bottom: 10px">
+                        <label class="col-md-2 control-label text-right" for="Comm_Type"> Postal Code</label>
+                        <div class="col-md-6">
+                           <input class="form-control" value="{{data.user['personal_info']['postalcode']}}" required="true" name="postalcode" type="text" >
+                        </div>
+                     </div>
+                     <div class="row" style="margin-bottom: 10px">
+                        <label class="col-md-2 control-label text-right" for="Comm_Type"> City</label>
+                        <div class="col-md-6">
+                           <input class="form-control" value="{{data.user['personal_info']['city']}}" required="true" name="city" type="text" >
+                        </div>
+                     </div>
+                     <div class="row" style="margin-bottom: 10px">
+                        <label class="col-md-2 control-label text-right" for="Comm_Type"> Country</label>
+                        <div class="col-md-6">
+                           <select class="form-control" name="country" required="required" >
+                              <option value="">Please select a country</option>
+                              {% for item in data.data_country %} 
+                              <option {% if data.user['personal_info']['country'] == item.country_name %} selected="selected" {% endif %}
+                                  data-id="{{item.dialling_code}}" value="{{item.country_name}}">{{item.country_name}}</option>
+                              {% endfor %} 
+                           </select>
+                        </div>
+                     </div>
+
+                     
+                     <input type="hidden" name="token_crt" value="{{data.token_crt}}">
+                     
+                     <div class="text-center" style="margin-top: 35px;">
+                        <button type="submit" style="background-color: #41b5e2; border-color: #40b5e3;" class="btn btn-rose btn-fill btn-wd">Begin Verification</button>
+                     </div>
+                     
+                  </div>
+               </form>
+               {% endif %}
+
+               {% if data.user['status_verify'] == 1%}
+                  <h4 class="text-center">Verification status: <span style="color: #FFC107;">PENDING</span></h4>
+                  
+               {% endif %}
+
+               {% if data.user['status_verify'] == 2%}
+
+
+                 
+                  <h4 style="margin-bottom: 30px;" class="text-center">Verification status: <span style="color: #FFC107;">VERIFIED</span></h4>
+
+
+                  
+
+
+
+  
+   <div class="form-group">
+      <div class="row">
+         <label for="User_Name" class="col-md-3 control-label">Username <span class="text-danger">*</span></label>
+         <div class="col-md-6"> <input readonly="true" type="text" value="{{data.user['username']}}" class="form-control" name="User_Name"> </div>
+      </div>
+   </div>
+   <div class="form-group">
+      <div class="row">
+         <label for="User_UserGroup" class="col-md-3 control-label">Packages</label>
+         <div class="col-md-6">
+            <select disabled="" class="form-control" name="User_UserGroup" id="User_UserGroup">
+               
+               
+               <option {% if data.user['level'] == 11 %} selected="selected" {% endif %} value="11">CROWN DIAMOND</option>
+               <option {% if data.user['level'] == 10 %} selected="selected" {% endif %}  value="10">BLACK DIAMOND</option>
+               <option {% if data.user['level'] == 9 %} selected="selected" {% endif %} value="9">BLUE DIAMOND</option>
+               <option {% if data.user['level'] == 8 %} selected="selected" {% endif %} value="8">DIAMOND</option>
+               
+               
+               <option {% if data.user['level'] == 7 %} selected="selected" {% endif %} value="7">PLATINUM</option>
+               <option {% if data.user['level'] == 6 %} selected="selected" {% endif %} value="6">RUBY</option>
+               <option {% if data.user['level'] == 5 %} selected="selected" {% endif %} value="5">SAPPHIRE</option>
+               <option {% if data.user['level'] == 4 %} selected="selected" {% endif %} value="4">GOLD</option>
+               <option {% if data.user['level'] == 3 %} selected="selected" {% endif %} value="3">SILVER</option>
+               <option {% if data.user['level'] == 2 %} selected="selected" {% endif %} value="2">EXCUTIVE</option>
+               <option {% if data.user['level'] == 1 %} selected="selected" {% endif %} value="1">STARTED</option>
+            </select>
+         </div>
+      </div>
+   </div>
+   
+   <div class="form-group">
+      
+      <div class="row">
+         <label for="User_Email" class="col-md-3 control-label">Email <span class="text-danger">*</span></label>
+         <div class="col-md-6"> <input type="email" readonly="true" value="{{data.user['email']}}" class="form-control" name="User_Email" id="User_Email" required=""> </div>
+      </div>
+      
+     
+   </div>
+
+   <div class="form-group">
+      <div class="row">
+         <label for="User_RegisteredDatetime" class="col-md-3 control-label">Registered datetime</label>
+         <div class="col-md-6"> <input type="text" disabled="" data-date-format="yyyy-mm-dd" value="{{data.user['creation'] | format_date }}" class="form-control input-datepicker" name="User_RegisteredDatetime" id="User_RegisteredDatetime"> </div>
+      </div>
+   </div>
+
+               {% endif %}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<!-- <div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">VERIFY ACCOUNT STATUS</strong>
+      </div>
+      <div class="card-body">
+         <table class="table table-bordered " >
+            <thead>
+               <tr>
+                  <th>Images</th>
+                  <th>ID Number</th>
+                  <th>Admin Note</th>
+                  <th>Create Date</th>                         
+                  <th>Status</th>
+               </tr>
+            </thead>
+            <tbody>
+                 <tr>
+                 
+                  {% for  item in data.verify %}
+                  <tr>
+                     <td class="text-center">
+                        <img src="{{ item.img1 }}" style="width: 50px">
+                        <img src="{{ item.img2 }}" style="width: 50px">
+                        <img src="{{ item.img2 }}" style="width: 50px">
+                     </td>
+                     <td class="text-center">{{ item.id_number }}</td>
+                     <td class="text-center">{{ item.admin_note }}</td>
+                     <td class="text-center">{{ item.date_added | format_date }}</td>
+                     
+                     <td class="text-center">
+                        {% if item.status == 1 %}
+                           <span class="label label-info">Active</span>
+                        {% endif %}
+                        {% if item.status == 0 %}
+                           <span class="label label-warning">Waiting</span>
+                        {% endif %}
+                     </td>
+                  </tr>
+                  {% endfor %}
+                                
+            </tbody>
+         </table>
+      </div>
+   </div>
+</div> -->
+{% endblock %}

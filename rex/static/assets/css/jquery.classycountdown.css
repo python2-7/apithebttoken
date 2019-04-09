@@ -1,0 +1,133 @@
+.clock {
+}
+.timer {
+    font-size: 30px;
+    display: inline-block !important;
+    vertical-align: top;
+    letter-spacing: 5px;
+    color:#ffa500;
+}
+.text {
+    font-size: 1em;
+    COlor: #ffa500;
+    padding-bottom: 1em;
+}
+.clock .column {
+    display: inline-block !important;
+    border: 1px solid #ffa500;
+    border-radius: 8px;
+    width: 20%;
+}
+
+.days {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .timer {
+        font-size: 35px;
+    }
+}
+
+
+
+@media screen and (max-width: 1024px) {
+    .timer {
+        font-size: 18px;
+    }
+    .text {
+        font-size: 10px;
+    }
+}
+
+
+@media screen and (max-width: 800px) {
+    .timer {
+        font-size: 30px;
+    }
+ 
+}
+
+@media screen and (max-width: 736px) {
+    .timer {
+        font-size: 30px;
+    }
+    .clock {
+        margin:0;
+    }
+   
+}
+@media screen and (max-width: 667px) {
+    .timer {
+       font-size: 30px;
+    }
+ 
+}
+
+
+
+@media screen and (max-width: 568px) {
+   .timer {
+        font-size: 30px;
+        letter-spacing: 0;
+    }
+
+ }
+
+
+@media screen and (max-width: 414px) {
+    .clock .column {
+        width: 19%;
+    }
+
+    .timer {
+        font-size: 30px;
+    }
+
+    .text {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 384px) {
+
+    .clock {
+        margin-left: -10px;
+    }
+    .clock .column {
+        width: 20%;
+    }
+
+    .timer {
+        font-size: 3.1em;
+    }
+
+}
+
+@media screen and (max-width: 375px) {
+
+    .timer {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .clock {
+        margin-left: -20px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+  
+    .clock {
+        margin-left: -10px;
+    }
+    .text {
+        font-size: 8px;
+    }
+   
+}
+.clock .column {
+    display: inline-block !important;
+}

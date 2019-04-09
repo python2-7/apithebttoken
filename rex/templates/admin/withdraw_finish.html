@@ -1,0 +1,117 @@
+{% extends "layout_admin.html" %}
+{% block title %}Withdraw{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+	var myapp = {
+    withdrawal: function(withdrawal){
+            swal({
+                    title: 'Are you sure?',
+                    text: '',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No',
+                    confirmButtonClass: "btn btn-success",
+                    cancelButtonClass: "btn btn-danger",
+                    buttonsStyling: false
+                }).then(function() {
+                    $('form#fromWithdraw').submit();
+                  swal({
+                    title: 'Deleted!',
+                    text: '.',
+                    type: 'success',
+                    confirmButtonClass: "btn btn-success",
+                    buttonsStyling: false
+                  }).catch(swal.noop);
+                }, function(dismiss) {
+                  // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                  if (dismiss === 'cancel') {
+                    swal({
+                      title: 'Cancelled',
+                      text: '',
+                      type: 'error',
+                      confirmButtonClass: "btn btn-info",
+                      buttonsStyling: false
+                    }).catch(swal.noop);
+                  }
+                })
+
+        
+    }
+}
+</script>
+{% endblock %}
+	
+
+{% block main %}
+
+    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="content">
+
+                                    <h4 class="title">History Withdrawal Finish</h4>
+                                    <div class="toolbar">
+                                        <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                    </div>
+                                   <div class="col-md-8 col-md-push-2 table_withdraw_pendding">    
+
+               <div class="input-group input-daterange">
+                  <input type="text" id="min-date" class="form-control date-range-filter" data-date-format="yyyy-mm-dd" placeholder="From:">
+                  <div class="input-group-addon">To</div>
+                  <input type="text" id="max-date" class="form-control date-range-filter" data-date-format="yyyy-mm-dd" placeholder="To:">
+               </div>
+            </div>
+                                    <div class="material-datatables">
+                                        <table id="datatables_depoist" class="table table-bordered" style="width:100%;cellspacing:0">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>DateTime</th>
+                                                    <th>Email</th>
+                                                    <th>Amount</th>
+                                                    <th>Currency</th>
+                                                    <th>Amount USD</th> 
+                                                    <th>Address</th>            
+                                                    <th>TxtId</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for item in data.withdraw %}
+                                                <tr>
+                                                    <td></td>
+                                                    <td>{{ item.date_added | format_date }}</td>
+                                                    <td><a href="/admin/customer-detail/{{ item.user_id}}">{{ item.username}}</a></td>
+                                                    
+                                                    <td>{{ item.amount }}</td>
+                                                    <td>{{ item.currency }}</td>
+                                                    <td>{% if item.status == 1 %}{{ item.amount_usd }}{% endif %}</td>
+                                                    <td>{{ item.address }}</td>
+                                                    <td>{{ item.txt_id }}</td>
+                                                    
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th colspan="5" style="text-align:right">Total:</th>
+                                                    <th ></th>
+                                                    <th ></th>
+                                                    <th ></th>
+                                                    
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- end content-->
+                            </div>
+                            <!--  end card  -->
+                        </div>
+                        <!-- end col-md-12 -->
+                    </div>
+
+{% endblock %}
+

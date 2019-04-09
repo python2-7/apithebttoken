@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}Notifications{% endblock %}
+{% block css %}
+{% endblock %}
+{% block js %}
+
+{% endblock %}
+	
+
+{% block main %}
+
+
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">Notifications</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            <div class=" alert  alert-primary ">
+               
+               <div class="clearfix"></div>
+               {% autoescape on %}{{data.notification['content']}}{% endautoescape %}
+               <div class="clearfix"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
+

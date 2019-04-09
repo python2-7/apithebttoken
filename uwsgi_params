@@ -1,0 +1,50 @@
+#!/bin/bash
+ 
+# Get function from functions library
+. /etc/init.d/functions
+ 
+BASE=/home/meccafund/meccafund
+UWSGI=$BASE/meccafundenv/bin
+ 
+start() {
+  echo -n "Starting server ..."
+  touch $BASE/reload
+  $UWSGI/uwsgi --ini $BASE/conf/uwsgi.ini &
+  success $"Started"
+  echo
+}
+ 
+reload() {
+  $UWSGI/uwsgi --reload /tmp/uwsgi-master.pid
+  success $ "Reloaded"
+  echo
+}
+ 
+stop() {
+  echo -n "Stopping server ..."
+  $UWSGI/uwsgi --stop /tmp/uwsgi-master.pid
+  success $ "Stopped"
+  echo
+}
+ 
+### main logic ###
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  reload)
+    reload
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart|reload}"
+    exit 1
+ 
+esac
+exit 0

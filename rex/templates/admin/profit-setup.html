@@ -1,0 +1,42 @@
+{% extends "layout_admin.html" %}
+{% block title %}Setup Profit{% endblock %}
+
+{% block js %}
+
+{% endblock %}
+  
+
+{% block main %}
+
+<div class="row content_setup_profit">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="content">
+                <h4 class="title">Setup Profit</h4>
+                <div class="toolbar">
+                    <div class="row">
+                        <div class="col-md-6 col-md-push-3">
+
+
+                              
+                           
+
+                            <form action="/admin/profit-setup" method="POST">
+                                <label style="margin-bottom: 10px;" class="col-md-12 control-label text-left" for="Comm_Type"> Percent</label>
+                                  <div class="col-md-12" style="margin-bottom: 10px;">
+                                     <input class="text-center form-control" type="text" value="{{data.profit.percent}}" name="percent">
+                                  </div>
+                                <div class="col-md-12 text-center">
+                                    <button class="btn btn-success" type="submit">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

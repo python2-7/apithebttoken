@@ -1,0 +1,188 @@
+{% extends "layout.html" %}
+{% block title %}Refferals{% endblock %}
+{% block css %}
+<link href="/static/assets/css/jstree.css" rel="stylesheet" >
+{% endblock %}
+{% block js %}
+<script src="/static/assets/js/getinfo.js"></script>
+<script type="text/javascript" src="/static/assets/js/jstree.min.js"> </script>
+<script type="text/javascript">
+    $('#TreeSystem').jstree({
+            'core' : {
+               'data' : {
+                  "url" : "/account/json_tree_ico/{{data.uid}}",
+                  "dataType" : "json",
+         'data' : function (node) {
+                  return { 'id' : node.id };
+              }
+               }
+            }
+         });
+</script>
+{% endblock %}
+	
+
+{% block main %}
+
+
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">REFERRAL NOT ACTIVE</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            <div class="material-datatables">
+              
+               <table id="" class="table table-bordered datatables_referrals" style="width:100%;cellspacing:0">
+                  <thead>
+                     <tr>
+                        <th>No.</th>
+                        <th>Username</th>
+                        <th>Join Date</th>
+                        <th>Email</th>
+                        <th>Country</th>
+                        <th>Package</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% if data.f1_noactive %}
+                     {% for item in data.f1_noactive %}
+                     <tr>
+                        <td></td>
+                        <td>{{ item.username }}</td>
+                        <td>{{ item.creation | format_date }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.country }}</td>
+                        <td>${{ item.investment | format_usd }}</td>
+                     </tr>
+                     {% endfor %}
+                     {% endif %}
+                  </tbody>
+               </table>
+            </div>
+
+            
+            </div>
+         </div>
+      </div>
+</div>
+
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">REFERRAL ACTIVE NOT IN TREE</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            <div class="material-datatables">
+              
+               <table id="" class="table table-bordered datatables_referrals22" style="width:100%;cellspacing:0">
+                  <thead>
+                     <tr>
+                        
+                        <th>Username</th>
+                        <th>Join Date</th>
+                        <th>Email</th>
+                        <th>Country</th>
+                        <th>Package</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% if data.f1_active_no_tree %}
+                     {% for item in data.f1_active_no_tree %}
+                     <tr>
+                        
+                        <td>{{ item.username }}</td>
+                        <td>{{ item.creation | format_date }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.country }}</td>
+                        <td>${{ item.investment | format_usd }}</td>
+                     </tr>
+                     {% endfor %}
+                     {% endif %}
+                  </tbody>
+                  <tfoot>
+                     <tr>
+                         
+                        <th colspan="4" class="text-right">Total</th>
+                       
+                        <th ></th>
+                     </tr>
+                 </tfoot>
+               </table>
+            </div>
+
+            
+            </div>
+         </div>
+      </div>
+</div>
+
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">REFERRAL ACTIVE IN TREE</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            <div class="material-datatables">
+              
+               <table id="" class="table table-bordered datatables_referrals22" style="width:100%;cellspacing:0">
+                  <thead>
+                     <tr>
+                        
+                        <th>Username</th>
+                        <th>Join Date</th>
+                        <th>Email</th>
+                        <th>Country</th>
+                        <th>Package</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% if data.f1_active_tree %}
+                     {% for item in data.f1_active_tree %}
+                     <tr>
+                        
+                        <td>{{ item.username }}</td>
+                        <td>{{ item.creation | format_date }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.country }}</td>
+                        <td>${{ item.investment | format_usd }}</td>
+                     </tr>
+                     {% endfor %}
+                     {% endif %}
+                  </tbody>
+                  <tfoot>
+                     <tr>
+                         
+                        <th colspan="4" class="text-right">Total</th>
+                       
+                        <th ></th>
+                     </tr>
+                 </tfoot>
+               </table>
+            </div>
+
+            
+            </div>
+         </div>
+      </div>
+</div>
+
+
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">System Tree (${{data.get_id_tree_package | format_usd}})</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            <div id="TreeSystem" class="demo"></div>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en"> 
+<head>
+<meta name="viewport" content="width = 1050, user-scalable = no" />
+<script type="text/javascript" src="/static/home/js/jquery.min.1.7.js"></script>
+<script type="text/javascript" src="/static/home/js/modernizr.2.5.3.min.js"></script>
+<!-- Start Alexa Certify Javascript -->
+<script type="text/javascript">
+_atrk_opts = { atrk_acct:"awLMq1Fx9f207i", domain:"worldtrader.info",dynamic: true};
+(function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://certify-js.alexametrics.com/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://certify.alexametrics.com/atrk.gif?account=awLMq1Fx9f207i" style="display:none" height="1" width="1" alt="" /></noscript>
+<!-- End Alexa Certify Javascript -->  
+</head>
+<body>
+
+<div class="flipbook-viewport">
+   <div class="container">
+      <div class="flipbook">
+         <div style="background-image:url(/static/home/images//1.jpg); margin-top: 100px;"></div>
+         <div style="background-image:url(/static/home/images//2.jpg); margin-top: 100px;"></div>
+         <div style="background-image:url(/static/home/images//3.jpg); margin-top: 100px;"></div>
+         <div style="background-image:url(/static/home/images//4.jpg); margin-top: 100px;"></div>
+         <div style="background-image:url(/static/home/images//5.jpg); margin-top: 100px;"></div>
+         <div style="background-image:url(/static/home/images//6.jpg); margin-top: 100px;"></div>
+         <div style="background-image:url(/static/home/images//7.jpg); margin-top: 100px;"></div>
+         <div style="background-image:url(/static/home/images//8.jpg); margin-top: 100px;"></div>
+         <div style="background-image:url(/static/home/images//9.jpg); margin-top: 100px;"></div>
+         <div style="background-image:url(/static/home/images//10.jpg); margin-top: 100px;"></div>
+         <div style="background-image:url(/static/home/images//11.jpg); margin-top: 100px;"></div>
+         <div style="background-image:url(/static/home/images//12.jpg); margin-top: 100px;"></div>
+      </div>
+   </div>
+</div>
+
+
+<script type="text/javascript">
+
+function loadApp() {
+
+   // Create the flipbook
+
+   $('.flipbook').turn({
+         // Width
+
+         width:800,
+         
+         // Height
+
+         height:360,
+
+         // Elevation
+
+         elevation: 50,
+         
+         // Enable gradients
+
+         gradients: true,
+         
+         // Auto center this flipbook
+
+         autoCenter: true
+
+   });
+}
+
+// Load the HTML4 version if there's not CSS transform
+
+yepnope({
+   test : Modernizr.csstransforms,
+   yep: ['/static/home/js/turn.js'],
+   nope: ['/static/home/js/turn.html4.min.js'],
+   both: ['/static/home/js/basic.css'],
+   complete: loadApp
+});
+
+</script>
+
+</body>
+</html>

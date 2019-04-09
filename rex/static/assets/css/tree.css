@@ -1,0 +1,1108 @@
+.tree,
+.tree li ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0
+}
+.tree li,
+.tree-node,
+.tree-title {
+    white-space: nowrap
+}
+.btn-tree,
+.btn-tree span,
+.tree-dnd-icon,
+.tree-title {
+    display: inline-block
+}
+.tree-hit,
+.tree-node {
+    cursor: pointer
+}
+.tree-node {
+    height: 18px
+}
+.tree-checkbox,
+.tree-collapsed,
+.tree-expanded,
+.tree-file,
+.tree-folder,
+.tree-indent {
+    display: inline-block;
+    width: 16px;
+    height: 18px;
+    vertical-align: top;
+    overflow: hidden
+}
+.tree-expanded {
+    background: url(images/tree_icons.png) -18px 0 no-repeat
+}
+.tree-expanded-hover {
+    background: url(images/tree_icons.png) -50px 0 no-repeat
+}
+.tree-collapsed {
+    background: url(images/tree_icons.png) no-repeat
+}
+.tree-collapsed-hover {
+    background: url(images/tree_icons.png) -32px 0 no-repeat
+}
+.tree-lines .tree-expanded,
+.tree-lines .tree-root-first .tree-expanded {
+    background: url(images/tree_icons.png) -144px 0 no-repeat
+}
+.tree-lines .tree-collapsed,
+.tree-lines .tree-root-first .tree-collapsed {
+    background: url(images/tree_icons.png) -128px 0 no-repeat
+}
+.tree-lines .tree-node-last .tree-expanded,
+.tree-lines .tree-root-one .tree-expanded {
+    background: url(images/tree_icons.png) -80px 0 no-repeat
+}
+.tree-lines .tree-node-last .tree-collapsed,
+.tree-lines .tree-root-one .tree-collapsed {
+    background: url(images/tree_icons.png) -64px 0 no-repeat
+}
+.tree-line {
+    background: url(images/tree_icons.png) -176px 0 no-repeat
+}
+.tree-join {
+    background: url(images/tree_icons.png) -192px 0 no-repeat
+}
+.tree-joinbottom {
+    background: url(images/tree_icons.png) -160px 0 no-repeat
+}
+.tree-folder {
+    background: url(images/tree_icons.png) -208px 0 no-repeat
+}
+.tree-folder-open {
+    background: url(images/tree_icons.png) -224px 0 no-repeat
+}
+.tree-file {
+    background: url(images/tree_icons.png) -240px 0 no-repeat
+}
+.tree-loading {
+    background: url(images/loading.gif) center center no-repeat
+}
+.tree-checkbox0 {
+    background: url(images/tree_icons.png) -208px -18px no-repeat
+}
+.tree-checkbox1 {
+    background: url(images/tree_icons.png) -224px -18px no-repeat
+}
+.tree-checkbox2 {
+    background: url(images/tree_icons.png) -240px -18px no-repeat
+}
+.tree-title {
+    font-size: 18px;
+    text-decoration: none;
+    vertical-align: top;
+    padding: 0 2px;
+    height: 18px;
+    line-height: 20px
+}
+.tree-node-proxy {
+    font-size: 12px;
+    line-height: 20px;
+    padding: 0 2px 0 20px;
+    border-width: 1px;
+    border-style: solid;
+    z-index: 9900000
+}
+.tree-dnd-icon {
+    position: absolute;
+    width: 16px;
+    height: 18px;
+    left: 2px;
+    top: 50%;
+    margin-top: -9px
+}
+.tree-dnd-yes {
+    background: url(images/tree_icons.png) -256px 0 no-repeat
+}
+.tree-dnd-no {
+    background: url(images/tree_icons.png) -256px -18px no-repeat
+}
+.tree-node-top {
+    border-top: 1px dotted red
+}
+.tree-node-bottom {
+    border-bottom: 1px dotted red
+}
+.tree-node-append .tree-title {
+    border: 1px dotted red
+}
+.tree-editor {
+    border: 1px solid #ccc;
+    font-size: 12px;
+    height: 14px!important;
+    height: 18px;
+    line-height: 14px;
+    padding: 1px 2px;
+    width: 80px;
+    position: absolute;
+    top: 0
+}
+.tree-node-proxy {
+    background-color: #fff;
+    color: #000;
+    border-color: #95B8E7
+}
+.tree-node-hover {
+    color: #000
+}
+.tree-node-selected {
+    background: #fff;
+    color: #000
+}
+.left_node,
+.right_node {
+    position: absolute
+}
+.undefined_node {
+    left: 50%;
+    position: absolute
+}
+.leftline.linefloor2 {
+    /*background: url(../../img/package/left1.png) no-repeat;*/
+    height: 37px;
+    position: absolute;
+    width: 210px;
+    left: -179px;
+    top: 59px;
+    border-left: 1px solid #3A94CC;
+    border-top: 1px solid #3A94CC;
+}
+.rightline.linefloor2 {
+    /*background: url(../../img/package/right1.png) no-repeat;*/
+    height: 37px;
+    position: absolute;
+    width: 212px;
+    right: -168px;
+    top: 59px;
+    border-right: 1px solid #3A94CC;
+    border-top: 1px solid #3A94CC;
+}
+.leftline.linefloor3 {
+    /*background: url(../../img/package/left2.png) no-repeat;*/
+    height: 35px;
+    left: -81px;
+    position: absolute;
+    top: 59px;
+    width: 118px;
+    border-left: 1px solid #3A94CC;
+    border-top: 1px solid #3A94CC;
+}
+.rightline.linefloor3 {
+    /*background: url(../../img/package/right2.png) no-repeat;*/
+        height: 35px;
+    position: absolute;
+    width: 118px;
+    right: -69px;
+    top: 59px;
+    border-right: 1px solid #3A94CC;
+    border-top: 1px solid #3A94CC;
+}
+.leftline.linefloor4 {
+    /*background: url(../../img/package/left3.png) no-repeat;*/
+     height: 57px;
+    left: -32px;
+    position: absolute;
+    top: 60px;
+    width: 73px;
+    border-left: 1px solid #3A94CC;
+    border-top: 1px solid #3A94CC;
+}
+.rightline.linefloor4 {
+    /*background: url(../../img/package/right3.png) no-repeat;*/
+        height: 56px;
+    position: absolute;
+    width: 72px;
+    right: -20px;
+    top: 60px;
+    border-right: 1px solid #3A94CC;
+    border-top: 1px solid #3A94CC;
+}
+.leftline.linefloor5,
+.leftline.linefloor6,
+.rightline.linefloor5,
+.rightline.linefloor6 {
+    height: 35px;
+    position: absolute
+}
+.leftline.linefloor5 {
+    background: url(../../img/package/package-left4.png) no-repeat;
+    width: 20px;
+    left: -11px;
+    top: 11px
+}
+.rightline.linefloor5 {
+    background: url(../../img/package/package-right4.png) no-repeat;
+    width: 20px;
+    right: -11px;
+    top: 10px
+}
+.leftline.linefloor6 {
+    background: url(../../img/package/package-left5.png) no-repeat;
+    width: 15px;
+    left: -8px;
+    top: 24px
+}
+.rightline.linefloor6 {
+    background: url(../img/right5.png) no-repeat;
+    width: 12px;
+    right: -6px;
+    top: 24px
+}
+.left_node.nodefloor2 {
+    left: -218px;
+    top: 62px
+}
+.right_node.nodefloor2 {
+    right: -225px;
+    top: 62px
+}
+.left_node.nodefloor3 {
+    left: -90px;
+    top: 60px
+}
+.right_node.nodefloor3 {
+    right: -100px;
+    top: 60px
+}
+.left_node.nodefloor4 {
+    left: -50px;
+    top: 60px
+}
+.right_node.nodefloor4 {
+    right: -50px;
+    top: 60px
+}
+.left_node.nodefloor5 {
+    left: -19px;
+    top: 60px
+}
+.right_node.nodefloor5 {
+    right: -28px;
+    top: 60px
+}
+.left_node.nodefloor6 {
+    left: -14px;
+    top: 60px
+}
+.right_node.nodefloor6 {
+    right: -16px;
+    top: 60px
+}
+.personal-tree {
+    width: 100%;
+    height: 300px;
+    /*margin-top: 60px*/
+}
+.personal_contain {
+    padding: 0 35px 35px
+}
+.personal-tree a {
+    font-size: 45px
+}
+.level2 {
+    background: url(../../img/package/package-B2.png) center center no-repeat!important
+}
+.personal-tree .type-1 {
+    background: url(../../img/package/package-6.png) center center no-repeat;
+    background-size: 35px;
+    color: transparent!important;
+    position: relative;
+    top: -30px
+}
+.personal-tree .type-2 {
+    background: url(../../img/package/package-200.png) center center no-repeat;
+    background-size: 35px;
+    color: transparent!important;
+    position: relative;
+    top: -30px
+}
+.personal-tree .type-2,.personal-tree .type-3, .personal-tree .type-4, .personal-tree .type-5, .personal-tree .type-6, .personal-tree .type-7,
+.personal-tree .type-add {
+    color: transparent!important;
+    top: -5px;
+    position: relative
+}
+.personal-tree .package-0 {
+    background: url(../../img/package/package-0.png) center center no-repeat;
+    background-size: 35px
+}
+.personal-tree .package-100 {
+    background: url(../../img/package/package-100.png) center center no-repeat;
+    background-size: 35px
+}
+.personal-tree .package-200 {
+    background: url(../../img/package/package-200.png) center center no-repeat;
+    background-size: 35px
+}
+.personal-tree .package-500 {
+    background: url(../../img/package/package-500.png) center center no-repeat;
+    background-size: 35px
+}
+.personal-tree .package-1000 {
+    background: url(../../img/package/package-3000.png) center center no-repeat;
+    background-size: 35px
+}
+.personal-tree .package-2000 {
+    background: url(../../img/package/package-2000.png) center center no-repeat;
+    background-size: 35px
+}
+.personal-tree .package-10000 {
+    background: url(../../img/package/package-10000.png) center center no-repeat;
+    background-size: 35px
+}
+.personal-tree .package-20000 {
+    background: url(../../img/package/package-20000.png) center center no-repeat;
+    background-size: 35px
+}
+.personal-tree .package-3000 {
+    background: url(../../img/package/package-1000.png) center center no-repeat;
+    background-size: 35px
+}
+.personal-tree .package-100000 {
+    background: url(../../img/package/package-100000.png) center center no-repeat;
+    background-size: 35px
+}
+.personal-tree .package-5000 {
+    background: url(../../img/package/package-10000.png) center center no-repeat;
+    background-size: 35px
+}
+.personal-tree .package-7 {
+    background: url(../../img/package/package-10.png) center center no-repeat;
+    background-size: 35px
+}
+.personal-tree .type-add {
+    background: url(../../img/package/package-3.png) center center no-repeat;
+    background-size: 35px
+}
+span.btn.btn-default.btn-tree {
+    border-radius: 40px
+}
+.account-personal .tab-content {
+    padding-top: 0!important
+}
+.btn-tree {
+    margin: 0 auto
+}
+.btn-tree span {
+    background-color: #fcf486;
+    padding: 5px 15px;
+    color: #3A474D;
+    text-transform: uppercase;
+    font-family: TradeGothicLTStd-BdCn20, 'PT Sans Narrow';
+    font-weight: 700;
+    font-size: 14px;
+    text-shadow: 0 1px #fff, 0 -1px #262F33
+}
+.btn-tree span:hover {
+    color: #b59a02;
+    text-shadow: 0 -1px #ffe70c;
+    cursor: pointer
+}
+.btn-tree:active span {
+    -webkit-transform: translate(0, 5px)
+}
+.undefined_node {
+    left: 50%;
+    position: absolute;
+}
+@media (max-width: 768px) {
+    .undefined_node {
+        left: 119%!important;
+    }
+}	
+
+
+
+
+.alertify .ajs-body {
+    min-height: 56px;
+    width: 100%;
+    float: left;
+    background: #fff;
+}
+.alertify .ajs-header {
+    margin: 0px !important;
+}
+.alertify .ajs-footer {
+    margin: 0px !important;
+}
+
+.ajs-header {
+    text-align: center;
+  
+  
+}
+.alertify .ajs-dialog {
+    padding: 0px !important;
+}
+.alertify .ajs-dialog {
+    background: none !important;
+}
+.alertify .ajs-dialog {
+    max-width: 768px !important;
+}
+.ajs-btn {
+    width: 109px;
+    
+}
+.ajs-close{
+    margin-top: 20px;
+}
+.left_node.nodefloor2 {
+    left: -255px;
+    top: 104px;
+}
+.right_node.nodefloor2 {
+    right: -250px;
+    top: 110px
+}
+.left_node.nodefloor3 {
+    left: -120px;
+    top: 120px;
+}
+.right_node.nodefloor3 {
+    right: -120px;
+    top: 120px
+}
+.left_node.nodefloor4 {
+    left: -60px;
+    top: 125px;
+}
+.right_node.nodefloor4 {
+    right: -60px;
+    top: 125px;
+}
+.left_node.nodefloor5 {
+    left: -19px;
+    top: 60px;
+     display: none;
+}
+.right_node.nodefloor5 {
+    right: -28px;
+    top: 60px;
+    display: none;
+}
+.left_node.nodefloor6 {
+    left: -14px;
+    top: 60px
+}
+.right_node.nodefloor6 {
+    right: -16px;
+    top: 60px
+}
+.username_node {
+    margin-top: -19px;
+    /* float: left; */
+    position: absolute;
+    /* left: -8px; */
+    font-size: 11px;
+    width: 100px;
+    overflow: hidden;
+    left: 0;
+    color: #1c2b36;
+    text-transform: uppercase;
+}
+/*.leftline {
+    display: none;
+}
+.rightline {
+    display: none;
+}
+*/
+.tree,
+.tree li ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0
+}
+.tree li,
+.tree-node,
+.tree-title {
+    white-space: nowrap
+}
+.btn-tree,
+.btn-tree span,
+.tree-dnd-icon,
+.tree-title {
+    display: inline-block
+}
+.tree-hit,
+.tree-node {
+    cursor: pointer
+}
+.tree-node {
+    height: 18px
+}
+.tree-checkbox,
+.tree-collapsed,
+.tree-expanded,
+.tree-file,
+.tree-folder,
+.tree-indent {
+    display: inline-block;
+    width: 16px;
+    height: 18px;
+    vertical-align: top;
+    overflow: hidden
+}
+.tree-expanded {
+    background: url(images/tree_icons.png) -18px 0 no-repeat
+}
+.tree-expanded-hover {
+    background: url(images/tree_icons.png) -50px 0 no-repeat
+}
+.tree-collapsed {
+    background: url(images/tree_icons.png) no-repeat
+}
+.tree-collapsed-hover {
+    background: url(images/tree_icons.png) -32px 0 no-repeat
+}
+.tree-lines .tree-expanded,
+.tree-lines .tree-root-first .tree-expanded {
+    background: url(images/tree_icons.png) -144px 0 no-repeat
+}
+.tree-lines .tree-collapsed,
+.tree-lines .tree-root-first .tree-collapsed {
+    background: url(images/tree_icons.png) -128px 0 no-repeat
+}
+.tree-lines .tree-node-last .tree-expanded,
+.tree-lines .tree-root-one .tree-expanded {
+    background: url(images/tree_icons.png) -80px 0 no-repeat
+}
+.tree-lines .tree-node-last .tree-collapsed,
+.tree-lines .tree-root-one .tree-collapsed {
+    background: url(images/tree_icons.png) -64px 0 no-repeat
+}
+.tree-line {
+    background: url(images/tree_icons.png) -176px 0 no-repeat
+}
+.tree-join {
+    background: url(images/tree_icons.png) -192px 0 no-repeat
+}
+.tree-joinbottom {
+    background: url(images/tree_icons.png) -160px 0 no-repeat
+}
+.tree-folder {
+    background: url(images/tree_icons.png) -208px 0 no-repeat
+}
+.tree-folder-open {
+    background: url(images/tree_icons.png) -224px 0 no-repeat
+}
+.tree-file {
+    background: url(images/tree_icons.png) -240px 0 no-repeat
+}
+.tree-loading {
+    background: url(images/loading.gif) center center no-repeat
+}
+.tree-checkbox0 {
+    background: url(images/tree_icons.png) -208px -18px no-repeat
+}
+.tree-checkbox1 {
+    background: url(images/tree_icons.png) -224px -18px no-repeat
+}
+.tree-checkbox2 {
+    background: url(images/tree_icons.png) -240px -18px no-repeat
+}
+.tree-title {
+    font-size: 18px;
+    text-decoration: none;
+    vertical-align: top;
+    padding: 0 2px;
+    height: 18px;
+    line-height: 20px
+}
+.tree-node-proxy {
+    font-size: 12px;
+    line-height: 20px;
+    padding: 0 2px 0 20px;
+    border-width: 1px;
+    border-style: solid;
+    z-index: 9900000
+}
+.tree-dnd-icon {
+    position: absolute;
+    width: 16px;
+    height: 18px;
+    left: 2px;
+    top: 50%;
+    margin-top: -9px
+}
+.tree-dnd-yes {
+    background: url(images/tree_icons.png) -256px 0 no-repeat
+}
+.tree-dnd-no {
+    background: url(images/tree_icons.png) -256px -18px no-repeat
+}
+.tree-node-top {
+    border-top: 1px dotted red
+}
+.tree-node-bottom {
+    border-bottom: 1px dotted red
+}
+.tree-node-append .tree-title {
+    border: 1px dotted red
+}
+.tree-editor {
+    border: 1px solid #ccc;
+    font-size: 12px;
+    height: 14px!important;
+    height: 18px;
+    line-height: 14px;
+    padding: 1px 2px;
+    width: 80px;
+    position: absolute;
+    top: 0
+}
+.tree-node-proxy {
+    background-color: #fff;
+    color: #000;
+    border-color: #95B8E7
+}
+.tree-node-hover {
+    color: #000
+}
+.tree-node-selected {
+    background: #fff;
+    color: #000
+}
+.left_node,
+.right_node {
+    position: absolute
+}
+.undefined_node {
+    left: 47%;
+    /*position: absolute;
+    top: 150px;*/
+}
+
+.leftline.linefloor5,
+.leftline.linefloor6,
+.rightline.linefloor5,
+.rightline.linefloor6 {
+    height: 35px;
+    position: absolute
+}
+
+.left_node.nodefloor2 {
+    left: -210px;
+    top: 97px;
+}
+.name_node{
+    width: 75px;
+    white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    float: left;
+    margin-top: -2px;
+        font-size: 10px;
+    text-align: center;
+    padding: 0 7px;
+        color: #5FC8F3;
+}
+.right_node.nodefloor2 {
+    right: -210px;
+    top: 95px;
+}
+.left_node.nodefloor3 {
+        left: -114px;
+    top: 93px;
+}
+.right_node.nodefloor3 {
+        right: -110px;
+    top: 92px;
+}
+.left_node.nodefloor4 {
+    left: -63px;
+    top: 112px;
+}
+.right_node.nodefloor4 {
+    right: -61px;
+    top: 111px;
+}
+.left_node.nodefloor5 {
+    left: -19px;
+    top: 60px;
+     display: none;
+}
+.right_node.nodefloor5 {
+    right: -28px;
+    top: 60px;
+    display: none;
+}
+.left_node.nodefloor6 {
+    left: -14px;
+    top: 60px
+}
+.right_node.nodefloor6 {
+    right: -16px;
+    top: 60px
+}
+.personal-tree {
+    width: 100%;
+    height: 922px;
+    margin-top: -160px;
+    padding-top: 250px;
+   /* position: absolute;*/
+    overflow-x: scroll;
+    position: relative;
+    z-index: 99999999999;
+}
+.personal_contain {
+    padding: 0 35px 35px
+}
+.personal-tree a {
+    font-size: 45px
+}
+
+.personal-tree .type-1 {
+    background: url(../../img/package/package-1.png) center center no-repeat;
+    background-size: 65px;
+    color: transparent!important;
+    position: relative;
+    top: -5px;
+    left: 0px;
+}
+.personal-tree .type-2 {
+    background: url(../../img/package/package-2.png) center center no-repeat;
+    background-size: 65px;
+    color: transparent!important;
+    position: relative;
+    top: -5px;
+    left: 0px;
+}
+.personal-tree .type-3 {
+    background: url(../../img/package/package-3.png) center center no-repeat;
+    background-size: 65px;
+    color: transparent!important;
+    position: relative;
+    top: -5px;
+    left: 0px;
+}
+.personal-tree .type-4 {
+    background: url(../../img/package/package-4.png) center center no-repeat;
+    background-size: 65px;
+    color: transparent!important;
+    position: relative;
+    top: -5px;
+    left: 0px;
+}
+.personal-tree .type-5 {
+    background: url(../../img/package/package-5.png) center center no-repeat;
+    background-size: 65px;
+    color: transparent!important;
+    position: relative;
+    top: -5px;
+    left: 0px;
+}
+.personal-tree .type-6 {
+    background: url(../../img/package/package-6.png) center center no-repeat;
+    background-size: 65px;
+    color: transparent!important;
+    position: relative;
+    top: -5px;
+    left: 0px;
+}
+.personal-tree .type-7 {
+    background: url(../../img/package/package-7.png) center center no-repeat;
+    background-size: 65px;
+    color: transparent!important;
+    position: relative;
+    top: -5px;
+    left: 0px;
+}
+.personal-tree .type-8 {
+    background: url(../../img/package/package-8.png) center center no-repeat;
+    background-size: 65px;
+}
+.personal-tree .type-9 {
+    background: url(../../img/package/package-9.png) center center no-repeat;
+    background-size: 65px;
+}
+.personal-tree .type-10 {
+    background: url(../../img/package/package-10.png) center center no-repeat;
+    background-size: 65px;
+}
+.personal-tree .type-11 {
+    background: url(../../img/package/package-11.png) center center no-repeat;
+    background-size: 65px;
+}
+.personal-tree .type-none {
+    background: url(../../img/package/package-none.png) center center no-repeat;
+    background-size: 65px;
+}
+
+.personal-tree .type-2,
+.personal-tree .type-add {
+    color: transparent!important;
+    top: 0px;
+    position: relative
+}
+a.adduser {
+    border: 1px solid #eeb488 !important;
+}
+.personal-tree .type-2 {
+    
+}
+.personal-tree .type-add {
+    background: url(../../img/package/package-0.png) center center no-repeat;
+    background-size: 65px
+}
+.personal-tree .none_tresss div{
+    display: none;
+}
+
+@media only screen and (max-width: 990px) {
+    #mobile,
+    #no-more-tables table,
+    #no-more-tables tbody,
+    #no-more-tables td,
+    #no-more-tables th,
+    #no-more-tables thead,
+    #no-more-tables tr {
+        display: block
+    }
+    #destop {
+        display: none
+    }
+    .panel.panel-default {
+        border: 0
+    }
+    #no-more-tables tr {
+        margin-bottom: 15px;
+        border: 1px solid #ccc
+    }
+    #no-more-tables thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px
+    }
+    #no-more-tables td {
+        / Behave like a "row" / border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        text-align: left;
+        word-break: break-word;
+    }
+    #no-more-tables td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: normal;
+        text-align: left;
+        font-weight: 700;
+        content: attr(data-title)
+    }
+}
+
+
+/*tree*/
+.undefined_node a{
+    text-align: center;
+    /*border:1px solid #3a769e;*/
+    background: transparent;
+    position: relative;
+    padding: 3px;
+    border-radius: 5px;
+    display: block;
+    width: 65px;
+    height: 60px;
+}
+.personal-tree i.fa {
+    width: 60px;
+    height: 60px;
+    float: left;
+}
+
+#no-more-tables{
+    border: 0px;
+}
+@media only screen and (max-width: 990px)
+{
+    #no-more-tables tr {
+    margin-bottom: 15px;
+    border: 1px solid #f1e3ed;
+        border-top: 0px;
+}
+}
+.customer_toolip{
+   /* position: absolute;*/
+    width: 250px;
+   /* z-index: 999999999999;
+    top: 135px;
+    bottom: -40px;*/
+    z-index: 999999999999;
+}
+.customer_toolip table{
+   /* background: #3B76A0;*/
+}
+.customer_toolip table tr{
+    border: 1px solid #eeb488;
+}
+.personal-tree i{
+    position: relative;
+    z-index: 999;
+    width: 50px;
+    height: 56px;
+    text-align: center;
+
+}
+.customer_toolip.left{
+    left: 80px;
+    top: -44px;
+}
+.customer_toolip.right{
+    right: 3px;
+    top: -44px;
+}
+.undefined_node .customer_toolip.undefined{
+    left: -60px;
+    top: 42px;
+}
+.personal-tree .type-0 {
+    background: url(../../img/package/package-0.png) center center no-repeat;
+    background-size: 40px;
+}
+.right_node.nodefloor3 .customer_toolip.left,.right_node.nodefloor3 .customer_toolip.right{
+    left: -203px;
+    top: -44px;
+}
+.left_node.nodefloor3 .right_node.nodefloor4 .customer_toolip.right{
+    left: 80px;
+    top: -44px;
+}
+.left_node.nodefloor2 .right_node.nodefloor3 .left_node.nodefloor4 .customer_toolip.left{
+    left: 60px;
+    top: -24px;
+}
+.right_node.nodefloor2 .left_node.nodefloor3 .right_node.nodefloor4 .customer_toolip.right{
+    left: -233px;
+    top: -24px;
+}
+.list-package-invest{
+    margin-top: 20px;
+    float: right;
+}
+
+.list-package-invest li{
+    width: 50px;
+    float: left;
+}
+.list-package-invest li .background{
+    height: 35px;
+    width: 35px;
+    float: left;
+    margin-right: 7px;
+    margin: 0 auto;
+    
+}
+.list-package-invest li span{
+    display: block;
+    clear: both;
+    font-size: 11px;
+    text-align: left;
+}
+.personal-icon .package-100{
+    background: url(/static/assets/img/icons/100.png) center;
+    background-size: 40px;
+    z-index: 999999;
+    background-repeat: no-repeat;
+    height: 50px;
+}
+.personal-icon .package-200{
+    background: url(/static/assets/img/icons/200.png) center;
+    background-size: 40px;
+    z-index: 999999;
+    background-repeat: no-repeat;
+    height: 50px;
+}
+.personal-icon .package-500{
+    background: url(/static/assets/img/icons/500.png) center;
+    background-size: 40px;
+    z-index: 999999;
+    background-repeat: no-repeat;
+    height: 50px;
+}
+.personal-icon .package-1000{
+    background: url(/static/assets/img/icons/1000.png) center;
+    background-size: 40px;
+    z-index: 999999;
+    background-repeat: no-repeat;
+    height: 50px;
+}
+.personal-icon .package-2000{
+    background: url(/static/assets/img/icons/2000.png) center;
+    background-size: 40px;
+    z-index: 999999;
+    background-repeat: no-repeat;
+    height: 50px;
+}
+.personal-icon .package-5000{
+    background: url(/static/assets/img/icons/5000.png) center;
+    background-size: 40px;
+    z-index: 999999;
+    background-repeat: no-repeat;
+    height: 50px;
+}
+.personal-icon .package-10000{
+    background: url(/static/assets/img/icons/10000.png) center;
+    background-size: 40px;
+    z-index: 999999;
+    background-repeat: no-repeat;
+    height: 50px;
+}
+.personal-icon .package-20000{
+    background: url(/static/assets/img/icons/20000.png) center;
+    background-size: 40px;
+    z-index: 999999;
+    background-repeat: no-repeat;
+    height: 50px;
+}
+.personal-icon .package-50000{
+    background: url(/static/assets/img/icons/50000.png) center;
+    background-size: 40px;
+    z-index: 999999;
+    background-repeat: no-repeat;
+    height: 50px;
+}
+.personal-icon .package-add{
+    background: url(/static/assets/img/icons/3.png) center;
+    background-size: 40px;
+    z-index: 999999;
+    background-repeat: no-repeat;
+    height: 50px;
+}
+.personal-icon .package-new{
+    background: url(/static/assets/img/icons/0.png) center;
+    background-size: 40px;
+    z-index: 999999;
+    background-repeat: no-repeat;
+    height: 50px;
+}
+.tooltip-inner {
+    max-width: 265px;
+    /* If max-width does not work, try using width instead */
+    width: 265px; 
+    z-index: 99999999;
+}
+.customer_toolip{
+    z-index: 99999999;
+}
+.customer_toolip .table > tbody > tr > td{
+    padding: 5px 11px;
+} 
+.customer_toolip .username{
+    background: #403e42;
+    border-radius: 5px 5px 0 0 ;
+    color: #fff;
+    padding: 20px;
+    height: 45px;
+}

@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+{% block title %}Mount the network tree{% endblock %}
+{% block css %}
+<link href="/static/assets/css/jstree.css" rel="stylesheet" >
+{% endblock %}
+{% block js %}
+<script src="/static/assets/js/getinfo.js"></script>
+<script type="text/javascript" src="/static/assets/js/jstree.min.js"> </script>
+<script type="text/javascript">
+    $('#TreeSystem').jstree({
+            'core' : {
+               'data' : {
+                  "url" : "/account/json_tree_ico/{{data.uid}}",
+                  "dataType" : "json",
+         'data' : function (node) {
+                  return { 'id' : node.id };
+              }
+               }
+            }
+         });
+</script>
+{% endblock %}
+	
+
+{% block main %}
+
+
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">Mount the network tree</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            <div class="material-datatables">
+              {% if data.checkF1 == True %}
+               <form  name="add-tree" action="/account/add-tree-submit/{{data.p_binary}}/{{data.position}}" method="POST">
+                  <table id="" class="table table-bordered" style="width:100%;cellspacing:0">
+                     <thead>
+                        <tr>
+                           <th>Username</th>
+                           <th>Join Date</th>
+                           <th>Email</th>
+                           <th>Country</th>
+                           <th>Package</th>
+                           <th>Selected</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        
+                        {% for item in data.refferal %}
+                        <tr>
+                           
+                           <td>{{ item.username }}</td>
+                           <td>{{ item.creation | format_date }}</td>
+                           <td>{{ item.email }}</td>
+                           <td>{{ item.country }}</td>
+                           <td>${{ item.investment | format_usd }}</td>
+                           <td class="text-center">
+                              <input type="radio" name="id_user" value="{{ item.customer_id }}">
+                           </td>
+                        </tr>
+                        {% endfor %}
+                        
+                     </tbody>
+                  </table>
+                  <div class="text-center">
+                  <button class="btn btn-success" type="submit">Submit</button>
+                  </div>
+               </form>
+               {% endif %}
+               {% if data.checkF1 == False %}
+               <div class="alert alert-danger">
+                     
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                     </button>
+                     
+                     <p><i class="fa fa-star"></i> You have no members to add to the tree.</p>
+                     
+                     
+                  </div>
+               {% endif %}
+            </div>
+
+            
+            </div>
+         </div>
+      </div>
+</div>
+
+
+{% endblock %}
+

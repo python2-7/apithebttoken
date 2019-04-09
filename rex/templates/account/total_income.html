@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block title %}Total Income{% endblock %}
+{% block css %}
+
+{% endblock %}
+{% block js %}
+
+{% endblock %}
+	
+
+{% block main %}
+
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">Total Income</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            <div class="material-datatables">
+              
+               <table id="datatables_investmenthistory" class="table table-bordered" style="width:100%;cellspacing:0">
+                  <thead>
+                     <tr>
+                        <th class="text-center">No.</th>
+                        <th class="text-center">Package</th>
+                        <th class="text-center">Total Income</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Datetime</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% if data.history %}
+                     {% for item in data.history %}
+                     <tr>
+                        <td class="text-center"></td>
+                        <td class="text-center">{{ item.package | format_usd}}</td>
+                        <td class="text-center">{{ item.total_income | format_usd}}</td>
+                        <td class="text-center" style="color: #4CAF50">Success</td>
+                        <td class="text-center">{{ item.date_income | format_date }}</td>
+                     </tr>
+                     {% endfor %}
+                     {% endif %}
+                  </tbody>
+                  
+               </table>
+            </div>
+            </div>
+         </div>
+      </div>
+</div>
+
+{% endblock %}
+

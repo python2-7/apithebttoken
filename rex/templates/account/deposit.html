@@ -1,0 +1,249 @@
+{% extends "layout.html" %}
+{% block title %}Deposit{% endblock %}
+{% block css %}
+<link href="/static/assets/css/jstree.css" rel="stylesheet" >
+{% endblock %}
+{% block js %}
+<script src="/static/assets/js/getinfo.js"></script>
+<script type="text/javascript" src="/static/assets/js/jstree.min.js"> </script>
+<script type="text/javascript">
+    $('#TreeSystem').jstree({
+            'core' : {
+               'data' : {
+                  "url" : "/account/json_tree_ico/{{data.uid}}",
+                  "dataType" : "json",
+         'data' : function (node) {
+                  return { 'id' : node.id };
+              }
+               }
+            }
+         });
+</script>
+{% endblock %}
+	
+
+{% block main %}
+<div class="section__content section__content--p30 ">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">HOW TO DEPOSIT </strong>
+      </div>
+      <div class="card-body">
+         <div class="div-wallet-container table-responsive">
+            <table class="table" id="table--list--coin" data-bind="with: Wallet">
+               <thead>
+                  <tr style="border-top:0px solid #DADEE7;border-bottom:1px solid #DADEE7">
+                     <th style="border-top:0px">Coin</th>
+                     <th style="border-top:0px">Name</th>
+
+                     <th style="border-top:0px" class="text-center">Price</th>
+                     <th style="border-top:0px; text-align:center" width="200px">Actions</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                     <img src="/static/img/BTC.png" width="40" style="margin-right: 10px;"><span class="span-coin-name">BTC</span></td>
+                     <td> Bitcoin</td>
+                     <td class="text-center">{{data.ticker['btc_usd'] | format_usd}}</td>
+                     <td style="text-align:center">
+                        <button class="btn btn-default btn-deposit button--deposit" data-coin="BTC" data-content="btc-action">Deposit</button>                                
+                     </td>
+                  </tr>
+                  <tr class="content-show-BTC hiddensss">
+                     <td colspan="4">
+                        <div style="padding:10px 0px 10px;">
+                           <h4 style="color: #333333; font-size: 18px">Your Address Bitcoin Deposit</h4>
+                           <div style="background: #dff1ef;padding: 15px;text-align: center;font-weight: 600;border-radius: 3px;" class="content-all-BTC">
+                              <div class="form-group text-center">
+                                 <img style="max-width:300px;" class="address-new-img-BTC" alt="" src="">
+                              </div>
+                              <span style="color: #000;" class="address-new-BTC"></span>
+                           </div>
+                           <div style="color: #fb4f53;">
+                              
+                              <div>IMPORTANT: Send only BTC to this deposit address.            
+                              </div>
+                           </div>
+                           <div>Sending tokens or any other currency to this address will result in the permanent loss of your deposit.</div>
+                        </div>
+                     </td>
+                  </tr>
+                  
+                  <tr>
+                     <td>
+                     <img src="/static/img/ETH.png" width="40" style="margin-right: 10px;"><span class="span-coin-name">ETH</span></td>
+                     <td> Ethereum</td>
+                     <td class="text-center">{{data.ticker['eth_usd'] | format_usd}}</td>
+                     <td style="text-align:center">
+                        <button class="btn btn-default btn-deposit button--deposit" data-coin="ETH" data-content="btc-action">Deposit</button>                                
+                     </td>
+                  </tr>
+                  <tr class="content-show-ETH hiddensss">
+                     <td colspan="4">
+                        <div style="padding:10px 0px 10px;">
+                           <h4 style="color: #333333; font-size: 18px">Your Address Ethereum Deposit</h4>
+                           <div style="background: #dff1ef;padding: 15px;text-align: center;font-weight: 600;border-radius: 3px;" class="content-all-ETH">
+                              <div class="form-group text-center">
+                                 <img style="max-width:300px;" class="address-new-img-ETH" alt="" src="">
+                              </div>
+                              <span style="color: #000;" class="address-new-ETH"></span>
+                           </div>
+                           <div style="color: #fb4f53;">
+                              
+                              <div>IMPORTANT: Send only ETH to this deposit address.            
+                              </div>
+                           </div>
+                           <div>Sending tokens or any other currency to this address will result in the permanent loss of your deposit.</div>
+                        </div>
+                     </td>
+                  </tr>
+
+                  <tr>
+                     <td>
+                     <img src="/static/img/LTC.png" width="40" style="margin-right: 10px;"><span class="span-coin-name">LTC</span></td>
+                     <td> Litecoin</td>
+                     <td class="text-center">{{data.ticker['ltc_usd'] | format_usd}}</td>
+                     <td style="text-align:center">
+                        <button class="btn btn-default btn-deposit button--deposit" data-coin="LTC" data-content="btc-action">Deposit</button>                                
+                     </td>
+                  </tr>
+                  <tr class="content-show-LTC hiddensss">
+                     <td colspan="4">
+                        <div style="padding:10px 0px 10px;">
+                           <h4 style="color: #333333; font-size: 18px">Your Litecoin Deposit</h4>
+                           <div style="background: #dff1ef;padding: 15px;text-align: center;font-weight: 600;border-radius: 3px;" class="content-all-LTC">
+                              <div class="form-group text-center">
+                                 <img style="max-width:300px;" class="address-new-img-LTC" alt="" src="">
+                              </div>
+                              <span style="color: #000;" class="address-new-LTC"></span>
+                           </div>
+                           <div style="color: #fb4f53;">
+                              
+                              <div>IMPORTANT: Send only LTC to this deposit address.            
+                              </div>
+                           </div>
+                           <div>Sending tokens or any other currency to this address will result in the permanent loss of your deposit.</div>
+                        </div>
+                     </td>
+                  </tr>
+
+                  <tr>
+                     <td>
+                     <img src="/static/img/BCH.png" width="40" style="margin-right: 10px;"><span class="span-coin-name">BCH</span></td>
+                     <td> Bitcoin Cash</td>
+                     <td class="text-center">{{data.ticker['bch_usd'] | format_usd}}</td>
+                     <td style="text-align:center">
+                        <button class="btn btn-default btn-deposit button--deposit" data-coin="BCH" data-content="btc-action">Deposit</button>                                
+                     </td>
+                  </tr>
+                  <tr class="content-show-BCH hiddensss">
+                     <td colspan="4">
+                        <div style="padding:10px 0px 10px;">
+                           <h4 style="color: #333333; font-size: 18px">Your Bitcoin Cash Deposit</h4>
+                           <div style="background: #dff1ef;padding: 15px;text-align: center;font-weight: 600;border-radius: 3px;" class="content-all-BCH">
+                              <div class="form-group text-center">
+                                 <img style="max-width:300px;" class="address-new-img-BCH" alt="" src="">
+                              </div>
+                              <span style="color: #000;" class="address-new-BCH"></span>
+                           </div>
+                           <div style="color: #fb4f53;">
+                              
+                              <div>IMPORTANT: Send only BCH to this deposit address.            
+                              </div>
+                           </div>
+                           <div>Sending tokens or any other currency to this address will result in the permanent loss of your deposit.</div>
+                        </div>
+                     </td>
+                  </tr>
+
+                  <tr>
+                     <td>
+                     <img src="/static/img/USDT.png" width="40" style="margin-right: 10px;"><span class="span-coin-name">USDT</span></td>
+                     <td> Tether</td>
+                     <td class="text-center">1.00</td>
+                     <td style="text-align:center">
+                        <button class="btn btn-default btn-deposit button--deposit" data-coin="USDT" data-content="btc-action">Deposit</button>                                
+                     </td>
+                  </tr>
+                  <tr class="content-show-USDT hiddensss">
+                     <td colspan="4">
+                        <div style="padding:10px 0px 10px;">
+                           <h4 style="color: #333333; font-size: 18px">Your Tether Deposit</h4>
+                           <div style="background: #dff1ef;padding: 15px;text-align: center;font-weight: 600;border-radius: 3px;" class="content-all-USDT">
+                              <div class="form-group text-center">
+                                 <img style="max-width:300px;" class="address-new-img-USDT" alt="" src="">
+                              </div>
+                              <span style="color: #000;" class="address-new-USDT"></span>
+                           </div>
+                           <div style="color: #fb4f53;">
+                              
+                              <div>IMPORTANT: Send only USDT to this deposit address.            
+                              </div>
+                           </div>
+                           <div>Sending tokens or any other currency to this address will result in the permanent loss of your deposit.</div>
+                        </div>
+                     </td>
+                  </tr>
+
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">DEPOSIT HISTORY </strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            <div class="material-datatables">
+              
+               <table id="datatables_deposit" class="table table-bordered" style="width:100%;cellspacing:0">
+                  <thead>
+                     <tr>
+                        <th>No.</th>
+                        <th>Datetime</th>
+                        <th>Amount</th>
+                        
+                        <th>Currency</th>
+                        <th>Amount USD</th>
+                        <th>Txid</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% if data.deposit %}
+                     {% for item in data.deposit %}
+                     <tr>
+                        <td></td>
+                        <td>{{ item.date_added | format_date }}</td>
+                        <td>{{ item.amount }}</td>
+                        
+                        <td>{{ item.type }}</td>
+                        <td>{{ item.amount_usd }}</td>
+                        <td>{{ item.tx }}</td>
+                     </tr>
+                     {% endfor %}
+                     {% endif %}
+                  </tbody>
+                  <tfoot>
+                  <th colspan="4" class="text-right">Total</th>
+                  <th colspan="2" class="text-left"></th>
+                  <tfoot>
+               </table>
+            </div>
+
+            
+            </div>
+         </div>
+      </div>
+</div>
+
+
+
+
+{% endblock %}
+

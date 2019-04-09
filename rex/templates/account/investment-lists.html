@@ -1,0 +1,340 @@
+{% extends "layout.html" %}
+{% block title %}Investment List{% endblock %}
+{% block js %}
+<script src="/static/assets/js/script.js"></script>
+<script src="/static/assets/js/getinfo.js"></script>
+<script src="/static/assets/js/lending.js"></script>
+<script src="/static/assets/js/main.js"></script>
+{% endblock %}
+{% block main %}
+<div class="section__content section__content--p30">
+   <style>
+      .btn-primary 
+      {
+      color: #fff;
+      background-color: #121734;
+      }
+      .btn-warning 
+      {
+      color: #212529;
+      background-color: #DDAF3F;
+      border-color: #ffc107;
+      }
+   </style>
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">INVESTMENT</strong>
+      </div>
+      <div class="card-body">
+         <div class="row">
+            <div class="col-md-4 item-buy-1" style="cursor: pointer;">
+               <!-- Widget: user widget style 1 -->
+               <div class="card">
+                  <div class="box box-widget widget-user">
+                     <!-- Add the bg color to the header using any of the bg-* classes -->
+                     <div class="widget-user-header">
+                        <h3 class="widget-user-username"><span style="float:left; padding: 10px; color:#121734">STARTED</span><span style="float:right;padding: 10px;color:#121734">$110</span><br style="clear:both"></h3>
+                     </div>
+                     <div class="widget-user-image">
+                        <img class="img-circle" src="/static/img/package/package-1.png" alt="User Avatar">
+                     </div>
+                     
+                     <br>
+                     <div class="text-center" style="margin-bottom:20px;">
+                        
+                        {% if data.investment == None%}
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='/account/active-investment/1'">Invesment Now</button>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+               <!-- /.widget-user -->
+            </div>
+            <div class="col-md-4 item-buy-1" style="cursor: pointer;">
+               <!-- Widget: user widget style 1 -->
+               <div class="card">
+                  <div class="box box-widget widget-user">
+                     <!-- Add the bg color to the header using any of the bg-* classes -->
+                     <div class="widget-user-header">
+                        <h3 class="widget-user-username"><span style="float:left; padding: 10px; color:#121734">EXCUTIVE</span><span style="float:right;padding: 10px;color:#121734">$510</span><br style="clear:both"></h3>
+                     </div>
+                     <div class="widget-user-image">
+                        <img class="img-circle" src="/static/img/package/package-2.png" alt="User Avatar">
+                     </div>
+                     
+                     <br>
+                     <div class="text-center" style="margin-bottom:20px;">
+                        {% if data.investment == None %}
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='/account/active-investment/2'">Invesment Now</button>
+                        {% endif %}
+
+                        {% if data.investment != None and data.investment['package'] < 500 and data.investment['upgrade'] != 1%}
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/account/upgrade-investment/2'">Upgrade package</button>
+                        {% endif %}
+
+                        {% if data.investment != None and  data.investment['package'] <= 500 and data.investment['reinvest'] == 1%}
+                        <button type="button" class="btn btn-info" onclick="window.location.href='/account/reinvest-investment/2'">Reinvest Now</button>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+               <!-- /.widget-user -->
+            </div>
+            <div class="col-md-4 item-buy-1" style="cursor: pointer;">
+               <!-- Widget: user widget style 1 -->
+               <div class="card">
+                  <div class="box box-widget widget-user">
+                     <!-- Add the bg color to the header using any of the bg-* classes -->
+                     <div class="widget-user-header">
+                        <h3 class="widget-user-username"><span style="float:left; padding: 10px; color:#121734">SILVER</span><span style="float:right;padding: 10px;color:#121734">$1,010</span><br style="clear:both"></h3>
+                     </div>
+                     <div class="widget-user-image">
+                        <img class="img-circle" src="/static/img/package/package-3.png" alt="User Avatar">
+                     </div>
+                     
+                     <br>
+                     <div class="text-center" style="margin-bottom:20px;">
+                        {% if data.investment == None %}
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='/account/active-investment/3'">Invesment Now</button>
+                        {% endif %}
+                        {% if data.investment != None and data.investment['package'] < 1000 and data.investment['upgrade'] != 1 and data.investment['reinvest'] != 1%}
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/account/upgrade-investment/3'">Upgrade package</button>
+                        {% endif %}
+                        {% if data.investment != None and    data.investment['package'] <= 1000 and data.investment['reinvest'] == 1%}
+                        <button type="button" class="btn btn-info" onclick="window.location.href='/account/reinvest-investment/3'">Reinvest Now</button>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+               <!-- /.widget-user -->
+            </div>
+            <div class="col-md-4 item-buy-1" style="cursor: pointer;">
+               <!-- Widget: user widget style 1 -->
+               <div class="card">
+                  <div class="box box-widget widget-user">
+                     <!-- Add the bg color to the header using any of the bg-* classes -->
+                     <div class="widget-user-header">
+                        <h3 class="widget-user-username"><span style="float:left; padding: 10px; color:#121734">GOLD</span><span style="float:right;padding: 10px;color:#121734">$3,010</span><br style="clear:both"></h3>
+                     </div>
+                     <div class="widget-user-image">
+                        <img class="img-circle" src="/static/img/package/package-4.png" alt="User Avatar">
+                     </div>
+                     
+                     <br>
+                     <div class="text-center" style="margin-bottom:20px;">
+                        {% if data.investment == None %}
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='/account/active-investment/4'">Invesment Now</button>
+                        {% endif %}
+                        {% if data.investment != None and data.investment['package'] < 3000 and data.investment['upgrade'] != 1 and data.investment['reinvest'] != 1%}
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/account/upgrade-investment/4'">Upgrade package</button>
+                        {% endif %}
+                        {% if  data.investment != None and   data.investment['package'] <= 3000 and data.investment['reinvest'] == 1%}
+                        <button type="button" class="btn btn-info" onclick="window.location.href='/account/reinvest-investment/4'">Reinvest Now</button>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+               <!-- /.widget-user -->
+            </div>
+            <div class="col-md-4 item-buy-1" style="cursor: pointer;">
+               <!-- Widget: user widget style 1 -->
+               <div class="card">
+                  <div class="box box-widget widget-user">
+                     <!-- Add the bg color to the header using any of the bg-* classes -->
+                     <div class="widget-user-header">
+                        <h3 class="widget-user-username"><span style="float:left; padding: 10px; color:#121734">SAPPHIRE</span><span style="float:right;padding: 10px;color:#121734">$5,010</span><br style="clear:both"></h3>
+                     </div>
+                     <div class="widget-user-image">
+                        <img class="img-circle" src="/static/img/package/package-5.png" alt="User Avatar">
+                     </div>
+                  
+                     <br>
+                     <div class="text-center" style="margin-bottom:20px;">
+                        {% if data.investment == None %}
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='/account/active-investment/5'">Invesment Now</button>
+                        {% endif %}
+                        {% if data.investment != None and data.investment['package'] < 5000 and data.investment['upgrade'] != 1 and data.investment['reinvest'] != 1%}
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/account/upgrade-investment/5'">Upgrade package</button>
+                        {% endif %}
+                        {% if  data.investment != None and   data.investment['package'] <= 5000 and data.investment['reinvest'] == 1%}
+                        <button type="button" class="btn btn-info" onclick="window.location.href='/account/reinvest-investment/5'">Reinvest Now</button>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+               <!-- /.widget-user -->
+            </div>
+            <div class="col-md-4 item-buy-1" style="cursor: pointer;">
+               <!-- Widget: user widget style 1 -->
+               <div class="card">
+                  <div class="box box-widget widget-user">
+                     <!-- Add the bg color to the header using any of the bg-* classes -->
+                     <div class="widget-user-header">
+                        <h3 class="widget-user-username"><span style="float:left; padding: 10px; color:#121734">RUBY</span><span style="float:right;padding: 10px;color:#121734">$10,010</span><br style="clear:both"></h3>
+                     </div>
+                     <div class="widget-user-image">
+                        <img class="img-circle" src="/static/img/package/package-6.png" alt="User Avatar">
+                     </div>
+                  
+                     <br>
+                     <div class="text-center" style="margin-bottom:20px;">
+                        {% if data.investment == None %}
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='/account/active-investment/6'">Invesment Now</button>
+                        {% endif %}
+                        {% if data.investment != None and data.investment['package'] < 10000 and data.investment['upgrade'] != 1 and data.investment['reinvest'] != 1%}
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/account/upgrade-investment/6'">Upgrade package</button>
+                        {% endif %}
+                        {% if  data.investment != None and   data.investment['package'] <= 10000 and data.investment['reinvest'] == 1%}
+                        <button type="button" class="btn btn-info" onclick="window.location.href='/account/reinvest-investment/6'">Reinvest Now</button>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+               <!-- /.widget-user -->
+            </div>
+            <div class="col-md-4 item-buy-1" style="cursor: pointer;">
+               <!-- Widget: user widget style 1 -->
+               <div class="card">
+                  <div class="box box-widget widget-user">
+                     <!-- Add the bg color to the header using any of the bg-* classes -->
+                     <div class="widget-user-header">
+                        <h3 class="widget-user-username"><span style="float:left; padding: 10px; color:#121734">PLATINUM</span><span style="float:right;padding: 10px;color:#121734">$30,010</span><br style="clear:both"></h3>
+                     </div>
+                     <div class="widget-user-image">
+                        <img class="img-circle" src="/static/img/package/package-7.png" alt="User Avatar">
+                     </div>
+                     
+                     <br>
+                     <div class="text-center" style="margin-bottom:20px;">
+                        {% if data.investment == None %}
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='/account/active-investment/7'">Invesment Now</button>
+                        {% endif %}
+                        {% if data.investment != None and data.investment['package'] < 30000 and data.investment['upgrade'] != 1 and data.investment['reinvest'] != 1%}
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/account/upgrade-investment/7'">Upgrade package</button>
+                        {% endif %}
+                        {% if data.investment != None and   data.investment['package'] <= 30000 and data.investment['reinvest'] == 1%}
+                        <button type="button" class="btn btn-info" onclick="window.location.href='/account/reinvest-investment/7'">Reinvest Now</button>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+               <!-- /.widget-user -->
+            </div>
+            <div class="col-md-4 item-buy-1" style="cursor: pointer;">
+               <!-- Widget: user widget style 1 -->
+               <div class="card">
+                  <div class="box box-widget widget-user">
+                     <!-- Add the bg color to the header using any of the bg-* classes -->
+                     <div class="widget-user-header">
+                        <h3 class="widget-user-username"><span style="float:left; padding: 10px; color:#121734">DIAMOND</span><span style="float:right;padding: 10px;color:#121734">$50,010</span><br style="clear:both"></h3>
+                     </div>
+                     <div class="widget-user-image">
+                        <img class="img-circle" src="/static/img/package/package-8.png" alt="User Avatar">
+                     </div>
+                     
+                     <br>
+                     <div class="text-center" style="margin-bottom:20px;">
+                        {% if data.investment == None %}
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='/account/active-investment/8'">Invesment Now</button>
+                        {% endif %}
+                        {% if data.investment != None and data.investment['package'] < 50000 and data.investment['upgrade'] != 1 and data.investment['reinvest'] != 1%}
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/account/upgrade-investment/8'">Upgrade package</button>
+                        {% endif %}
+                        {% if data.investment != None and   data.investment['package'] <= 50000 and data.investment['reinvest'] == 1%}
+                        <button type="button" class="btn btn-info" onclick="window.location.href='/account/reinvest-investment/8'">Reinvest Now</button>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+               <!-- /.widget-user -->
+            </div>
+            <div class="col-md-4 item-buy-1" style="cursor: pointer;">
+               <!-- Widget: user widget style 1 -->
+               <div class="card">
+                  <div class="box box-widget widget-user">
+                     <!-- Add the bg color to the header using any of the bg-* classes -->
+                     <div class="widget-user-header">
+                        <h3 class="widget-user-username"><span style="float:left; padding: 10px; color:#121734">BLUE DIAMOND</span><span style="float:right;padding: 10px;color:#121734">$100,010</span><br style="clear:both"></h3>
+                     </div>
+                     <div class="widget-user-image">
+                        <img class="img-circle" src="/static/img/package/package-9.png" alt="User Avatar">
+                     </div>
+                     
+                     <br>
+                     <div class="text-center" style="margin-bottom:20px;">
+                        {% if data.investment == None %}
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='/account/active-investment/9'">Invesment Now</button>
+                        {% endif %}
+                        {% if data.investment != None and data.investment['package'] < 100000  and data.investment['upgrade'] != 1 and data.investment['reinvest'] != 1%}
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/account/upgrade-investment/9'">Upgrade package</button>
+                        {% endif %}
+                        {%  if  data.investment != None and  data.investment['package'] <= 100000 and data.investment['reinvest'] == 1%}
+                        <button type="button" class="btn btn-info" onclick="window.location.href='/account/reinvest-investment/9'">Reinvest Now</button>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+               <!-- /.widget-user -->
+            </div>
+            <div class="col-md-4 item-buy-1" style="cursor: pointer;">
+               <!-- Widget: user widget style 1 -->
+               <div class="card">
+                  <div class="box box-widget widget-user">
+                     <!-- Add the bg color to the header using any of the bg-* classes -->
+                     <div class="widget-user-header">
+                        <h3 class="widget-user-username"><span style="float:left; padding: 10px; color:#121734">BLACK DIAMOND</span><span style="float:right;padding: 10px;color:#121734">$500,010</span><br style="clear:both"></h3>
+                     </div>
+                     <div class="widget-user-image">
+                        <img class="img-circle" src="/static/img/package/package-10.png" alt="User Avatar">
+                     </div>
+                     
+                     <br>
+                     <div class="text-center" style="margin-bottom:20px;">
+                        {% if data.investment == None %}
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='/account/active-investment/10'">Invesment Now</button>
+                        {% endif %}
+                        {% if data.investment != None and data.investment['package'] < 500000 and data.investment['upgrade'] != 1 and data.investment['reinvest'] != 1%}
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/account/upgrade-investment/10'">Upgrade package</button>
+                        {% endif %}
+                        {% if data.investment != None and   data.investment['package'] <= 500000 and data.investment['reinvest'] == 1%}
+                        <button type="button" class="btn btn-info" onclick="window.location.href='/account/reinvest-investment/10'">Reinvest Now</button>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+               <!-- /.widget-user -->
+            </div>
+            <div class="col-md-4 item-buy-1" style="cursor: pointer;">
+               <!-- Widget: user widget style 1 -->
+               <div class="card">
+                  <div class="box box-widget widget-user">
+                     <!-- Add the bg color to the header using any of the bg-* classes -->
+                     <div class="widget-user-header">
+                        <h3 class="widget-user-username"><span style="float:left; padding: 10px; color:#121734">CROWN DIAMOND</span><span style="float:right;padding: 10px;color:#121734">$1,000,010</span><br style="clear:both"></h3>
+                     </div>
+                     <div class="widget-user-image">
+                        <img class="img-circle" src="/static/img/package/package-11.png" alt="User Avatar">
+                     </div>
+                     
+                     <br>
+                     <div class="text-center" style="margin-bottom:20px;">
+                        {% if data.investment == None %}
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='/account/active-investment/11'">Invesment Now</button>
+                        {% endif %}
+                        {% if data.investment != None and data.investment['package'] < 1000000 and data.investment['upgrade'] != 1 and data.investment['reinvest'] != 1%}
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/account/upgrade-investment/11'">Upgrade package</button>
+                        {% endif %}
+                        {% if data.investment != None and  data.investment['package'] <= 1000000 and data.investment['reinvest'] == 1%}
+                        <button type="button" class="btn btn-info" onclick="window.location.href='/account/reinvest-investment/11'">Reinvest Now</button>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+               <!-- /.widget-user -->
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock %}

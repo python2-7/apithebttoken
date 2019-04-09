@@ -1,0 +1,87 @@
+{% extends "layout_admin.html" %}
+{% block title %}History Direct Bonus{% endblock %}
+
+{% block js %}
+
+{% endblock %}
+  
+
+{% block main %}
+
+    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="content">
+
+                                    <h4 class="title">History Direct Bonus</h4>
+                                    <div class="toolbar">
+                                        <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                    </div>
+                                   <div class="col-md-8 col-md-push-2 table_transfer">    
+
+               <div class="input-group input-daterange">
+                  <input type="text" id="min-date" class="form-control date-range-filter" data-date-format="yyyy-mm-dd" placeholder="From:">
+                  <div class="input-group-addon">To</div>
+                  <input type="text" id="max-date" class="form-control date-range-filter" data-date-format="yyyy-mm-dd" placeholder="To:">
+               </div>
+            </div>
+                                    <div class="material-datatables">
+                                        <table id="datatables_transfer" class="table table-bordered" style="width:100%;cellspacing:0">
+                                              <thead>
+                                                 <tr>
+                                                    <th class="text-center">No.</th>
+                                                    <th>Datetime</th>
+                                                    <th>From Acount</th>
+                                                    <th>To Acount</th>
+                                                    <th>Receive</th>
+                                                    <th>Send</th>
+                                                    <th>Status</th>
+                                                 </tr>
+                                              </thead>
+                                              <tbody>
+                                                 {% if data.history %}
+                                                 {% for item in data.history %}
+                                                 <tr>
+                                                    <td class="text-center">></td>
+                                                    <td>{{ item.date_added | format_date }}</td>
+                                                    <td>{{ item.from }}</td>
+                                                    <td>{{ item.to }}</td>
+                                                    <td class="text-center">
+                                                    {% if item.type == "receive" %}
+                                                       {{item.amount | format_usd }}
+                                                    {% endif %}
+                                                    </td>
+                                                    <td class="text-center">
+                                                    {% if item.type == "send" %}
+                                                       {{item.amount | format_usd }}
+                                                    {% endif %}
+                                                    
+                                                    </td>
+                                                    <td class="text-center">
+                                                       <label style="color:green">Success</label>
+                                                    </td>
+                                                 </tr>
+                                                 {% endfor %}
+                                                 {% endif %}
+                                              </tbody>
+                                              <tfoot>
+                                                 <tr>
+                                                     
+                                                    <th colspan="4" class="text-right">Total</th>
+                                                    <th class="text-center"></th> 
+                                                    <th class="text-center" colspan="1"></th> 
+                                                    <th ></th>
+                                                 </tr>
+                                             </tfoot>
+                                           </table>
+                                    </div>
+                                </div>
+                                <!-- end content-->
+                            </div>
+                            <!--  end card  -->
+                        </div>
+                        <!-- end col-md-12 -->
+                    </div>
+
+{% endblock %}
+

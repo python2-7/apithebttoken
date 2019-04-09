@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block title %}Support{% endblock %}
+{% block css %}
+
+{% endblock %}
+{% block js %}
+
+{% endblock %}
+	
+
+{% block main %}
+<div class="row">
+   <div class="col-md-12">
+   
+      <div class="card" style="padding: 20px;">
+               <h4 class="text-center">{{data.data_support.subject}}</h4>
+               <div class="clearfix"></div>
+               <ul class="chat" style="margin-top: 20px;">
+                  <li class="left clearfix">
+                   
+                      <div class="chat-body clearfix" style="width: 100%; ">
+                          <div class="">
+                              <strong class="primary-font">{{data.data_support.username}} </strong> 
+                              <small class="pull-right text-muted  pull-right">
+                                  <span class="glyphicon glyphicon-time pull-right"></span>{{data.data_support.date_added | format_date}}</small>
+                          </div>
+                          <p>
+                             {% autoescape on %}{{data.data_support.message}}{% endautoescape %}
+                          </p>
+                      </div>
+                  </li>
+                  {% if data.data_support.reply %}
+                     {% for item in data.data_support.reply %}
+                     <li class="left clearfix">
+                   
+                      <div class="chat-body clearfix" style="width: 100%; ">
+                          <div class="">
+                              <strong class="primary-font">{{item.username}} </strong> 
+                              <small class="pull-right text-muted  pull-right">
+                                  <span class="glyphicon glyphicon-time pull-right"></span>{{item.date_added | format_date}}</small>
+                          </div>
+                          <p>
+                             {% autoescape on %}{{item.message}}{% endautoescape %}
+                          </p>
+                      </div>
+                  </li>
+                     {% endfor %}
+                     {% endif %}
+                 
+                 
+              </ul>
+              <div class="clearfix"></div>
+              <div>
+                  <form method="post" action="/account/support/reply-support" id="frmReplySupport" autocomplete="off" novalidate="novalidate">
+                    <input type="hidden" name="sp_id" value="{{data.data_support._id}}">
+                     <div class="form-group ">
+                        <textarea class="form-control" style="height: 80px;" name="message" id="message" maxlength="2000" placeholder="Message"></textarea>
+                     </div>
+                     <div class="form-group text-center" id="capatcha" style="width:240px; margin-bottom:15px;margin: 0 auto; display: block">
+                        <script src='https://www.google.com/recaptcha/api.js'></script>
+                        <div  class="g-recaptcha" data-theme="light" data-sitekey="6LcESjUUAAAAAN0l4GsSiE2cLLZLZQSRZsEdSroE"></div>
+                     </div>
+                     <div class="text-center">
+                        <button type="submit" style="margin-top: 10px;width: 120px;" class="btn btn-warning btn-wd btn-fill">Reply</button>
+                     </div>
+                  </form>
+               </div>
+               <div class="clearfix"></div>
+            </div>
+      <!--  end card  -->
+   </div>
+   <!-- end col-md-12 -->
+</div>
+
+{% endblock %}
+

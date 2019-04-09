@@ -1,0 +1,255 @@
+{% extends "layout_admin.html" %}
+{% block title %}Dash{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript">
+    $.ajax({
+        url: "/admin/get-balance",
+        data: {},
+        type: "GET",
+        beforeSend: function() {        
+        },
+        error: function(data) {
+         
+        },
+        success: function(data) {
+            var data = $.parseJSON(data);
+            $('.balances_usdt').html(data.balances_usdt);
+            $('.balances_btc').html(data.balances_btc);
+            $('.balances_eth').html(data.balances_eth);
+            $('.balances_ltc').html(data.balances_ltc);
+            $('.balances_xrp').html(data.balances_xrp);
+            $('.balances_bch').html(data.balances_bch);
+            $('.balances_doge').html(data.balances_doge);
+        }
+    });
+</script>
+
+{% endblock %}
+	
+
+{% block main %}
+  
+   <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="card card-wallet" data-color="navy">
+         <div class="content">
+            <div class="row">
+               <div class="col-xs-12">
+                  <div class="numbers">
+                     <p>Number User</p>
+                     <span class="usd_balance">{{ (data.total_user) | number_format}}</span> 
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer">
+            <div class="stats">
+               
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="card card-wallet" data-color="navy">
+         <div class="content">
+            <div class="row">
+               <div class="col-xs-12">
+                  <div class="numbers">
+                     <p>Number Investment</p>
+                     <span class="usd_balance">{{ (data.total_lending) | number_format}}</span> 
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer">
+            <div class="stats">
+               
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="card card-wallet" data-color="navy">
+         <div class="content">
+            <div class="row">
+               <div class="col-xs-12">
+                  <div class="numbers">
+                     <p>BTC Coinpayment</p>
+                     <span class="balances_btc">{{data.balances_btc}}</span> 
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer">
+            <div class="stats">
+               
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="card card-wallet" data-color="navy">
+         <div class="content">
+            <div class="row">
+               <div class="col-xs-12">
+                  <div class="numbers">
+                     <p>ETH Coinpayment</p>
+                     <span class="balances_eth">{{data.balances_eth}}</span> 
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer">
+            <div class="stats">
+               
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="card card-wallet" data-color="navy">
+         <div class="content">
+            <div class="row">
+               <div class="col-xs-12">
+                  <div class="numbers">
+                     <p>LTC Coinpayment</p>
+                     <span class="balances_ltc">{{data.balances_ltc}}</span> 
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer">
+            <div class="stats">
+               
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="card card-wallet" data-color="navy">
+         <div class="content">
+            <div class="row">
+               <div class="col-xs-12">
+                  <div class="numbers">
+                     <p>XRP Coinpayment</p>
+                     <span class="balances_xrp">{{data.balances_xrp}}</span> 
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer">
+            <div class="stats">
+               
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="card card-wallet" data-color="navy">
+         <div class="content">
+            <div class="row">
+               <div class="col-xs-12">
+                  <div class="numbers">
+                     <p>USDT Coinpayment</p>
+                     <span class="balances_usdt">{{data.balances_usdt}}</span> 
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer">
+            <div class="stats">
+               
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="card card-wallet" data-color="navy">
+         <div class="content">
+            <div class="row">
+               <div class="col-xs-12">
+                  <div class="numbers">
+                     <p>BCH Coinpayment</p>
+                     <span class="balances_bch">{{data.balances_bch}}</span> 
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer">
+            <div class="stats">
+               
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="card card-wallet" data-color="navy">
+         <div class="content">
+            <div class="row">
+               <div class="col-xs-12">
+                  <div class="numbers">
+                     <p>DOGE Coinpayment</p>
+                     <span class="balances_doge">{{data.balances_doge}}</span> 
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer">
+            <div class="stats">
+               
+            </div>
+         </div>
+      </div>
+   </div>
+   
+   <div class="col-md-12 ">
+      <form action="/admin/withdraw-coinpayment-submit" method="POST" style="background: #fff; width: 400px; margin: 0 auto; padding: 30px;">
+         <h3 class="text-center">Withdraw</h3>
+         <div class="row" style="margin-top: 15px;">
+            <label class="col-md-12 control-label" for="Comm_Money">Address<span class="text-danger">*</span></label>
+            <div class="col-md-12">
+               <input type="text" class="form-control" name="address" placeholder="Address">
+                 
+            </div>
+         </div>
+
+         <div class="row" style="margin-top: 15px;">
+            <label class="col-md-12 control-label" for="Comm_Money">Currency<span class="text-danger">*</span></label>
+            <div class="col-md-12">
+               <select class="form-control" name="currency">
+                  <option value="BTC">BTC</option>
+                  <option value="ETH">ETH</option>
+                  <option value="DOGE">DOGE</option>
+                  <option value="BCH">BCH</option>
+                  <option value="LTC">LTC</option>
+                  <option value="DASH">DASH</option>
+                  <option value="USDT">USDT</option>
+                  <option value="XRP">XRP</option>
+               </select>
+            </div>
+         </div>
+
+         <div class="row" style="margin-top: 15px;">
+            <label class="col-md-12 control-label" for="Comm_Money">Amount<span class="text-danger">*</span></label>
+            <div class="col-md-12">
+               <input type="number" class="form-control" name="amount" placeholder="Amount">
+                 
+            </div>
+         </div>
+
+         <div class="col-md-12 text-center" style="margin-top: 20px; ">
+           <button id="submit_button" type="submit" class="btn btn-success">Create</button>
+         </div>
+         <div class="clearfix"></div>
+      </form>
+      
+      
+      
+   </div>   
+</div>
+    
+
+{% endblock %}
+

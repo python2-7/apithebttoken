@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block title %}Support{% endblock %}
+{% block css %}
+
+{% endblock %}
+{% block js %}
+
+{% endblock %}
+	
+
+{% block main %}
+<style type="text/css">
+  .form-control {
+    background-color: #fffef8;
+  }
+</style>
+<div class="section__content section__contentp--30">
+  <div class="card">
+      <div class="card-header">
+         <strong class="card-title">New Ticket</strong>
+      </div>
+      <div class="card-body">
+      
+        <div class="content">
+          <p class="text-center">
+          We are always available and accessible to support you at anytime you need us. In case you need a technical support, it would be more convenient if you could create a ticket.</p>
+          <div class="col-md-8 col-md-push-2">
+                  <form method="post" action="/account/support/new-support-submit" id="frmNewSupport" autocomplete="off" novalidate="novalidate">
+                     <div class="form-group ">
+                        <label>Subject</label>
+                        
+                        <input type="text" id="subject" maxlength="600" class="form-control input-flyp " name="subject" placeholder="Subject" required="" autocomplete="off">
+                           
+                     </div>
+
+                     <div class="form-group ">
+                        <label>Message</label>
+                        <textarea class="form-control" style="height: 150px;" name="message" id="message" maxlength="2000" placeholder="Message"></textarea>
+                     </div>
+                      <div class="form-group text-center" id="capatcha">
+                        <script src='https://www.google.com/recaptcha/api.js'></script>
+                        <div  class="g-recaptcha" data-theme="light" data-sitekey="6LcESjUUAAAAAN0l4GsSiE2cLLZLZQSRZsEdSroE" style="width:240px; margin-bottom:15px;margin: 0 auto; display: block"></div>
+                     </div>
+                     <div class="text-center">
+                        <button type="submit" style="margin-top: 20px;width: 120px;" class="btn btn-warning btn-wd btn-fill">Send</button>
+                     </div>
+
+                  </form>
+                  <div class="clearfix"></div>
+               </div>
+               <div class="clearfix"></div>
+            </div>
+
+      </div>
+  </div>
+</div>
+{% endblock %}
+

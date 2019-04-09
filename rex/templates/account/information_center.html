@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}Informations{% endblock %}
+{% block css %}
+{% endblock %}
+{% block js %}
+
+{% endblock %}
+	
+
+{% block main %}
+
+
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">Informations</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            {% for item in data.notification %}
+               <div class=" alert  alert-primary " style="margin-bottom: 20px">
+               
+               {% autoescape on %}{{item['content']}}{% endautoescape %}
+               <div class="clearfix"></div>
+               <span style="color: #000" class="pull-right">{{ item.date_added | format_date }}</span>
+               <div class="clearfix"></div>
+                </div>
+
+            {% endfor %}   
+
+            
+         </div>
+         <div class="clearfix"></div>
+      </div>
+   </div>
+</div>
+{% endblock %}
+

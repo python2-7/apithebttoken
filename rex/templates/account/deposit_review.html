@@ -1,0 +1,150 @@
+{% extends "layout.html" %}
+{% block title %}
+Transaction | World Trade
+{% endblock %}
+
+
+{% block js %}
+{% if(data.invoice.type == 0) %}
+<script type="text/javascript">
+ $(document).ready(function() {
+    checkBalance();
+    });
+     function checkBalance() {
+        var root ='https://blockchain.info/';
+         $.ajax({
+             type: "GET",
+             // url: root + 'q/getreceivedbyaddress/'+ "{{ data.invoice.input_wallet }}",
+             url :'https://chain.so/api/v2/get_address_balance/BTC/'+ "{{ data.invoice.input_wallet }}",
+             data: {
+                 format: 'plain'
+             },
+             success: function(response) {
+
+                 if (!response) return;
+                 // response = JSON.parse(response);
+                 // var value = parseInt(response);
+         
+                var value = parseFloat(response.data.unconfirmed_balance);
+             
+                var value_confirm = parseFloat(response.data.confirmed_balance);
+                value_confirm = value_confirm*100000000;
+          
+                    value = value*100000000;
+                 if (value_confirm >= parseInt("{{ data.invoice.amount }}") || value >= parseInt("{{ data.invoice.amount }}")) {
+                    $('#PaymentStatus').html('<span class="text-success"><i class="fa fa-spin fa-spinner"></i> Transaction requires 1 confirmation...</span><br><code>Received : '+value/100000000+' BTC</code><br><code>Confirmation : 0</code>');
+                    checktransaction();
+
+                 } else {
+                     setTimeout(checkBalance, 20000);
+                 }
+             }
+         });
+     }
+     setTimeout(checkBalance, 20000);
+
+     function checktransaction(){
+        $.ajax({
+             type: "POST",
+             url:'/account/checktransaction/'+"{{ data.invoice.invoid_id }}",
+             data: {
+                 invoid_id: "{{ data.invoice.invoid_id }}",
+                 wallet:  "{{ data.invoice.input_wallet }}"
+             },
+             success: function(response) {
+                 if (!response) return;
+                
+                    response = JSON.parse(response);
+                 if (response.confirm == 1) {
+                    window.location.href = '/account/deposit';
+                 } else {
+                     setTimeout(checktransaction, 20000);
+                 }
+             }
+         });
+     }
+</script>
+    {% endif %}
+{% endblock %}
+
+
+{% block main %}
+{% if(data.invoice.type == 0) %}
+<div class="row">
+   <div class="col-md-8 col-md-offset-2">
+      <div class="card">
+         <div class="content text-center">
+            <div class="row">
+               <div class="col-sm-12 col-md-12 col-lg-12">
+                  <h3><span class="text text-warning"><img src="/static/assets/img/BTC.png" width="32px" height="32px"></span> Bitcoin Payment</h3>
+               </div>
+               {% if(data.invoice.confirmations == 0) %}
+               <div class="col-sm-4 col-md-4 col-lg-4">
+                  <img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=bitcoin:{{ data.invoice.input_wallet }}?amount={{ data.invoice.amount/100000000 }}&choe=UTF-8" class="img-responsive">
+               </div>
+               <div class="col-sm-8 col-md-8 col-lg-8" style="padding:10px;">
+                  Please Send <b>{{ data.invoice.amount/100000000 }} BTC</b> the payment to the following Bitcoin address<br/><input type="text" readonly="true" id="address_{{ data.invoice.amount }}" class="form-control" value="{{ data.invoice.input_wallet }}">
+                  or scan QR Code with your mobile device<br/><br/>
+                  <small>Do not refresh page, payment status will be updated automatically.</small>
+                  <br>
+                  <p> 
+                  <center><span id="PaymentStatus"><span class="text-info"><i class="fa fa-spin fa-spinner"></i> Awaiting payment...</span></span></center>
+                  </p>
+               </div>
+             
+               {% endif %}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endif %}
+
+{% if(data.invoice.type == 1) %}
+<div class="row">
+   <div class="col-md-8 col-md-offset-2">
+      <div class="card">
+         <div class="content text-center">
+            <div class="row">
+               <div class="col-sm-12 col-md-12 col-lg-12">
+                  <h3><span class="text text-warning"><img src="/static/assets/img/ETH.png" width="32px" height="32px"></span> Ethereum Payment</h3>
+               </div>
+               {% if(data.invoice.confirmations == 0) %}
+               <div class="col-sm-4 col-md-4 col-lg-4">
+                  <img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=ethereum:{{ data.invoice.input_wallet }}?amount={{ data.invoice.amount/100000000 }}&choe=UTF-8" class="img-responsive">
+               </div>
+               <div class="col-sm-8 col-md-8 col-lg-8" style="padding:10px;">
+                  Please Send <b>{{ data.invoice.amount/100000000 }} ETH</b> the payment to the following Ethereum address<br/><input type="text" readonly="true" id="address_{{ data.invoice.amount }}" class="form-control" value="{{ data.invoice.input_wallet }}">
+                  or scan QR Code with your mobile device<br/><br/>
+                  <small>Do not refresh page, payment status will be updated automatically.</small>
+                  <br>
+                  <p> 
+                  <center><span id="PaymentStatus"><span class="text-info"><i class="fa fa-spin fa-spinner"></i> Awaiting payment...</span></span></center>
+                  </p>
+               </div>
+               {% else %} 
+               <div class="col-sm-12" style="padding:10px;">
+                  <p> 
+                  <center>
+                     <span class="text-success">
+                        <p><strong>Transaction ID</strong>: {{ item.id }}</p>
+                        <p><strong>Date Create</strong>: {{ item.date_add }}</p>
+                        <p><strong>Plan</strong>: {{ item.amount }} USD</p>
+                        <p><strong>Status</strong>: Active</p>
+                        <p><strong>Received</strong>: {{ item.invoice_received/100000000 }} ETH</p>
+                        <p><strong>Transaction Hash</strong>:<a target="_blank" href="https://blockchain.info/vi/tx/{{ item.transaction_hash }}"> {{ item.transaction_hash }}</a></p>
+                     </span>
+                  </center>
+                  </p>
+               </div>
+               {% endif %}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+

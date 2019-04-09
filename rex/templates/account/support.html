@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block title %}Support{% endblock %}
+{% block css %}
+
+{% endblock %}
+{% block js %}
+
+{% endblock %}
+	
+
+{% block main %}
+<div class="section__content section__contentp--30">
+  <div class="card">
+      <div class="card-header">
+         <strong class="card-title">Support and Ticket</strong>
+      </div>
+      <div class="card-body">
+        <a href="/account/new-support">
+          <button class="btn btn-success pull-right" style="margin-bottom: 20px;">Create Support</button>
+        </a>
+        <div class="material-datatables">
+           <table id="datatables" class="table table-bordered datatables_referrals" style="width:100%;cellspacing:0">
+              <thead>
+                 <tr>
+                    <th>No.</th>
+                    <th>Date</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                 </tr>
+              </thead>
+              <tbody>
+                 {% if data.support %}
+                 {% for item in data.support %}
+                 <tr>
+                    <td></td>
+                    <td>{{ item.date_added | format_date }}</td>
+                    <td><a href="/account/support/{{item._id}}" class="">{{ item.subject }}</a> </td>
+                    <td>{% autoescape on %}{{ item.message }}{% endautoescape %}</td>
+                    <td>
+                        {% if item.status == 0 %}
+                            <a href="/account/support/{{item._id}}" class="label label-warning">NOT ANSWERED</a>
+
+                        {% endif %}
+                        {% if item.status == 1 %}
+                           <a href="/account/support/{{item._id}}" class="label label-success">ANSWERED</a>
+                        {% endif %}
+                       
+                   </td>
+                 </tr>
+                 {% endfor %}
+                 {% endif %}
+              </tbody>
+           </table>
+        </div>
+
+        
+
+      </div>
+  </div>
+</div>
+{% endblock %}
+

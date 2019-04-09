@@ -1,0 +1,112 @@
+{% extends "layout.html" %}
+{% block title %}Code | World Trade{% endblock %}
+{% block js %}
+<script src="/static/assets/js/script.js"></script>
+<script src="/static/assets/js/getinfo.js"></script>
+<!-- <script src="/static/assets/js/withdraw.js"></script> -->
+<script src="/static/assets/js/wallet.js"></script>
+<script src="/static/assets/js/main.js"></script>
+<script type="text/javascript">
+   // $('#modalNotificationWallet').modal();
+   $('#datatables_deposit').DataTable({
+      "order": [
+         [0, "desc"]
+      ], 
+      autoWidth: false, 
+      searching: false,
+      ordering: true, 
+      responsive: true, 
+      lengthChange: false, 
+      destroy: true,
+      paging: true, 
+      info: false
+   });
+   $('#datatables_withdraw').DataTable({
+      "order": [
+         [0, "desc"]
+      ], 
+      autoWidth: false, 
+      searching: false,
+      ordering: true, 
+      responsive: true, 
+      lengthChange: false, 
+      destroy: true,
+      paging: true, 
+      info: false
+   });
+</script>
+{% endblock %}
+{% block main %}
+
+
+<div class="row" id="Buycode">
+    <div class="col-md-6 col-md-push-3">
+      <div class="card">
+        <div class="header">
+           <h4 class="title">
+              Buy Code
+           </h4>
+        </div>
+        <div class="content">
+          <div class="well" style="    background-color: #c3c0c0;">
+              <div class="text-black"> BTC Wallet : <strong class="btc_balance">{{ (data.float(data.user.btc_balance)) | format_round}} BTC</strong> </div>
+           </div>
+           <div class="form-group">
+               <label for="address" class="">Number Code</label>
+               <input class="form-control" name="numbercode" id="numbercode" type="text" id="" placeholder="Number Code">
+               <code>1 Code = 20 USD</code>
+           </div>
+
+           <input type="hidden" name="" id="price_usd_btc" value="{{data.btc_usd}}">
+           <div class="form-group">
+               <label for="amount" class="">Quantity in BTC </label>
+               <input class="form-control" readonly="true" name="amount" type="text" id="amount_btc" placeholder="Quantity BTC">
+           </div>
+           <div class="text-center">
+            <button type="button" id="btnBuyCode" class="btn btn-fill btn-warning btnConfirm" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing">Buy Code</button>
+          </div>
+        </div>
+      </div>
+   </div>
+  
+</div>
+<div class="row">
+   <div class="col-md-12">
+       <div class="card">
+         <div class="content">
+            <h4 class="title">Code</h4>
+            <div class="material-datatables">
+               <table id="datatables_deposit" class="table table-striped table-no-bordered table-hover" style="width:100%;cellspacing:0">
+                  <thead>
+                     <tr>
+                        <th>Date</th>
+                        
+                        <th>Code</th>
+                        <th>Status</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% if data.datacode %}
+                     {% for item in data.datacode %}
+                        <td>{{ item.date_added | format_date }}</td>
+                        <td>{{ item.code}}</td>
+                       
+                        {% if item.status == 0 %}
+                          <td>Not Active</td>
+                        {% endif %}
+                        {% if item.status == 1 %}
+                        <td>Active</td>
+                        {% endif %}
+                     </tr>
+                     {% endfor %}
+                     {% endif %}
+                  </tbody>
+                 
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "layout_admin.html" %}
+{% block title %}Deposit{% endblock %}
+
+{% block js %}
+
+{% endblock %}
+	
+
+{% block main %}
+
+    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="content">
+
+                                    <h4 class="title">History Deposit</h4>
+                                    <div class="toolbar">
+                                        <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                    </div>
+                                    <div class="col-md-8 col-md-push-2 table_deposit">    
+
+               <div class="input-group input-daterange">
+                  <input type="text" id="min-date" class="form-control date-range-filter" data-date-format="yyyy-mm-dd" placeholder="From:">
+                  <div class="input-group-addon">To</div>
+                  <input type="text" id="max-date" class="form-control date-range-filter" data-date-format="yyyy-mm-dd" placeholder="To:">
+               </div>
+            </div>
+                                    <div class="material-datatables">
+                                        <table id="datatables_depoist" class="table table-bordered" style="width:100%;cellspacing:0">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>DateTime</th>
+                                                    <th>Email</th>
+                                                    <th>Amount</th>
+                                                    <th>Currency</th>
+                                                    <th>Amount USD</th> 
+                                                    <th>Address</th>            
+                                                    <th>Txid</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for item in data.databtc %}
+                                                <tr>
+                                                    <td></td>
+                                                    <td>{{ item.date_added | format_date }}</td>
+                                                    <td><a href="/admin/customer-detail/{{ item.user_id}}">{{ item.username}}</a></td>
+                                                    
+                                                    <td>{{ item.amount }}</td>
+                                                    <td>{{ item.currency }}</td>
+                                                    <td>{{ item.amount_usd }}</td>
+                                                    <td>{{ item.address }}</td>
+                                                    <td>{{ item.txt_id }}</td>
+                                                    
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th colspan="5" style="text-align:right">Total:</th>
+                                                    <th ></th>
+                                                    <th ></th>
+                                                    <th ></th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- end content-->
+                            </div>
+                            <!--  end card  -->
+                        </div>
+                        <!-- end col-md-12 -->
+                    </div>
+
+{% endblock %}
+

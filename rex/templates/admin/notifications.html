@@ -1,0 +1,91 @@
+{% extends "layout_admin.html" %}
+{% block title %}Notifications{% endblock %}
+
+{% block js %}
+
+{% endblock %}
+	
+
+{% block main %}
+<div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="content">
+                    <div class="">
+                        <h4 class="title pull-left">Notifications</h4>
+                        <a class="pull-right" href="/admin/create-notifications">
+                            <button class="btn btn-success">Create New</button>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="toolbar">
+                       
+                    </div>
+                   
+                    <div class="material-datatables">
+                        <table id="datatables_tables" class="table table-bordered" style="width:100%;cellspacing:0">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>DateTime</th>
+                                    <th>Title</th>
+                                    <th>Content</th>
+                                    <th>Type</th>
+                                    <th>Status</th>  
+                                    <th>Edit</th>                            
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in data.history %}
+                                <tr>
+                                    <td></td>
+                                    <td>{{ item.date_added | format_date }}</td>
+                                    <td>{{ item.title}}</a></td>
+                                    <td >
+                                        <div style="max-height: 85px;  overflow: hidden; text-overflow: ellipsis;">
+                                        {% autoescape on %}{{item.content}}{% endautoescape %}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {%if item.type == 'all'%}
+                                            All Account
+                                        {% endif %}
+                                        {%if item.type == 'account'%}
+                                            Only one account
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {%if item.status == 0%}
+                                            <a href="/admin/notifications-disable/{{item._id}}">
+                                                <span class="label label-success">Disable</span>
+                                            </a>
+                                        {% endif %}
+                                        {%if item.status == 1%}
+                                            <a href="/admin/notifications-enlable/{{item._id}}">
+                                                <span class="label label-danger">Enlable</span>
+                                            </a>
+                                        {% endif %}
+                                                
+                                    </td>
+                                    <td>
+                                        <a href="/admin/notifications-edit/{{item._id}}">
+                                        <span class="label label-info">Edit</span>
+                                        </a>    
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            
+                        </table>
+
+                    </div>
+                </div>
+                <!-- end content-->
+            </div>
+            <!--  end card  -->
+        </div>
+        <!-- end col-md-12 -->
+    </div>
+
+{% endblock %}
+

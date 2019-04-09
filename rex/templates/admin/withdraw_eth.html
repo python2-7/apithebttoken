@@ -1,0 +1,149 @@
+{% extends "layout_admin.html" %}
+{% block title %}Withdraw{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+	var myapp = {
+    withdrawal: function(withdrawal){
+            swal({
+                    title: 'Are you sure?',
+                    text: '',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No',
+                    confirmButtonClass: "btn btn-success",
+                    cancelButtonClass: "btn btn-danger",
+                    buttonsStyling: false
+                }).then(function() {
+                    $('form#fromWithdraw').submit();
+                  swal({
+                    title: 'Deleted!',
+                    text: '.',
+                    type: 'success',
+                    confirmButtonClass: "btn btn-success",
+                    buttonsStyling: false
+                  }).catch(swal.noop);
+                }, function(dismiss) {
+                  // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                  if (dismiss === 'cancel') {
+                    swal({
+                      title: 'Cancelled',
+                      text: '',
+                      type: 'error',
+                      confirmButtonClass: "btn btn-info",
+                      buttonsStyling: false
+                    }).catch(swal.noop);
+                  }
+                })
+
+        
+    }
+}
+</script>
+{% endblock %}
+	
+
+{% block main %}
+<div class="row" style="display: none;">
+                        <div class="col-md-6">
+                            <div class="card">
+                           
+
+                             
+
+                                <form id="fromWithdraw" method="POST" action="/admin/withdraw-submit">
+                                    <div class="header">
+                                        <h4 class="title">
+                                            Withdraw
+                                        </h4>
+                                    </div>
+                                    <div class="content">
+                                       
+                                        <div class="form-group">
+                                            <label>Pin</label>
+                                            <input type="text" placeholder="Pin" name="pin" class="form-control" required="required" aria-required="true">
+                                        </div>
+                                       
+                                        <a class="btn btn-fill btn-default" onclick="myapp.withdrawal('withdrawal')">Withdraw</a>
+                                    </div>
+                                </form>
+                            </div> <!-- end card -->
+                        </div> <!--  end col-md-6  -->
+
+                        <div class="col-md-6">
+                            <div class="card">
+                         
+                                    <div class="content text-center">
+                                        <img src="https://chart.googleapis.com/chart?chs=250x250&amp;cht=qr&amp;chl=34Q4qGpeVDTGqrynxBYrig3buyqtQmJczR" alt="" />
+                        				<hr>
+				                        <span style="margin-bottom:10px" class="text-muted"><b>34Q4qGpeVDTGqrynxBYrig3buyqtQmJczR</b></span><br/>
+				                        <span style="margin-bottom:10px" class="text-muted">Total Balance: <b><t t-raw="bitcoin['available_balance']" /> BTC</b></span><br/>
+				                        <span style="margin-bottom:10px" class="text-muted">Total Pending: <b><t t-raw="bitcoin['pending_received_balance']" /></b> BTC</span>
+                                    </div>
+                                
+                            </div> <!-- end card -->
+                        </div> <!--  end col-md-6  -->
+                    </div>
+    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="content">
+
+                                    <h4 class="title">History Withdrawal</h4>
+                                    <div class="toolbar">
+                                        <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                    </div>
+                                    <div class="col-md-12">
+    <div class="input-group input-daterange">
+
+      <input type="text" id="min-date" class="form-control date-range-filter" data-date-format="yyyy-mm-dd" placeholder="From:">
+
+      <div class="input-group-addon">to</div>
+
+      <input type="text" id="max-date" class="form-control date-range-filter" data-date-format="yyyy-mm-dd" placeholder="To:">
+
+    </div>
+  </div>
+                                    <div class="material-datatables">
+                                        <table id="datatables" class="table table-striped table-no-bordered table-hover" style="width:100%;cellspacing:0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date Add</th>
+                                                    
+                                                    <th>Username</th>
+                                                    
+                                                    <th>Amount Withdraw</th>
+                                                    <th>ETH</th>
+                                                    <th>Amount Rest</th>
+                                                    <th>Wallet</th>
+                                                    
+                                                    <th>TX</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            
+                                                {% for item in data.withdraw %}
+                                                <tr>
+                                                    <td>{{item}}</td>
+                                                    
+                                                   
+                                                </tr>
+                                                {% endfor %}
+                                            
+                                              
+                                               
+                                            </tbody>
+                                          
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- end content-->
+                            </div>
+                            <!--  end card  -->
+                        </div>
+                        <!-- end col-md-12 -->
+                    </div>
+
+{% endblock %}
+

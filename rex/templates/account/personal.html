@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+{% block title %}Network Tree{% endblock %}
+{% block css %}
+<link href="/static/assets/css/tree.css" rel="stylesheet" >
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="/static/assets/js/lodash.min.js"></script>
+<script src="/static/assets/js/personal.js"></script>
+
+{% endblock %}
+{% block main %}
+
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">NETWORK TREE</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+
+            <table aria-describedby="example-datatable_info" role="grid" class="table table-striped table-bordered table-vcenter dataTable no-footer">
+               <thead class="filter">
+                 <tr role="row">
+                   <th colspan="9">
+                     <div class="row">
+                        <div class="col-sm-11 col-xs-11">
+                          <div class="dataTables_length">
+                                                            
+                           <span class="info_item">Total:                                          
+                              F1(<b style="color: red">{{data.count_f1}}</b>), Total downline(<b style="color: red">{{data.total_binary_left}}</b> Left, <b style="color: red">{{data.total_binary_right}} </b>Right )
+                              ,Left (<b style="color: red">${{data.user['total_pd_left'] | format_usd}} </b>), Right (<b style="color: red">${{data.user['total_pd_right'] | format_usd}}</b>)
+                              
+                           </span>                                                           
+                          </div>
+                        </div>
+                     </div>
+                   </th>
+                 </tr>
+               </thead>
+               </table>
+
+               <div style="padding: 5px" style="position: relative;z-index: -1">
+                  
+                  <div style="float:left; margin: 10px 5px 10px; text-align:center; width: 100px"><span style="line-height:100%;display: block;height:52px"><img src="/static/img/package/package-1.png" alt="" width="55" align="absmiddle"></span><span style="font-size:11.5px;text-transform: capitalize; line-height:100%;display: block;color:#5FC8F3">STARTED</span></div>
+                  <div style="float:left; margin: 10px 5px 10px; text-align:center; width: 100px"><span style="line-height:100%;display: block;height:52px"><img src="/static/img/package/package-2.png" alt="" width="55" align="absmiddle"></span><span style="font-size:11.5px;text-transform: capitalize; line-height:100%;display: block;color:#5FC8F3">EXCUTIVE</span></div>
+                  <div style="float:left; margin: 10px 5px 10px; text-align:center; width: 100px"><span style="line-height:100%;display: block;height:52px"><img src="/static/img/package/package-3.png" alt="" width="55" align="absmiddle"></span><span style="font-size:11.5px;text-transform: capitalize; line-height:100%;display: block;color:#5FC8F3">SILVER</span></div>
+                  <div style="float:left; margin: 10px 5px 10px; text-align:center; width: 100px"><span style="line-height:100%;display: block;height:52px"><img src="/static/img/package/package-4.png" alt="" width="55" align="absmiddle"></span><span style="font-size:11.5px;text-transform: capitalize; line-height:100%;display: block;color:#5FC8F3">GOLD</span></div>
+                  <div style="float:left; margin: 10px 5px 10px; text-align:center; width: 100px"><span style="line-height:100%;display: block;height:52px"><img src="/static/img/package/package-5.png" alt="" width="55" align="absmiddle"></span><span style="font-size:11.5px;text-transform: capitalize; line-height:100%;display: block;color:#5FC8F3">SAPPHIRE</span></div>
+                  <div style="float:left; margin: 10px 5px 10px; text-align:center; width: 100px"><span style="line-height:100%;display: block;height:52px"><img src="/static/img/package/package-6.png" alt="" width="55" align="absmiddle"></span><span style="font-size:11.5px;text-transform: capitalize; line-height:100%;display: block;color:#5FC8F3">RUBY</span></div>
+                  <div style="float:left; margin: 10px 5px 10px; text-align:center; width: 100px"><span style="line-height:100%;display: block;height:52px"><img src="/static/img/package/package-7.png" alt="" width="55" align="absmiddle"></span><span style="font-size:11.5px;text-transform: capitalize; line-height:100%;display: block;color:#5FC8F3">PLATINUM</span></div>
+                  <div style="float:left; margin: 10px 5px 10px; text-align:center; width: 100px"><span style="line-height:100%;display: block;height:52px"><img src="/static/img/package/package-8.png" alt="" width="55" align="absmiddle"></span><span style="font-size:11.5px;text-transform: capitalize; line-height:100%;display: block;color:#5FC8F3">DIAMOND</span></div>
+                  <div style="float:left; margin: 10px 5px 10px; text-align:center; width: 100px"><span style="line-height:100%;display: block;height:52px"><img src="/static/img/package/package-9.png" alt="" width="55" align="absmiddle"></span><span style="font-size:11.5px;text-transform: capitalize; line-height:100%;display: block;color:#5FC8F3">BLUE DIAMOND</span></div>
+                  <div style="float:left; margin: 10px 5px 10px; text-align:center; width: 100px"><span style="line-height:100%;display: block;height:52px"><img src="/static/img/package/package-10.png" alt="" width="55" align="absmiddle"></span><span style="font-size:11.5px;text-transform: capitalize; line-height:100%;display: block;color:#5FC8F3">BLACK DIAMOND</span></div>
+                  <div style="float:left; margin: 10px 5px 10px; text-align:center; width: 100px"><span style="line-height:100%;display: block;height:52px"><img src="/static/img/package/package-11.png" alt="" width="55" align="absmiddle"></span><span style="font-size:11.5px;text-transform: capitalize; line-height:100%;display: block;color:#5FC8F3">CROWN DIAMOND</span></div>
+               </div>
+               <div class="clearfix"></div>
+
+            <div class="main-container content-personal" >
+               <div class="accountContent responsive">
+                  <div>
+                     <ul class="list-unstyled" style="float: left;position: absolute;    left: 42%;z-index: 999">
+                        <li style="margin-bottom:15px;margin-top: 57px">
+                           <a style="line-height:11px;color: #fff;border-color: #fff;background: #111734;" class="btn btn-default btn-rounded notranslate" href="javascript:void(0)" onclick='click_node({{data.uid}})'> <span class="" style="font-weight:700">Top</span> </a>
+                           <a style="line-height:11px;color: #fff;border-color: #fff;background: #111734;" class="btn btn-default btn-rounded notranslate" href="javascript:void(0)" onclick='click_back()'> <span class="" style="font-weight:700">Back</span> </a>
+                        </li>
+                        <!-- <li>
+                          
+            <div class="input-group p-b-10" style=" width: 300px; ">
+               <input id="search_tree" class="form-control" name="s_username" type="text" value="" placeholder="Enter Username">
+               <span class="input-group-btn">
+               <button id="btnSearchTree"  class="btn btn-social btn-dashboard btnConfirm" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing" type="button" >Search</button>
+               </span>
+            </div>
+                        </li>
+                        <li>
+                           <div class="input-group" style=" width: 300px; display: none; ">
+                                <input id="search_tree" class="form-control" name="username_tree" type="text" placeholder ="Enter username">
+                                <span class="input-group-btn">
+                                    <button id="btnSearchTree"  class="btn btn-primary btnConfirm" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing" type="button">Search</button>
+                                </span>
+                            </div>
+                        </li> -->
+                     </ul>
+                   
+                     <div class="clearfix"></div>
+                    
+                     <div class="personal-tree text-center" style="z-index: 100">
+                       
+                     </div>
+                     <input type="hidden" id="uid_customer" value="{{data.uid}}" />
+                  </div>
+               </div>
+            </div>
+            
+            </div>
+         </div>
+         
+      </div>
+</div>
+
+
+
+
+{% endblock %}

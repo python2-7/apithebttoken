@@ -1,0 +1,184 @@
+{% extends "layout.html" %}
+{% block title %}Withdrawal | World Trade{% endblock %}
+
+
+{% block js %}
+
+<script src="/static/assets/js/script.js"></script>
+<script src="/static/assets/js/getinfo.js"></script>
+{% endblock %}
+    
+
+{% block main %}
+<div class="row">
+<div class="col-md-12">
+    <div class="card">
+        <div class="content text-center">
+           
+        <h4 class="title">
+        <code>
+            Your Balance {{(data.user.s_wallet)/1000000}} $
+        </code>
+            
+        </h4>
+            
+        </div>
+    </div>
+</div>
+    
+</div>
+<div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                           
+
+                             
+
+                                <form id="fromWithdraw" method="POST" action="/account/withdraw-submit">
+                                    <div class="header">
+                                        <h4 class="title">
+                                            Withdraw
+                                        </h4>
+                                    </div>
+                                    <div class="content">
+                                        <div class="form-group">
+                                            <label>Quantity</label>
+                                            <input type="number" placeholder="Quantity" name="amount" class="form-control" required="required" aria-required="true">
+                                        </div>
+                                        <div class="form-group">
+                                           <label class="col-sm-2 control-label">Payment method</label>
+                                           <div class="col-sm-10">
+                                             
+                                           
+                                             <input type="radio" data-toggle="radio" name="method_payment" value="btc" checked> Bitcoin
+                                             
+                                            <br>
+                                              <input type="radio" data-toggle="radio" name="method_payment" value="eth"> Ethereum
+                                             
+                                           </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="form-group">
+                                            <label>Password Transaction</label>
+                                            <input type="password" placeholder="Password" name="password" class="form-control" required="required" aria-required="true">
+                                        </div>
+                                       
+                                        <a class="btn btn-fill btn-default" onclick="myapp.withdrawal('withdrawal')">Withdraw</a>
+                                    </div>
+                                </form>
+                            </div> <!-- end card -->
+                        </div> <!--  end col-md-6  -->
+
+                        <div class="col-md-6">
+                            <div class="card">
+                                <form method="POST" action="/user/updatewallet">
+                                    <div class="header">
+                                        <h4 class="title">
+                                            Withdraw
+                                        </h4>
+                                    </div>
+                                    <div class="content">
+                                        <div class="form-group">
+                                                <label>Bitcoin Wallet</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon" style=" background-color: #ef8157; color: rgba(255, 255, 255, 0.85); border-color: #ef8157; ">BTC</span>
+                                                <input id="btc_wallet" value="{{ data.user.btc_wallet }}" type="text" class="form-control" name="wallet" placeholder="Bitcoin Wallet" style=" text-align: center; " required="true">
+                                            </div>
+                                            </div>
+                                            <div class="form-group">
+                                                            <label>Ethereum Wallet</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon" style=" background-color: #ef8157; color: rgba(255, 255, 255, 0.85); border-color: #ef8157; ">ETH</span>
+                                                                <input id="btc_wallet" value="{{ data.user.wallet }}" type="text" class="form-control" name="eth_wallet" placeholder="Ethereum Wallet" style=" text-align: center; " required="true">
+                                                            </div>
+                                                        </div>
+                                            <div class="form-group">
+                                                <label>Password Transaction</label>
+                                                <div class="input-group">
+                                                <span class="input-group-addon" style=" background-color: #ef8157; color: rgba(255, 255, 255, 0.85); border-color: #ef8157; ">Password</span>
+                                                <input type="password" placeholder="Password" name="password" class="form-control" required="required" aria-required="true">
+                                                </div>
+                                            </div>
+                                      
+                                        <button type="submit"  class="btn btn-fill btn-default">Update</button>
+                                    </div>
+                                </form>
+                            </div> <!-- end card -->
+                        </div> <!--  end col-md-6  -->
+                    </div>
+<div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="content">
+
+                                    <h4 class="title">History Withdrawal</h4>
+                                    <div class="toolbar">
+                                        <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                    </div>
+                                    <div class="material-datatables">
+                                        <table id="datatables" class="table table-striped table-no-bordered table-hover" style="width:100%;cellspacing:0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Amount Withdraw</th>
+                                                    <th>Date Add</th>
+                                                    <th>Amount</th>
+                                                    <th>Amount Rest</th>
+                                                    
+                                                    
+                                                    <th>TX</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if data.withdraw %}
+                                                {% for item in data.withdraw %}
+                                                {% if item.method_payment == 1 %}
+                                                    <tr class="text-info">
+                                                    {% else %}
+                                                    <tr class="text-default">
+                                                    {% endif %}
+                                                
+                                                    <td>- {{ item.amount_sub}} $</td>
+                                                    <td>{{ item.date_added | format_date }}</td>
+                                                    {% if item.method_payment == 1 %}
+                                                    <td>{{ data.float(item.amount_btc)/100000000 }} ETH</td>
+                                                    {% else %}
+                                                    <td>{{ data.float(item.amount_btc)/100000000 }} BTC</td>
+                                                    {% endif %}
+                                                    <td>{{ data.float(item.amount_rest)/1000000 }} $</td>
+                                                    
+                                                    <td>
+                                                        {% if item.txtid == '' %}
+                                                            <span class="text-warning">Pending</span>
+                                                         {% else %}
+                                                           <span class="text-success"><a target="_blank" href="https://blockchain.info/vi/tx/{{item.txtid}}">View Transaction</a></span>
+                                                         {% endif %}
+                                                     </td>
+                                                </tr>
+                                                {% endfor %}
+                                              {% endif %}
+                                              
+                                               
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Amount Withdraw</th>
+                                                    <th>Date Add</th>
+                                                    <th>BTC</th>
+                                                    <th>Amount Rest</th>
+                                                    
+                                                    
+                                                    <th>TX</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- end content-->
+                            </div>
+                            <!--  end card  -->
+                        </div>
+                        <!-- end col-md-12 -->
+                    </div>
+                    
+        {% endblock %}
+

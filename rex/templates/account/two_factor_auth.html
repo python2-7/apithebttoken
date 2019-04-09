@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block title %}Two-factor Auth{% endblock %}
+{% block js %}
+<script src="/static/assets/js/script.js"></script>
+<script src="/static/assets/js/getinfo.js"></script>
+{% endblock %}
+{% block main %}
+
+<div class="section__content section__content--p30">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">Two-factor Auth</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            <div class="col-md-8 col-md-push-2">
+               <form  action="/user/2FA" method="post">
+                  {% if data.user.status_2fa == 0 %}
+               <h3>Enlable Google Authenticator</h3>
+                 <ol style="padding-left:17px">
+                    <li>Install Google Authenticator on your phone.</li>
+                    <li>Open the Google Authenticator app.</li>
+                    <li>Tab menu, then tab "Set up Account", then "Scan a barcode" or "Enter key provided" is <strong style="word-break:break-all;">{{data.otp_secret}}</strong>.</li>
+                    <li>Your phone will now be in "scanning" mode. When you are in this mode, scan  the barcode below:</li>
+                 </ol>
+                 <div class="mt-4 text-center">
+                    <img src="https://chart.googleapis.com/chart?chs=166x166&chld=L|0&cht=qr&chl={{data.url_otp}}}" width="180">
+                 </div>
+                 <p>Once you have scanned the barcode, enter the 6-digit code below:</p>
+                 {% endif %}
+                 {% if data.user.status_2fa == 0 %}
+                 <div class="form-group text-center"> <label class="text-center">Input code from application:</label> <input name="GACode" id="account_frm_GACode" value="" size="20" class="form-control text-center" type="text"> </div>
+                 <div class="text-center"> 
+                  <button type="submit" class="btn btn-social btn-fill btn-linkedin" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing Function" id="btn_frm_GACode">Activate</button></div>
+                 {% else %}
+                 <div class="form-group text-center"> <label class="text-center">Input code from application:</label> <input name="GACode" id="account_frm_GACode" value="" size="20" class="form-control text-center" type="text"> </div>
+                 <div class="text-center"> 
+                  <button type="submit" class="btn btn-danger btn-fill btn-wd" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing Function" id="btn_frm_GACode">Disable</button></div>
+                  {% endif %}
+              </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+{% endblock %}

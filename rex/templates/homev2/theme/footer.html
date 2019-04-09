@@ -1,0 +1,87 @@
+
+	<footer id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="copyright">Copyright © 2017 SmartFVA All Right Reserved</div>
+				</div>
+				<div class="col-md-7">
+					<div class="social-footer">
+						<ul class="social nav justify-content-end">
+						  <li class="nav-item">
+						    <a class="nav-link" href="https://www.facebook.com/FutureSmartVirtualAssistant"><i class="ion ion-social-facebook"></i></a>
+						  </li>
+						  <li class="nav-item">
+						    <a class="nav-link" href="https://www.youtube.com/channel/UCBfCbBRAqRbtSGrdSbpfQGw"><i class="ion-social-youtube"></i></a>
+						  </li>
+						  <li class="nav-item">
+						    <a class="nav-link" href="#"><i class="ion-social-github"></i></a>
+						  </li>
+						  <li class="nav-item">
+						    <a class="nav-link" href="https://bitcointalk.org/index.php?topic=2500284"><i class="ion-social-bitcoin"></i></a>
+						  </li>
+						  <li class="nav-item">
+						    <a class="nav-link" href="https://twitter.com/SmartFVA"><i class="ion-social-twitter"></i></a>
+						  </li>
+						  <li class="nav-item">
+						    <a class="nav-link" href="https://t.me/SVACOINOFFICIAL"><i class="ion-paper-airplane"></i></a>
+						  </li>
+						  <li class="nav-item">
+						    <a class="nav-link" href="mailto:support@smartfva.co"><i class="ion-android-mail"></i></a>
+						  </li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<a id="scroll-up" class=""><i class="ion ion-ios-arrow-up"></i></a>
+</div> <!-- End Stage -->
+
+	<div id="modalNotificationHome" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" style=" margin: 0; padding: 0px; ">&times;</button>
+				<h4 class="modal-title">Notification</h4>
+				</div>
+				<div class="modal-body" style="color: #222">
+				<p></p>
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-fill btn-warning" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type='text/javascript' src="/static/frontend/js/jquery.min.js"></script>
+<script type='text/javascript' src="/static/frontend/js/bootstrap4.0/bootstrap.bundle.min.js"></script>
+<script type='text/javascript' src="/static/frontend/plugins/slide-show/jquery.superslides.js"></script>
+<script type='text/javascript' src="/static/frontend/js/myscript.js"></script>
+
+{% if(data.menu == 'roadmap') %}
+<script type="text/javascript" src="/static/frontend/plugins/time-line/modernizr.js"></script>
+<script type='text/javascript' src="/static/frontend/plugins/slide-show/jquery.superslides.js"></script>
+<script type="text/javascript" src="/static/frontend/plugins/time-line/frst-timeline.js"></script>
+{% endif %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+	
+        function getCookie(name) {
+            var value = "; " + document.cookie; 
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift(); 
+        }
+        var popup = getCookie("popupnotifisH"); 
+        /*popup != '1' && (
+            $('#modalNotificationHome').modal(), 
+            document.cookie = "popupnotifisH=1; max-age=900; path=/;"
+        ); */
+    })
+   </script>
+
+   <script type="text/javascript"> /* <![CDATA[ */ var google_conversion_id = 824193461; var google_custom_params = window.google_tag_params; var google_remarketing_only = true; /* ]]> */ </script> <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"> </script> <noscript> <div style="display:inline;"> <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/824193461/?guid=ON&amp;script=0"/> </div> </noscript>
+</body>
+</html>

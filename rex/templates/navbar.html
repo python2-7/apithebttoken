@@ -1,0 +1,123 @@
+<nav class="navbar navbar-default">
+   <div class="container-fluid">
+      <div class="navbar-minimize">
+         <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon hidden-sm hidden-xs">
+         <i class="ti-arrow-left"></i>
+         </button>
+          
+      </div>
+      <div class="navbar-header">
+        <div class="hidden-lg hidden-md text-center">
+          
+          <button type="button" class="navbar-toggle" data-toggle="collapse">
+         <span class="sr-only">Toggle navigation</span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         </button>
+         <img src="/static/img/logo_right.png" alt="" style="    width: 225px;margin-top: 2px;">
+        </div>
+
+         
+      </div>
+      <div class="collapse navbar-collapse">
+         <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs" >
+            
+               <li><span style="line-height: 76px; margin-right: 8px;">Join Date: {{data.user.creation | format_only_date}}</span></li>
+
+               <li class="dropdown">
+                  <a style="line-height: 45px;" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bell"></i>
+                    {% if data.number_notifications > 0 %}
+                      <span class="quantity number">{{data.number_notifications}}</span>
+                    {% endif %}
+                  </a>
+                  <div class="dropdown-menu" style="width: 280px;">
+                    <div class="notifi__title">
+                        <p>You have {{data.number_notifications}} Notifications</p>
+                    </div>
+                    {% for item in data.list_notifications %}
+                    <div class="notifi__item">
+                       <div class="bg-c1 img-cir img-40">
+                          <i class="fa fa-envelope-open-o"></i>
+                       </div>
+                       <div class="content">
+                          <p><a href="/account/notifications/{{item._id}}">Notification Options</a></p>
+                          <span class="date">{{ item.date_added | format_date }}</span>
+                       </div>
+                    </div>   
+                  {% endfor %}                                         
+                       <div class="notifi__footer">
+                           <a href="/account/list-notifications">All notifications</a> 
+                       </div>
+                   </div>
+
+               </li>
+
+            <li class="dropdown">
+               <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <p class=""><img style="height: 45px" src="/static/img/package/package-{{data.user['level'] | format_int}}.png"> {{data.user.username}} <b class="caret"></b> </p>
+               </a>
+
+               <ul class="dropdown-menu">
+                  <li> <a href="/user/my-profile"><i class="ti-settings"></i> My Profile</a> </li>
+                  <li> <a href="/auth/logout"><i class="ti-power-off"></i>  Logout</a> </li>
+               </ul>
+            </li>
+            <li class="separator hidden-lg hidden-md"></li>
+         </ul>
+      </div>
+    
+   </div>
+</nav>
+
+<header class="header-desktop hidden-lg hidden-md">
+   <div class="section__content section__content--p30">
+      <div class="container-fluid">
+         <ul class="" >
+               <li><span style="line-height: 76px; margin-right: 8px;">Join Date: {{data.user.creation | format_only_date}}</span></li>
+
+               <li class="dropdown">
+                  <a style="line-height: 45px;" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bell"></i>
+                    {% if data.number_notifications > 0 %}
+                      <span class="quantity number">{{data.number_notifications}}</span>
+                    {% endif %}
+                  </a>
+                  <div class="dropdown-menu" style="width: 280px;">
+                    <div class="notifi__title">
+                        <p>You have {{data.number_notifications}} Notifications</p>
+                    </div>
+                    {% for item in data.list_notifications %}
+                    <div class="notifi__item">
+                       <div class="bg-c1 img-cir img-40">
+                          <i class="fa fa-envelope-open-o"></i>
+                       </div>
+                       <div class="content">
+                          <p><a href="/account/notifications/{{item._id}}">Notification Options</a></p>
+                          <span class="date">{{ item.date_added | format_date }}</span>
+                       </div>
+                    </div>   
+                  {% endfor %}                                         
+                       <div class="notifi__footer">
+                           <a href="/account/list-notifications">All notifications</a> 
+                       </div>
+                   </div>
+
+               </li>
+
+            <li class="dropdown" style="margin-top: 18px;">
+               <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <p class=""><img style="height: 45px" src="/static/img/package/package-{{data.user['level'] | format_int}}.png"> {{data.user.username}} <b class="caret"></b> </p>
+               </a>
+
+               <ul class="dropdown-menu">
+                  <li> <a href="/user/my-profile"><i class="ti-settings"></i> My Profile</a> </li>
+                  <li> <a href="/auth/logout"><i class="ti-power-off"></i>  Logout</a> </li>
+               </ul>
+            </li>
+            <li class="separator hidden-lg hidden-md"></li>
+         </ul>
+      </div>
+   </div>
+</header>

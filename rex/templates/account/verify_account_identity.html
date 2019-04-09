@@ -1,0 +1,151 @@
+{% extends "layout.html" %}
+{% block title %}Verify account{% endblock %}
+{% block js %}
+<script src="/static/assets/js/script.js"></script>
+<script src="/static/assets/js/account.js"></script>
+{% endblock %}
+{% block main %}
+<div class="section__content section__content--p30 verify_account">
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">VERIFY ACCOUNT</strong>
+      </div>
+      <div class="card-body">
+         <div class="">
+            <div class="">
+               {% if data.user['status_verify'] == 0%}
+               <form  action="/user/account/identity" id="form_verify" enctype="multipart/form-data" method="post">
+                  <div class="content">
+
+                     <div id="identity_1">
+                        <div class="f-fl" style="margin-bottom: 30px">
+                           <p class="step-title ng-binding">Upload front of identity card or Passport</p>
+                        </div>
+
+                        <div class="row" style="margin-bottom: 10px" >
+                           <div class="col-xs-6">
+                              <div class="text-rigth">
+                                 <div class="image-preview">
+                                    <img id="img_1" src="/static/img/generic-thumb-front-ver-1536063574000.png">
+                                 </div>
+                                 
+                              </div>
+                           </div>
+                           <div class="col-xs-6">
+                              <div class="text-left" >
+                                 <input type="file"  name="file_1" id="file_1" class="pull-left inputfile"  accept="image/x-png,image/gif,image/jpeg" />
+                                 <label for="file">Choose file</label>
+                                 <div class="clearfix"></div>
+                                 <div class="btn-continue" id="confirm_1">Confirm</div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     
+                     <div id="identity_2">
+                        <div class="f-fl" style="margin-bottom: 30px;">
+                           <p class="step-title ng-binding">Upload back of identity card or Passport</p>
+                        </div>
+                     
+                        <div class="row" style="margin-bottom: 10px" >
+                           <div class="col-xs-6">
+                              <div class="text-rigth">
+                                 <div class="image-preview">
+                                    <img id="img_2" src="/static/img/generic-thumb-id-back-ver-1536063574000.png">
+                                 </div>
+                                 
+                              </div>
+                           </div>
+                           <div class="col-xs-6">
+                              <div class="text-left" >
+                                 <input type="file" name="file_2" id="file_2" class="pull-left inputfile"  accept="image/x-png,image/gif,image/jpeg" />
+                                 <label for="file">Choose file</label>
+                                 <div class="clearfix"></div>
+                                 <div class="btn-continue"  id="confirm_2">Confirm</div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+                     
+                     <div id="identity_3">
+                        <div class="f-fl" style="margin-bottom: 30px; ">
+                           <p class="step-title ng-binding">Upload image of your face</p>
+                           <span class="legal" wicketpath="wizard_view_identityVerificationPlusTitle">Hold up a <strong>handwritten</strong> note with the phrase <strong>Diamondcapital</strong> plus <strong>today's date</strong></span>
+                        </div>
+
+                        <div class="row" style="margin-bottom: 10px" >
+                           <div class="col-xs-6">
+                              <div class="text-rigth">
+                                 <div class="image-preview">
+                                    <img id="img_3" src="/static/img/generic-identity-verification-plus-for-specific-merchant-ver-1536063574000.png">
+                                 </div>
+                                 
+                              </div>
+                           </div>
+                           <div class="col-xs-6">
+                              <div class="text-left" >
+                                 <input type="file" name="file_3" id="file_3" class="pull-left inputfile"  accept="image/x-png,image/gif,image/jpeg" />
+                                 <label for="file">Choose file</label>
+                                 <div class="clearfix"></div>
+                                 <div class="btn-continue"  id="confirm_3">Confirm</div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     
+                     <input type="hidden" name="token_crt" value="{{data.token_crt}}">
+                     
+                     
+                  </div>
+               </form>
+               {% endif %}
+
+               {% if data.user['status_verify'] == 1%}
+                  <div class="sufee-alert alert with-close alert-primary alert-primary_note alert-dismissible ">
+                     <div class="row row-flex-carousel">
+                        <div class="js-notification-content col-md-11">
+                           <div class="row row-flex-carousel">
+                              
+                              <div class="col-md-12">
+                                 
+                                 <p>Your account is pending verification of your account</p>
+                                 
+                                 
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">×</span>
+                     </button>
+                  </div>
+               {% endif %}
+
+               {% if data.user['status_verify'] == 2%}
+                  <div class="alert-success  alert-dismissible ">
+                     <div class="row row-flex-carousel">
+                        <div class="js-notification-content col-md-11">
+                           <div class="row row-flex-carousel">
+                              
+                              <div class="col-md-12">
+                                 
+                                 <p style="padding: 20px">The account was successfully verified</p>
+                                 
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">×</span>
+                     </button>
+                  </div>
+               {% endif %}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+{% endblock %}

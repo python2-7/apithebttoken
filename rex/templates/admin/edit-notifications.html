@@ -1,0 +1,165 @@
+{% extends "layout_admin.html" %}
+{% block title %}Edit Notifications{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/static/froala/css/froala_editor.css">
+<link rel="stylesheet" href="/static/froala/css/froala_style.css">
+<link rel="stylesheet" href="/static/froala/css/plugins/code_view.css">
+<link rel="stylesheet" href="/static/froala/css/plugins/image_manager.css">
+<link rel="stylesheet" href="/static/froala/css/plugins/image.css">
+<link rel="stylesheet" href="/static/froala/css/plugins/table.css">
+<link rel="stylesheet" href="/static/froala/css/plugins/video.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/froala_editor.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/align.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/code_beautifier.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/code_view.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/draggable.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/image.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/image_manager.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/link.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/lists.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/paragraph_format.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/paragraph_style.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/table.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/video.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/url.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/entities.min.js"></script>
+
+<script type="text/javascript" src="/static/froala/js/plugins/inline_style.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/font_size.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/font_family.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/fullscreen.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/colors.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/emoticons.min.js"></script>
+<script type="text/javascript" src="/static/froala/js/plugins/save.min.js"></script>
+<script>
+  $(function(){
+    $('#edit')
+      .on('froalaEditor.initialized', function (e, editor) {
+        $('#edit').parents('form').on('submit', function () {
+            if ($('#edit').val() !== '')
+            {
+                $.ajax({
+                    url: "/admin/edit-notifications-submit/{{data.ids}}",
+                    dataType: 'json',
+                    type: "POST",
+                    data: {
+                        'content': $('#edit').val(),
+                        'option' : $('#select_option').val(),
+                        'username' : $('#input_username').val(),
+                        'title' : $('#input_title').val()
+                    },
+                    success: function(data) {
+                       if (data.user == false)
+                       {
+                            alert('Username does not exist')
+                       }
+                       if (data.complete == true)
+                       {
+                            location.replace("/admin/notifications-edit/{{data.ids}}");
+                       }
+                    }
+                });
+            } 
+          return false;
+        })
+      })
+      .froalaEditor({enter: $.FroalaEditor.ENTER_P, placeholderText: null,
+       
+      })
+  });
+
+    $(function(){
+        $('select[name="option"]').on('change',function(){
+            
+            if ($(this).val() == 'all')
+                $('#username_selects').hide();
+            else
+                $('#username_selects').show();
+        })
+
+
+
+    })
+</script>
+
+
+{% endblock %}
+	
+
+{% block main %}
+
+    <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="content">
+                <div class="">
+                    <h4 class="title pull-left">Edit Notifications</h4>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <div class="toolbar">
+                   
+                </div>
+               
+                <div class="material-datatables">
+                    <div id="editor">
+                        <form action="/admin/create-notifications" method="POST">
+                            <div class="row" style="margin-top: 15px;">
+                                <label class="col-md-12 control-label" for="Comm_Money">Title<span class="text-danger">*</span></label>
+                                <div class="col-md-12">
+                                    <input type="text" id="input_title" class="form-control" name="title" placeholder="Title" value="{{data.notification['title']}}">
+                                      
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <label class="col-md-12 control-label" for="Comm_Money">Content Notifications<span class="text-danger">*</span></label>
+                                <div class="col-md-12">
+                                      <textarea id='edit' style="margin-top: 30px;height: 300px" placeholder="Type some text">{% autoescape on %}{{data.notification['content']}}{% endautoescape %}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 25px;">
+                                <label class="col-md-12 control-label" for="Comm_Money">Notification option<span class="text-danger">*</span></label>
+                                <div class="col-md-12">
+                                    <select  name="option" id="select_option" class="form-control">
+                                        <option {% if data.notification['type'] == 'all' %} selected="selected" {% endif %} value="all">All Account</option>
+                                        <option {% if data.notification['type'] == 'account' %} selected="selected" {% endif %} value="account">Only one account</option>
+                                       
+                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="clearfix" style="margin-top: 25px;" ></div>
+                            <div class="row"  id="username_selects" {% if data.notification['type'] == 'all' %} style="display: none" {% endif %}>
+                                <label class="col-md-12 control-label" for="Comm_Money">Username<span class="text-danger">*</span></label>
+                                <div class="col-md-12">
+                                    <input type="text" id="input_username" placeholder="Username" value="{{data.notification['username']}}" name="username" class="form-control" >  
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 text-center" style="margin-top: 20px">
+                                <button id="submit_button" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                          
+                        </form>
+                      </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
+
+{% endblock %}
+

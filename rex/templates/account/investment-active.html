@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{% block title %}Please confirm Active Member{% endblock %}
+{% block js %}
+<script src="/static/assets/js/script.js"></script>
+<script src="/static/assets/js/getinfo.js"></script>
+<script src="/static/assets/js/lending.js"></script>
+<script src="/static/assets/js/main.js"></script>
+{% endblock %}
+{% block main %}
+<div class="section__content section__content--p30">
+   <style>
+      .btn-primary 
+      {
+      color: #fff;
+      background-color: #121734;
+      }
+      .btn-warning 
+      {
+      color: #212529;
+      background-color: #DDAF3F;
+      border-color: #ffc107;
+      }
+   </style>
+   <div class="card">
+      <div class="card-header">
+         <strong class="card-title">Please confirm Active Member </strong>
+      </div>
+      <div class="card-body">
+         <div class="row">
+            <div class="block">
+           
+            <div class="form-group">
+               <div class="row">
+                  <label class="col-md-3 control-label">Total Balance:<label style="color:green; font-size: 20px; padding: 10px 5px 10px;">${{data.user.balance_wallet | format_usd}}</label></label>
+                  <div class="col-md-6"> </div>
+               </div>
+            </div>
+            <div class="form-group">
+               <div class="row">
+                  <label class="col-md-3 control-label" for="pass2">Package select <span class="text-danger">*</span></label>
+                  <div class="col-md-6">
+                     <div class="col-md-12 item-buy-1" style="cursor: pointer;">
+                       
+                        <div class="card">
+                           <div class="box box-widget widget-user">
+                              
+                              <div class="widget-user-header">
+                                 <h3 class="widget-user-username"><span style="float:left; padding: 10px; color:#121734">{{data.name_package}}</span><span style="float:right;padding: 10px;color:#121734">${{data.amount_package | format_usd}}</span><br style="clear:both"></h3>
+                              </div>
+                              <div class="widget-user-image">
+                                 <img class="img-circle" src="/static/img/package/package-{{data.package}}.png" alt="User Avatar">
+                              </div>
+                              <div class="box-footer" style="height: 30px;">
+                                 
+                              </div>
+                              <br>
+                              
+                              {% if data.check_investment == True %}
+                              {% if data.check_balance == True %}
+                              <div class="text-center" style="margin-bottom:20px;">
+                                 <button type="button" class="btn btn-success" onclick="window.location.href='/account/active-investment-submit/{{data.package}}'">Active Now</button>
+                              </div>
+                              {% endif %}
+                              {% endif %}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            
+            
+            
+            <div align="center">
+               {% if data.check_investment == True %}
+               {% if data.check_balance == False %}
+                  <div class="alert alert-danger alert-dismissable">
+                     <h4><strong>Notice</strong></h4>
+                     <p>Balance wallet is <label style="color:green; font-size: 20px; padding: 10px 5px 10px;">${{data.user.balance_wallet | format_usd}}</label> So you do not Investment. Please select other Package Or <a href="/account/deposit" class="button">Deposit</a></p>
+                  </div>
+               {% endif %}
+               {% endif %}
+               {% if data.check_investment == False %}
+                  <div class="alert alert-success alert-dismissable">
+                     <h4><strong>Notice</strong></h4>
+                     <p>Your investment has been activated. </p>
+                  </div>
+               {% endif %}
+               <div style="margin:0 auto;width: 300px;">
+                  <center><a href="/account/investment-lists" class="button">Back Investment</a></center>
+               </div>
+            </div>
+            
+         </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock %}
