@@ -1,0 +1,140 @@
+@media (min-width: 1200px) and (max-width: 1400px) {
+	.bg-home .welcome_img {
+		padding: 0px 20px;
+	}
+}
+@media (max-width: 1199px) {
+	.bg-home .welcome_img {
+		padding: 0px 30px;
+	}
+	.home2 .welcome_img {
+    padding: 0px 10px;
+	}
+	.shape{
+		top: -100px!important;
+		left: -100px!important;
+	}
+}
+@media (max-width: 991px) {
+	.bg-home .welcome_img {
+		padding: 0px 0px;
+	}
+	.bg-home{
+		height: inherit!important;
+		padding: 30px 0px 120px;
+	}
+	.height-100{
+		height: inherit!important;
+	}
+	#howitwork .service-box{
+		margin-bottom: 30px; 
+	}
+	.bg-services {
+		padding: 110px 0px 90px;
+	}
+	.bg-features .feature-img{
+		padding: 30px 0px;
+	}
+	.bg-price{
+		margin-bottom: 30px;
+	}
+	.bg-pricing {
+		padding: 110px 0px 90px;
+	}
+	.shape{
+		top: -150px!important;
+		left: -150px!important;
+	}
+	.social-links li {
+		margin: 0px 2px;
+	}
+	.home2 .welcome_img {
+    padding: 0px 0px;
+}
+
+
+}
+@media (max-width: 767px) {
+	.bg-home .welcome_img{
+		max-width: 250px;
+		margin-bottom: 50px;
+	}
+	.shape{
+		display: none;
+	}
+	.bg-contact {
+		padding: 110px 0px 105px!important;
+	}
+	#download .pt-4.text-center.download-img{
+		padding: 0px;
+	}
+	.home2 .welcome_img {
+		padding: 0px 120px;
+		margin-bottom: 35px;
+}
+.home2{
+	padding-bottom: 120px;
+}
+
+
+}
+@media (max-width: 768px){
+	 .welcomeContent {
+		text-align: center;
+	}
+}
+@media (max-width: 575px) {
+.navbar-custom {
+    padding: 20px 15px !important;
+}
+.home-title {
+    font-size: 36px;
+    line-height: 47px;
+}
+ .welcomeContent {
+	text-align: center;
+}
+.home-subtitle {
+    padding-right: 0px;
+}
+.title h2 {
+    font-size: 30px!important;
+    line-height: 40px;
+
+}
+.faq-side .btn-link {
+    font-size: 18px;
+}
+.home2 .welcome_img {
+	padding: 0px 140px;
+}
+
+}
+
+
+
+@media (max-width: 500px) {
+	.home2 .welcome_img {
+		padding: 0px 120px;
+	}
+}
+@media (max-width: 450px) {
+	.home2 .welcome_img {
+		padding: 0px 100px;
+	}
+}
+
+@media (max-width: 414px) {
+	.home-title {
+		font-size: 34px;
+		line-height: 44px;
+	}
+	.home2 .welcome_img {
+		padding: 0px 80px;
+	}
+}
+@media (max-width: 360px) {
+	.home2 .welcome_img {
+		padding: 0px 50px;
+	}
+}

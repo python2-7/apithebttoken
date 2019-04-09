@@ -7,4 +7,5 @@ config.py
 ./app.py
 ./config.py
 ./setting.py
+setting.py
 
