@@ -52,7 +52,7 @@ def get_address():
     currency = dataDict['currency']
     
 
-    url_callback = 'http://62.210.84.7:58011/account/jskfkjsfhkjsdhfqwtryqweqeweqeqwe'
+    url_callback = 'http://192.254.73.26:51029/api/deposit/jskfkjsfhkjsdhfqwtryqweqeweqeqwe'
     user = db.users.find_one({'customer_id': customer_id})
     if currency == 'BTC':
       if user['balance']['bitcoin']['cryptoaddress'] == '':
