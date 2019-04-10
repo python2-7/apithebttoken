@@ -210,12 +210,11 @@ def disable_package():
     for item in investment:
 
         sub_date = now_date - item['date_added']
-        if int(sub_date.days) < 10:
-            percent_fee = 10
-        if int(sub_date.days) >= 10 and int(sub_date.days) <= 25:
+        if int(sub_date.days) < 20:
             percent_fee = 5
-        if int(sub_date.days) >= 26:
+        if int(sub_date.days) >= 21:
             percent_fee = 1
+        
         percent_fee = 100 - float(percent_fee)
         val_add_balance += float(item['package'])*float(percent_fee)*1000000
         amount_usd_sub += float(item['amount_usd'])
