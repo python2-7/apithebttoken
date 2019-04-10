@@ -368,11 +368,11 @@ def get_infomation_user():
     dataDict = json.loads(request.data)
     customer_id = dataDict['customer_id'].lower()
     
-    user = db.User.find_one({'customer_id': customer_id},{'total_node' : 1,'security' : 1,'personal_info' : 1,'balance' : 1,'email' : 1,'d_wallet' : 1,'r_wallet' : 1,'s_wallet' : 1,'l_wallet' : 1,'total_earn' : 1})
+    user = db.User.find_one({'customer_id': customer_id},{'status' : 1,'total_node' : 1,'security' : 1,'personal_info' : 1,'balance' : 1,'email' : 1,'d_wallet' : 1,'r_wallet' : 1,'s_wallet' : 1,'l_wallet' : 1,'total_earn' : 1})
     
     if user is None:
         return json.dumps({
-          'status': 'error'
+          'status': 'Please try again.'
       })
     else:
 
@@ -390,6 +390,7 @@ def get_infomation_user():
           'total_node' : user['total_node'],
           'email' : user['email'],
           'balance' : user['balance'],
+          'status_user' : user['status'],
           'status': 'complete', 
         }) 
 
