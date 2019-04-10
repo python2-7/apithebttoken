@@ -976,10 +976,10 @@ def create_account(email,password_login,password_transaction,referees):
 
 def send_mail_register(email):
     html = """ 
-      <div style="width: 100%;background: #f3f3f3;"><div style="width: 80%;background: #fff; margin: 0 auto "><div style="background: linear-gradient(to top, #160c56 0%, #052238 100%); height: 150px;text-align: center;"><img src="https://i.ibb.co/tH5J6C2/logo.png" width="120px;" style="margin-top: 30px;" /></div><br/><div style="padding: 20px;">
-      <p style="color: #222; font-size: 14px;">Thank you for registering with Asipay.</p>
+      <div style="width: 100%;background: #f3f3f3;"><div style="width: 80%;background: #fff; margin: 0 auto "><div style="background: linear-gradient(to top, #160c56 0%, #052238 100%); height: 180px;text-align: center;"><img src="https://i.ibb.co/KhXc2YW/token.png" width="120px;" style="margin-top: 30px;" /></div><br/><div style="padding: 20px;">
+      <p style="color: #222; font-size: 14px;">Thank you for registering with The Best Token.</p>
       <p style="color: #222;  font-size: 14px;">Congratulations on successful account registration with email: <b>"""+str(email)+"""</b>. You can use our service now.</p>
-      <p style="color: #222;  font-size: 14px;"><br>Regards,</p><p style="color: #222; font-size: 14px;">Asipay Account Services</p><div class="yj6qo"></div><div class="adL"><br><br><br></div></div></div></div>
+      <p style="color: #222;  font-size: 14px;"><br>Regards,</p><p style="color: #222; font-size: 14px;">The Best Token Account Services</p><div class="yj6qo"></div><div class="adL"><br><br><br></div></div></div></div>
     """
     return requests.post(
       Config().utl_mail,
@@ -993,10 +993,10 @@ def send_mail_register(email):
    
 def sendmail_forgot_password_code(email,code):
     html = """ 
-      <div style="width: 100%;background: #f3f3f3;"><div style="width: 80%;background: #fff; margin: 0 auto "><div style="background: linear-gradient(to top, #160c56 0%, #052238 100%); height: 150px;text-align: center;"><img src="https://i.ibb.co/tH5J6C2/logo.png" width="120px;" style="margin-top: 30px;" /></div><br/><div style="padding: 20px;">
-      <p style="color: #222; font-size: 14px;">Thank you for registering with Asipay.</p>
+      <div style="width: 100%;background: #f3f3f3;"><div style="width: 80%;background: #fff; margin: 0 auto "><div style="background: linear-gradient(to top, #160c56 0%, #052238 100%); height: 180px;text-align: center;"><img src="https://i.ibb.co/KhXc2YW/token.png" width="120px;" style="margin-top: 30px;" /></div><br/><div style="padding: 20px;">
+      <p style="color: #222; font-size: 14px;">Thank you for registering with The Best Token.</p>
       <p style="color: #222;  font-size: 14px;">Your verification code is <b>"""+str(code)+"""</b>, Please do not disclose this to others! </p>
-      <p style="color: #222;  font-size: 14px;"><br>Regards,</p><p style="color: #222; font-size: 14px;">Asipay Account Services</p><div class="yj6qo"></div><div class="adL"><br><br><br></div></div></div></div>
+      <p style="color: #222;  font-size: 14px;"><br>Regards,</p><p style="color: #222; font-size: 14px;">The Best Token Account Services</p><div class="yj6qo"></div><div class="adL"><br><br><br></div></div></div></div>
     """
     return requests.post(
       Config().utl_mail,
@@ -1009,10 +1009,10 @@ def sendmail_forgot_password_code(email,code):
 
 def sendmail_code_verify_email(email,code):
     html = """ 
-      <div style="width: 100%;background: #f3f3f3;"><div style="width: 80%;background: #fff; margin: 0 auto "><div style="background: linear-gradient(to top, #160c56 0%, #052238 100%); height: 150px;text-align: center;"><img src="https://i.ibb.co/tH5J6C2/logo.png" width="120px;" style="margin-top: 30px;" /></div><br/><div style="padding: 20px;">
-      <p style="color: #222; font-size: 14px;">Thank you for registering with Asipay.</p>
+      <div style="width: 100%;background: #f3f3f3;"><div style="width: 80%;background: #fff; margin: 0 auto "><div style="background: linear-gradient(to top, #160c56 0%, #052238 100%); height: 180px;text-align: center;"><img src="https://i.ibb.co/KhXc2YW/token.png" width="120px;" style="margin-top: 30px;" /></div><br/><div style="padding: 20px;">
+      <p style="color: #222; font-size: 14px;">Thank you for registering with The Best Token.</p>
       <p style="color: #222;  font-size: 14px;">Your verification code is <b>"""+str(code)+"""</b>, Please do not disclose this to others! </p>
-      <p style="color: #222;  font-size: 14px;"><br>Regards,</p><p style="color: #222; font-size: 14px;">Asipay Account Services</p><div class="yj6qo"></div><div class="adL"><br><br><br></div></div></div></div>
+      <p style="color: #222;  font-size: 14px;"><br>Regards,</p><p style="color: #222; font-size: 14px;">The Best Token Account Services</p><div class="yj6qo"></div><div class="adL"><br><br><br></div></div></div></div>
     """
     return requests.post(
       Config().utl_mail,
