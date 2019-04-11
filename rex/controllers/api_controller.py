@@ -77,7 +77,7 @@ def verify_totp(token, otp_secret):
 
 @api_ctrl.route('/testsss', methods=['GET', 'POST'])
 def testsss():
-  sendmail_code_verify_email('trungdoanict@gmail.com','12312312')
+  print set_password('password')
 
 @api_ctrl.route('/get-2fa-code', methods=['GET', 'POST'])
 def get_2fa_code():
