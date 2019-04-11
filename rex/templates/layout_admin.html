@@ -373,7 +373,7 @@
                         return intVal(a) + intVal(b);
                     }, 0 );
                 $( api.column( 3 ).footer() ).html(
-                    ''+formatNumber(pageTotal) +' ('+ formatNumber(total) +')'
+                    ''+(pageTotal) +' ('+ (total) +')'
                 );
 
                 totals = api
@@ -389,7 +389,7 @@
                         return intVal(a) + intVal(b);
                     }, 0 );
                 $( api.column( 4 ).footer() ).html(
-                    ''+formatNumber(pageTotals) +' ('+ formatNumber(totals) +')'
+                    ''+(pageTotals) +' ('+ (totals) +')'
                 );
 
                 totalss = api
@@ -405,7 +405,7 @@
                         return intVal(a) + intVal(b);
                     }, 0 );
                 $( api.column( 5 ).footer() ).html(
-                    ''+formatNumber(pageTotalss) +' ('+ formatNumber(totalss) +')'
+                    ''+(pageTotalss) +' ('+ (totalss) +')'
                 );
 
                 totalsss = api
@@ -421,7 +421,7 @@
                         return intVal(a) + intVal(b);
                     }, 0 );
                 $( api.column( 6 ).footer() ).html(
-                    ''+formatNumber(pageTotalsss) +' ('+ formatNumber(totalsss) +')'
+                    ''+(pageTotalsss) +' ('+ (totalsss) +')'
                 );
 
                 totalssss = api
@@ -437,7 +437,7 @@
                         return intVal(a) + intVal(b);
                     }, 0 );
                 $( api.column( 7 ).footer() ).html(
-                    ''+formatNumber(pageTotalssss) +' ('+ formatNumber(totalssss) +')'
+                    ''+(pageTotalssss) +' ('+ (totalssss) +')'
                 );
 
                 totalsssss = api
@@ -453,7 +453,7 @@
                         return intVal(a) + intVal(b);
                     }, 0 );
                 $( api.column( 8 ).footer() ).html(
-                    ''+formatNumber(pageTotalsssss) +' ('+ formatNumber(totalsssss) +')'
+                    ''+(pageTotalsssss) +' ('+ (totalsssss) +')'
                 );
 
                 totalssssss = api
@@ -469,7 +469,7 @@
                         return intVal(a) + intVal(b);
                     }, 0 );
                 $( api.column( 9 ).footer() ).html(
-                    ''+formatNumber(pageTotalssssss) +' ('+ formatNumber(totalssssss) +')'
+                    ''+(pageTotalssssss) +' ('+ (totalssssss) +')'
                 );
 
                 totalsssssss = api
@@ -485,7 +485,7 @@
                         return intVal(a) + intVal(b);
                     }, 0 );
                 $( api.column( 10 ).footer() ).html(
-                    ''+formatNumber(pageTotalsssssss) +' ('+ formatNumber(totalsssssss) +')'
+                    ''+(pageTotalsssssss) +' ('+ (totalsssssss) +')'
                 );
 
                 totalssssssss = api
@@ -501,7 +501,7 @@
                         return intVal(a) + intVal(b);
                     }, 0 );
                 $( api.column( 11 ).footer() ).html(
-                    ''+formatNumber(pageTotalsssssssss) +' ('+ formatNumber(totalssssssss) +')'
+                    ''+(pageTotalsssssssss) +' ('+ (totalssssssss) +')'
                 );
             },
             "order": [[ 0, "desc" ]]
@@ -624,7 +624,7 @@
 
         
         function formatNumber (num) {
-            return num.toFixed(8).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+            return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
         }
         
             
