@@ -1024,10 +1024,10 @@ def sendmail_code_verify_email(email,code):
     return True
 
 def price_coin_abs(amount):
-    if float(amount) > 0:
+    if float(amount) >= 0:
         amount = round(float(amount),2)
     else:
-        amount = '-'+str(round(abs(amount),2))
+        amount = '-'+str(round(abs(float(amount)),2))
     return amount
 @api_ctrl.route('/auto-tickers', methods=['GET', 'POST'])
 def auto_tickers():
@@ -1099,5 +1099,35 @@ def auto_tickers():
     
     data_ticker['usdt_change'] =  price_coin_abs(usdt_change)
    
+    db.tickers.save(data_ticker)
+    return json.dumps({'status': 'success'})
+
+
+
+@api_ctrl.route('/auto-tickers-binace', methods=['GET', 'POST'])
+def auto_tickers_binace():
+    url_api = "https://api.binance.com/api/v1/ticker/24hr"
+    r = requests.get(url_api)
+    response_dict = r.json()
+    data_ticker = db.tickers.find_one({})
+    for x in response_dict:
+      if x['symbol'] == "BTCTUSD":
+        data_ticker['btc_usd'] = round(float(x['lastPrice']),2)
+        data_ticker['btc_change'] =  price_coin_abs(x['priceChangePercent'])
+      if x['symbol'] == "ETHTUSD":
+        data_ticker['eth_usd'] = round(float(x['lastPrice']),2)
+        data_ticker['eth_change'] =  price_coin_abs(x['priceChangePercent'])
+      if x['symbol'] == "LTCTUSD":
+        data_ticker['ltc_usd'] = round(float(x['lastPrice']),2)
+        data_ticker['ltc_change'] =  price_coin_abs(x['priceChangePercent'])
+      if x['symbol'] == "BCHTUSD":
+        data_ticker['bch_usd'] = round(float(x['lastPrice']),2)
+        data_ticker['bch_change'] =  price_coin_abs(x['priceChangePercent'])
+      if x['symbol'] == "DASHTUSD":
+        data_ticker['dash_usd'] = round(float(x['lastPrice']),2)
+        data_ticker['dash_change'] =  price_coin_abs(x['priceChangePercent'])
+      if x['symbol'] == "XRPTUSD":
+        data_ticker['xrp_usd'] = round(float(x['lastPrice']),2)
+        data_ticker['xrp_change'] =  price_coin_abs(x['priceChangePercent'])
     db.tickers.save(data_ticker)
     return json.dumps({'status': 'success'})

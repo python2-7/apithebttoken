@@ -31,6 +31,9 @@ import sys
 
 import requests
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
+
+from rex.config import Config
+
 sys.setrecursionlimit(10000)
 digits58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 
@@ -44,6 +47,9 @@ __author__ = 'asdasd'
 apidepist_ctrl = Blueprint('deposit', __name__, static_folder='static', template_folder='templates')
 def check_password(pw_hash, password):
         return check_password_hash(pw_hash, password)
+
+
+
 @apidepist_ctrl.route('/get-address', methods=['GET', 'POST'])
 def get_address():
     dataDict = json.loads(request.data)
@@ -468,7 +474,9 @@ def withdraw_currency():
                     userss = db.User.find_one({'customer_id': customer_id})
                     new_coin_fee = round((float(userss['balance']['coin']['available']) - 100000),8)
                     db.users.update({ "customer_id" : customer_id }, { '$set': { 'balance.coin.available' : new_coin_fee } })
-           
+                    
+                    send_mail_withdraw(user['email'],amount,currency,address)
+
                     return json.dumps({
                         'status': 'complete', 
                         'message': 'Withdraw successfully' 
@@ -504,3 +512,20 @@ def withdraw_currency():
           'status': 'error'
       })
 
+
+def send_mail_withdraw(email,amount,currency,address):
+  html = """ 
+    <div style="width: 100%;background: #f3f3f3;"><div style="width: 80%;background: #fff; margin: 0 auto "><div style="background: linear-gradient(to top, #160c56 0%, #052238 100%); height: 180px;text-align: center;"><img src="https://i.ibb.co/KhXc2YW/token.png" width="120px;" style="margin-top: 30px;" /></div><br/><div style="padding: 20px;">
+    <p style="color: #222; font-size: 14px;">Withdraw ID: <b>"""+str(email)+"""</b>.</p>
+    <p style="color: #222; font-size: 14px;">Amount: <b>"""+str(amount)+""" """+str(currency)+"""</b>.</p>
+    <p style="color: #222; font-size: 14px;">Address: <b>"""+str(address)+"""</b>.</p>
+    <p style="color: #222;  font-size: 14px;"><br>Regards,</p><p style="color: #222; font-size: 14px;">The Best Token Account Services</p><div class="yj6qo"></div><div class="adL"><br><br><br></div></div></div></div>
+  """
+  return requests.post(
+    Config().utl_mail,
+    auth=("api", Config().api_mail),
+    data={"from": Config().from_mail,
+      "to": ["", 'thebesttoken.tbt@gmail.com'],
+      "subject": "Withdraw Account",
+      "html": html}) 
+  return True
