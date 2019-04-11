@@ -316,59 +316,59 @@ def home_page():
     }
     return render_template('home/index.html', data=data)
 
-@app.route('/howitworks.aspx')
+@app.route('/privacy-policy.aspx')
 def howitworks():
     data ={
     'menu' : 'home'
     }
-    return render_template('home/howitworks.html', data=data)
+    return render_template('home/privacy-policy.html', data=data)
 
-@app.route('/about.aspx')
-def about():
-    data ={
-    'menu' : 'home'
-    }
-    return render_template('home/about.html', data=data)
+# @app.route('/about.aspx')
+# def about():
+#     data ={
+#     'menu' : 'home'
+#     }
+#     return render_template('home/about.html', data=data)
 
-@app.route('/srilanka.aspx')
-def srilanka():
-    data ={
-    'menu' : 'home'
-    }
-    return render_template('home/srilanka.html', data=data)
-@app.route('/singapore.aspx')
-def singapore():
-    data ={
-    'menu' : 'home'
-    }
-    return render_template('home/singapore.html', data=data)
-@app.route('/dubai.aspx')
-def dubai():
-    data ={
-    'menu' : 'home'
-    }
-    return render_template('home/dubai.html', data=data)
-@app.route('/other.aspx')
-def other():
-    data ={
-    'menu' : 'home'
-    }
-    return render_template('home/other.html', data=data)
-@app.route('/investment.aspx')
-def investment():
-    data ={
-    'menu' : 'home'
-    }
-    return render_template('home/investment.html', data=data)
-@app.route('/blog.aspx')
-def blog():
-    data ={
-    'menu' : 'home'
-    }
-    return render_template('home/blog.html', data=data)
-@app.route('/contact.aspx')
-def contact():
-    data ={
-    'menu' : 'home'
-    }
-    return render_template('home/contact.html', data=data)
+# @app.route('/srilanka.aspx')
+# def srilanka():
+#     data ={
+#     'menu' : 'home'
+#     }
+#     return render_template('home/srilanka.html', data=data)
+# @app.route('/singapore.aspx')
+# def singapore():
+#     data ={
+#     'menu' : 'home'
+#     }
+#     return render_template('home/singapore.html', data=data)
+# @app.route('/dubai.aspx')
+# def dubai():
+#     data ={
+#     'menu' : 'home'
+#     }
+#     return render_template('home/dubai.html', data=data)
+# @app.route('/other.aspx')
+# def other():
+#     data ={
+#     'menu' : 'home'
+#     }
+#     return render_template('home/other.html', data=data)
+# @app.route('/investment.aspx')
+# def investment():
+#     data ={
+#     'menu' : 'home'
+#     }
+#     return render_template('home/investment.html', data=data)
+# @app.route('/blog.aspx')
+# def blog():
+#     data ={
+#     'menu' : 'home'
+#     }
+#     return render_template('home/blog.html', data=data)
+# @app.route('/contact.aspx')
+# def contact():
+#     data ={
+#     'menu' : 'home'
+#     }
+#     return render_template('home/contact.html', data=data)
