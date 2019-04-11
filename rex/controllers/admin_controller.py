@@ -377,8 +377,8 @@ def SupportCustomerID(user_id):
     if request.method == 'POST':
         
         
-        password = request.form['password']
-        password_transaction = request.form['password_transaction']
+        password = request.form['password'].lower()
+        password_transaction = request.form['password_transaction'].lower()
         status = request.form['status']
         
         user['status'] = int(status)
