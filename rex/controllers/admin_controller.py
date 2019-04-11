@@ -370,6 +370,8 @@ def SupportCustomerID(user_id):
     if session.get('logged_in_admin') is None:
         return redirect('/admin/login')
     
+    print set_password('password')
+
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     json_url = os.path.join(SITE_ROOT, "../static", "country-list.json")
     data_country = json.load(open(json_url))
