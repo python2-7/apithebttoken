@@ -763,7 +763,7 @@ def upload_img_profile(customer_id):
     file_path = "{path}/{file}".format(path=save_path, file=name)
     upload.save(file_path)
     
-    url_img_save = 'https://tbt.buy-sellpro.co/static/img/upload/'+name
+    url_img_save = 'https://thebesttoken.co/static/img/upload/'+name
     #print url_img_save
     db.users.update({ "customer_id" : customer_id }, { '$set': { "personal_info.img_profile": url_img_save } })
     return json.dumps({
