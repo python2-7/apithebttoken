@@ -45,13 +45,13 @@ __author__ = 'asdasd'
 apiinvestment_ctrl = Blueprint('investment', __name__, static_folder='static', template_folder='templates')
 def check_password(pw_hash, password):
         return check_password_hash(pw_hash, password)
-@apiinvestment_ctrl.route('/testinvest', methods=['GET', 'POST'])
+@apiinvestment_ctrl.route('/dailyprofit-alsjaldjaslkdladadjaaskjd', methods=['GET', 'POST'])
 def testinvest():
     
     caculator_profitDaily()
 
     return json.dumps({
-        'status': 'complete' 
+        'status': 'dailyprofit-complete' 
         
     })
 
