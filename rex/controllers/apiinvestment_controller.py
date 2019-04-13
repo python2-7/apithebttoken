@@ -114,15 +114,17 @@ def active_package():
                 amount_usd = round(float(amount)*float(price_atlcoin),2)
                 if float(amount_usd) >= 100:
 
-                    if float(amount_usd) >= 100 and float(amount_usd) < 1000:
-                        percent_daily = 0.3
-                    if float(amount_usd) >= 1000 and float(amount_usd) < 5000:
+                    if float(amount_usd) >= 100 and float(amount_usd) <= 500:
+                        percent_daily = 0.4
+                    if float(amount_usd) > 500 and float(amount_usd) <= 1000:
                         percent_daily = 0.5
-                    if float(amount_usd) >= 5000 and float(amount_usd) < 15000:
+                    if float(amount_usd) > 1000 and float(amount_usd) <= 5000:
                         percent_daily = 0.6
-                    if float(amount_usd) >= 15000 and float(amount_usd) < 25000:
+                    if float(amount_usd) > 5000 and float(amount_usd) <= 15000:
                         percent_daily = 0.8
-                    if float(amount_usd) >= 25000:
+                    if float(amount_usd) > 15000 and float(amount_usd) <= 25000:
+                        percent_daily = 0.9
+                    if float(amount_usd) > 25000:
                         percent_daily = 1
 
                     new_balance_sub = round((float(val_balance) - float(amount)*100000000),8)
@@ -614,9 +616,9 @@ def caculator_profitDaily():
     ticker = db.tickers.find_one({})
     price_coin = ticker['coin_usd']
     
-    percent = 0.3
+    
     for x in get_invest:
-        
+        percent = x['percent_daily']
         customer = db.users.find_one({'customer_id': x['uid']})
         if customer is not None:
 
