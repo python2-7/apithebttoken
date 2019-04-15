@@ -46,6 +46,10 @@ lm.login_view = '/auth/login'
 
 from rex.controllers import api_controller
 app.register_blueprint(blueprint=api_controller.api_ctrl, url_prefix='/api')
+
+# from rex.controllers import socket_controller
+# app.register_blueprint(blueprint=socket_controller.socket_ctrl, url_prefix='/socket')
+
 from rex.controllers import apideposit_controller
 app.register_blueprint(blueprint=apideposit_controller.apidepist_ctrl, url_prefix='/api/deposit')
 from rex.controllers import apiexchange_controller
@@ -212,102 +216,6 @@ def allowed_file(filename):
 
 def set_password(password):
     return generate_password_hash(password)
-@app.route('/setup')
-def setup():
-    inserted = []
-    #return json.dumps({'status' : 'error'})
-    profit = [{"_id" : "5995a569587b3b15a14174e0",
-        '500': 0.1,
-        '1000':  0.2,
-        '3000' : 0.3,
-        '5000' : 0.4,
-        '10000' : 0.5,
-        '30000' : 0.6,
-        '50000': 0.7,
-        '100000':  0.8,
-        '500000' : 0.9,
-        '1000000' : 1
-    }]
-    db['profits'].drop()
-    db['profits'].insert(profit)
-    
-    # users = [{"_id" : "5995a569587b3b15a14174e0",
-    # "roi" : 100920,
-    # "right" : "",
-    # "p_binary" : "",
-    # "m_wallet" : 600000000,
-    # "creation" : datetime.utcnow(),
-    # "telephone" : "000000000",
-    # "password_transaction" : set_password('12345'),
-    # "total_amount_right" : int("0"),
-    # "total_pd_right" : int("0"),
-    # "btc_wallet" : "19WpQavvcEcy4MmWk7szPoiY2cwvi8jt9E",
-    # "p_node" : "",
-    # "r_wallet" : 600000000,
-    # "password_custom" : set_password('12345'),
-    # "total_pd_left" : 9700,
-    # "customer_id" : "1010101001",
-    # "email" : "meccafunds@meccafund.org",
-    # "total_amount_left" : 10500,
-    # "username" : "root",
-    # "s_wallet" : 1000000000,
-    # "total_invest" : 100000,
-    # "password" : set_password('12345'),
-    # "img_profile" : "",
-    # "max_out" : 500000,
-    # "max_binary" : 500000,
-    # "name" : "MECCAFUND",
-    # "level" : int("3"),
-    # "country" : "French Southern territories",
-    # "wallet" : "",
-    # "status" : 1,
-    # "total_earn" : 10000,
-    # "position" : "",
-    # 'sva_balance': 0,
-    # 'sva_address': '',
-    # 'btc_balance': 0,
-    # 'btc_address': '',
-    # 'usd_balance': 0,
-    # 'total_max_out': 0,
-    # 'total_capital_back': 0,
-    # 'total_commission': 0,
-    # 'secret_2fa':'',
-    # 'status_2fa': 0,
-    # "left" : "",
-    # 's_left': 0,
-    # 's_right': 0,
-    # 's_p_node': 0,
-    # 's_p_binary': 0,
-    # 's_token': 0,
-    # 's_id': 0
-    # }]
-    # db['users'].drop()
-    # db['users'].insert(users)
-    # inserted.append(users)
-
-    # admin = [{
-    #     "_id" : "1175a9437u2b3b15a14174e0",
-    #     'username':  'admin',
-    #     'email' :  'admin@admin.com',
-    #     'password': set_password('12345'),
-    #     'sum_withdraw': 0,
-    #     'sum_invest' : 0
-    # }]
-    # db['admins'].drop()
-    # db['admins'].insert(admin)
-    # inserted.append(admin)
-
-    # ticker = [{
-    #     'btc_usd' : 7500,
-    #     'sva_btc' : 0.00013333,
-    #     'sva_usd' : 1
-    # }]
-    # db['tickers'].drop()
-    # db['tickers'].insert(ticker)
-
-    return json.dumps(inserted)
-   
-
 
 @app.route('/')
 def home_page():
@@ -323,52 +231,5 @@ def howitworks():
     }
     return render_template('home/privacy-policy.html', data=data)
 
-# @app.route('/about.aspx')
-# def about():
-#     data ={
-#     'menu' : 'home'
-#     }
-#     return render_template('home/about.html', data=data)
 
-# @app.route('/srilanka.aspx')
-# def srilanka():
-#     data ={
-#     'menu' : 'home'
-#     }
-#     return render_template('home/srilanka.html', data=data)
-# @app.route('/singapore.aspx')
-# def singapore():
-#     data ={
-#     'menu' : 'home'
-#     }
-#     return render_template('home/singapore.html', data=data)
-# @app.route('/dubai.aspx')
-# def dubai():
-#     data ={
-#     'menu' : 'home'
-#     }
-#     return render_template('home/dubai.html', data=data)
-# @app.route('/other.aspx')
-# def other():
-#     data ={
-#     'menu' : 'home'
-#     }
-#     return render_template('home/other.html', data=data)
-# @app.route('/investment.aspx')
-# def investment():
-#     data ={
-#     'menu' : 'home'
-#     }
-#     return render_template('home/investment.html', data=data)
-# @app.route('/blog.aspx')
-# def blog():
-#     data ={
-#     'menu' : 'home'
-#     }
-#     return render_template('home/blog.html', data=data)
-# @app.route('/contact.aspx')
-# def contact():
-#     data ={
-#     'menu' : 'home'
-#     }
-#     return render_template('home/contact.html', data=data)
+
