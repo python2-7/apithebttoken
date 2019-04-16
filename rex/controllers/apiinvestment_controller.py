@@ -203,79 +203,86 @@ def disable_package():
     dataDict = json.loads(request.data)
     customer_id = dataDict['customer_id']
     currency = dataDict['currency']
-    
-    val_add_balance = 0
-    amount_usd_sub = 0
-    now_date= datetime.utcnow()
-
-    investment = db.investments.find({'$and' : [{'uid': customer_id},{'currency': currency},{'status' : 1}]})
-    for item in investment:
-
-        sub_date = now_date - item['date_added']
-        if int(sub_date.days) < 20:
-            percent_fee = 5
-        if int(sub_date.days) >= 21:
-            percent_fee = 1
-        
-        percent_fee = 100 - float(percent_fee)
-        val_add_balance += float(item['package'])*float(percent_fee)*1000000
-        amount_usd_sub += float(item['amount_usd'])
-        db.investments.update({ "_id" : ObjectId(item['_id']) }, { '$set': { 'status': 0} })
+    password_transaction = dataDict['password_transaction']
 
     user = db.User.find_one({'customer_id': customer_id})
+    if check_password(user['password_transaction'], password_transaction) == True:
 
-    if currency == 'BTC': 
-        string_query = 'balance.bitcoin.available'
-        val_balance = user['balance']['bitcoin']['available']
-    if currency == 'ETH':
-        string_query = 'balance.ethereum.available'
-        val_balance = user['balance']['ethereum']['available']
-    if currency == 'LTC':
-        string_query = 'balance.litecoin.available'
-        val_balance = user['balance']['litecoin']['available']
-    if currency == 'XRP':
-        string_query = 'balance.ripple.available'
-        val_balance = user['balance']['ripple']['available']
-    if currency == 'USDT':
-        string_query = 'balance.tether.available'
-        val_balance = user['balance']['tether']['available']
-    if currency == 'DASH':
-        string_query = 'balance.dash.available'
-        val_balance = user['balance']['dash']['available']
-    if currency == 'EOS':
-        string_query = 'balance.eos.available'
-        val_balance = user['balance']['eos']['available']
-    if currency == 'BCH':
-        string_query = 'balance.bitcoincash.available'
-        val_balance = user['balance']['bitcoincash']['available']
-    if currency == 'DOGE':
-        string_query = 'balance.dogecoin.available'
-        val_balance = user['balance']['dogecoin']['available']
-    if currency == 'TBT':
-        string_query = 'balance.coin.available'
-        val_balance = user['balance']['coin']['available']
+        val_add_balance = 0
+        amount_usd_sub = 0
+        now_date= datetime.utcnow()
 
-    new_balance_add = float(val_balance) + float(val_add_balance)
+        investment = db.investments.find({'$and' : [{'uid': customer_id},{'currency': currency},{'status' : 1}]})
+        for item in investment:
 
-              
-    db.users.update({ "customer_id" : customer_id }, { '$set': { string_query: float(new_balance_add)} })
+            sub_date = now_date - item['date_added']
+            if int(sub_date.days) < 20:
+                percent_fee = 5
+            if int(sub_date.days) >= 21:
+                percent_fee = 1
+            
+            percent_fee = 100 - float(percent_fee)
+            val_add_balance += float(item['package'])*float(percent_fee)*1000000
+            amount_usd_sub += float(item['amount_usd'])
+            db.investments.update({ "_id" : ObjectId(item['_id']) }, { '$set': { 'status': 0} })
 
-    TotalnodeAmountSub(customer_id,amount_usd_sub)
+        
 
-    customer = db.User.find_one({'customer_id': customer_id})
+        if currency == 'BTC': 
+            string_query = 'balance.bitcoin.available'
+            val_balance = user['balance']['bitcoin']['available']
+        if currency == 'ETH':
+            string_query = 'balance.ethereum.available'
+            val_balance = user['balance']['ethereum']['available']
+        if currency == 'LTC':
+            string_query = 'balance.litecoin.available'
+            val_balance = user['balance']['litecoin']['available']
+        if currency == 'XRP':
+            string_query = 'balance.ripple.available'
+            val_balance = user['balance']['ripple']['available']
+        if currency == 'USDT':
+            string_query = 'balance.tether.available'
+            val_balance = user['balance']['tether']['available']
+        if currency == 'DASH':
+            string_query = 'balance.dash.available'
+            val_balance = user['balance']['dash']['available']
+        if currency == 'EOS':
+            string_query = 'balance.eos.available'
+            val_balance = user['balance']['eos']['available']
+        if currency == 'BCH':
+            string_query = 'balance.bitcoincash.available'
+            val_balance = user['balance']['bitcoincash']['available']
+        if currency == 'DOGE':
+            string_query = 'balance.dogecoin.available'
+            val_balance = user['balance']['dogecoin']['available']
+        if currency == 'TBT':
+            string_query = 'balance.coin.available'
+            val_balance = user['balance']['coin']['available']
 
-    investments = db.investments.find({'$and' : [{'uid': customer_id},{'status' : 1}]})
-    investment_usd = 0
-    for items in investments:
-        investment_usd += float(items['amount_usd'])
-    if  float(investment_usd) > 0:
-        db.users.update({ "customer_id" : customer_id }, { '$set': { 'investment' : investment_usd } })
+        new_balance_add = float(val_balance) + float(val_add_balance)
 
-    
-    return json.dumps({
-        'status': 'complete', 
-        'message': 'Disable Ai-Dog successfully' 
-    })
+                  
+        db.users.update({ "customer_id" : customer_id }, { '$set': { string_query: float(new_balance_add)} })
+
+        TotalnodeAmountSub(customer_id,amount_usd_sub)
+
+        new_investment_user = float(user['investment'])-float(amount_usd_sub)
+        if float(new_investment_user) < 10:
+            new_investment_user = 0
+
+
+        db.users.update({ "customer_id" : customer_id }, { '$set': { 'investment' :  new_investment_user} })
+
+        
+        return json.dumps({
+            'status': 'complete', 
+            'message': 'Disable Ai-Dog successfully' 
+        })
+    else:
+        return json.dumps({
+            'status': 'error', 
+            'message': 'Wrong password transaction. Please try again' 
+        })
 @apiinvestment_ctrl.route('/get-history', methods=['GET', 'POST'])
 def get_historys_investment():
 
