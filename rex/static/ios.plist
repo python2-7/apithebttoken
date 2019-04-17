@@ -11,7 +11,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://url-to-ipa.ipa</string>
+					<string>https://thebesttoken.co/static/tbt.ipa</string>
 				</dict>
 				<dict>
 					<key>kind</key>
@@ -33,7 +33,7 @@
 			<key>metadata</key>
 			<dict>
 				<key>bundle-identifier</key>
-				<string>com.saleh7.testapp</string>
+				<string>com.tbt.thebesttoken</string>
 				<key>bundle-version</key>
 				<string>1.0</string>
 				<key>kind</key>
