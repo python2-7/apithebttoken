@@ -2,33 +2,44 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>The Best Token.ipa</key>
+	<key>items</key>
 	<array>
 		<dict>
-			<key>architectures</key>
+			<key>assets</key>
 			<array>
-				<string>armv7</string>
-				<string>arm64</string>
+				<dict>
+					<key>kind</key>
+					<string>software-package</string>
+					<key>url</key>
+					<string>https://url-to-ipa.ipa</string>
+				</dict>
+				<dict>
+					<key>kind</key>
+					<string>full-size-image</string>
+					<key>needs-shine</key>
+					<true/>
+					<key>url</key>
+					<string>https://raw.githubusercontent.com/Saleh7/ipa-install/master/Icon%402x.png</string>
+				</dict>
+				<dict>
+					<key>kind</key>
+					<string>display-image</string>
+					<key>needs-shine</key>
+					<true/>
+					<key>url</key>
+					<string>https://raw.githubusercontent.com/Saleh7/ipa-install/master/Icon.png</string>
+				</dict>
 			</array>
-			<key>certificate</key>
+			<key>metadata</key>
 			<dict>
-				<key>SHA1</key>
-				<string></string>
-				<key>dateExpires</key>
-				<string></string>
-				<key>type</key>
-				<string>Unknown</string>
-			</dict>
-			<key>name</key>
-			<string>The Best Token.app</string>
-			<key>symbols</key>
-			<true/>
-			<key>team</key>
-			<dict>
-				<key>id</key>
-				<string>45AM76Z934</string>
-				<key>name</key>
-				<string>Nguyen Thi Phan</string>
+				<key>bundle-identifier</key>
+				<string>com.saleh7.testapp</string>
+				<key>bundle-version</key>
+				<string>1.0</string>
+				<key>kind</key>
+				<string>software</string>
+				<key>title</key>
+				<string>The Best Token</string>
 			</dict>
 		</dict>
 	</array>
