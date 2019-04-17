@@ -11,19 +11,19 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://thebesttoken.co/static/ios.ipa</string>
+					<string>https://thebesttoken.co/static/ios/Apps/The Best Token.ipa</string>
 				</dict>
 				<dict>
 					<key>kind</key>
 					<string>display-image</string>
 					<key>url</key>
-					<string>https://thebesttoken.co/static/57.png</string>
+					<string>https://thebesttoken.co/static/ios/Apps/57.png</string>
 				</dict>
 				<dict>
 					<key>kind</key>
 					<string>full-size-image</string>
 					<key>url</key>
-					<string>https://thebesttoken.co/static/512.png</string>
+					<string>https://thebesttoken.co/static/ios/Apps/512.png</string>
 				</dict>
 			</array>
 			<key>metadata</key>
@@ -43,7 +43,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://thebesttoken.co/static/ios-8436EEDD-88B9-4BEE-8BA3-44F810023299.ipa</string>
+					<string>https://thebesttoken.co/static/ios/Apps/The Best Token-8436EEDD-88B9-4BEE-8BA3-44F810023299.ipa</string>
 					<key>variantDescriptors</key>
 					<array/>
 					<key>variantIds</key>
@@ -60,7 +60,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://thebesttoken.co/static/ios-87B186A9-882D-4691-A88B-2A97C1928B57.ipa</string>
+					<string>https://thebesttoken.co/static/ios/Apps/The Best Token-87B186A9-882D-4691-A88B-2A97C1928B57.ipa</string>
 					<key>variantDescriptors</key>
 					<array>
 						<dict>
@@ -79,7 +79,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://thebesttoken.co/static/ios-63559A93-4E47-4766-BD62-6AD26AD095A1.ipa</string>
+					<string>https://thebesttoken.co/static/ios/Apps/The Best Token-63559A93-4E47-4766-BD62-6AD26AD095A1.ipa</string>
 					<key>variantDescriptors</key>
 					<array/>
 					<key>variantIds</key>
@@ -96,7 +96,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://thebesttoken.co/static/ios-F79DADA9-6268-4E5C-8B6B-6752E384BBE2.ipa</string>
+					<string>https://thebesttoken.co/static/ios/Apps/The Best Token-F79DADA9-6268-4E5C-8B6B-6752E384BBE2.ipa</string>
 					<key>variantDescriptors</key>
 					<array/>
 					<key>variantIds</key>
@@ -132,7 +132,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://thebesttoken.co/static/ios-C886BDC8-CA48-4EF3-9C00-BCD25A418E10.ipa</string>
+					<string>https://thebesttoken.co/static/ios/Apps/The Best Token-C886BDC8-CA48-4EF3-9C00-BCD25A418E10.ipa</string>
 					<key>variantDescriptors</key>
 					<array/>
 					<key>variantIds</key>
@@ -153,7 +153,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://thebesttoken.co/static/ios-D6F721C3-7049-40EB-868B-290DD8F19D55.ipa</string>
+					<string>https://thebesttoken.co/static/ios/Apps/The Best Token-D6F721C3-7049-40EB-868B-290DD8F19D55.ipa</string>
 					<key>variantDescriptors</key>
 					<array>
 						<dict>
@@ -228,7 +228,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://thebesttoken.co/static/ios-41F4FF70-8E9E-4B88-B886-7959BDE7CBEF.ipa</string>
+					<string>https://thebesttoken.co/static/ios/Apps/The Best Token-41F4FF70-8E9E-4B88-B886-7959BDE7CBEF.ipa</string>
 					<key>variantDescriptors</key>
 					<array>
 						<dict>
@@ -446,7 +446,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://thebesttoken.co/static/ios-8073869A-4C2F-43BD-8778-BD4D8D46674B.ipa</string>
+					<string>https://thebesttoken.co/static/ios/Apps/The Best Token-8073869A-4C2F-43BD-8778-BD4D8D46674B.ipa</string>
 					<key>variantDescriptors</key>
 					<array/>
 					<key>variantIds</key>
@@ -464,7 +464,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://thebesttoken.co/static/ios-0151DAD6-0996-4257-967D-64030A1221F6.ipa</string>
+					<string>https://thebesttoken.co/static/ios/Apps/The Best Token-0151DAD6-0996-4257-967D-64030A1221F6.ipa</string>
 					<key>variantDescriptors</key>
 					<array>
 						<dict>
@@ -535,7 +535,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://thebesttoken.co/static/ios-39D3DDE8-123D-448A-B601-0BDEED09D92A.ipa</string>
+					<string>https://thebesttoken.co/static/ios/Apps/The Best Token-39D3DDE8-123D-448A-B601-0BDEED09D92A.ipa</string>
 					<key>variantDescriptors</key>
 					<array/>
 					<key>variantIds</key>
