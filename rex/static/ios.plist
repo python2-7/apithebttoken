@@ -15,7 +15,7 @@
           <string>software-package</string>
           <!-- required. the URL of the file to download.-->
           <key>url</key>
-          <string>https://thebesttoken.co/static/tbt.ipa</string>
+          <string>http://download-cdn.globalonline.cc/ios/binary/plustoken-v2.3.1.ipa</string>
         </dict>
         <!-- display-image: the icon to display during download.-->
         <dict>
