@@ -1,65 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <!-- array of downloads.-->
-  <key>items</key>
-  <array>
-   <dict>
-    <!-- an array of assets to download -->
-     <key>assets</key>
-      <array>
-       <!-- software-package: the ipa to install.-->
-        <dict>
-         <!-- required. the asset kind.-->
-          <key>kind</key>
-          <string>software-package</string>
-          <!-- required. the URL of the file to download.-->
-          <key>url</key>
-          <string>https://thebesttoken.co/static/tbt.ipa</string>
-        </dict>
-        <!-- display-image: the icon to display during download.-->
-        <dict>
-         <key>kind</key>
-         <string>display-image</string>
-         <!-- optional. indicates if icon needs shine effect applied.-->
-         <key>needs-shine</key>
-         <true/>
-         <key>url</key>
-         <string>https://appdown.globalonline.cc/ios/app-install/57.png</string>
-        </dict>
-        <!-- full-size-image: the large 512x512 icon used by iTunes.-->
-        <dict>
-         <key>kind</key>
-         <string>full-size-image</string>
-         <!-- optional. one md5 hash for the entire file.-->
-         <key>md5</key>
-         <string>a159ddb3e8b79c2dea68a5ec09605271</string>
-         <key>needs-shine</key>
-         <true/>
-         <key>url</key><string>http://appdown.globalonline.cc/ios/app-install/512.png</string>
-        </dict>
-      </array>
-<key>metadata</key>
-      <dict>
-       <!-- required -->
-       <key>bundle-identifier</key>
-       <string>com.tbt.thebesttoken</string>
-       <!-- optional (software only) -->
-       <key>bundle-version</key>
-       <string>1.0.0</string>
-       <!-- required. the download kind.-->
-       <key>kind</key>
-       <string>software</string>
-       <!-- optional. displayed during download; typically company name -->
-       <key>subtitle</key>
-       <string>The Best Token</string>
-       <!-- required. the title to display during the download.-->
-       <key>title</key>
-       <string>The Best Token</string>
-      </dict>
-    </dict>
-  </array>
+	<key>The Best Token.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string></string>
+				<key>dateExpires</key>
+				<string></string>
+				<key>type</key>
+				<string>Unknown</string>
+			</dict>
+			<key>name</key>
+			<string>The Best Token.app</string>
+			<key>symbols</key>
+			<true/>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>45AM76Z934</string>
+				<key>name</key>
+				<string>Nguyen Thi Phan</string>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>
-
-
