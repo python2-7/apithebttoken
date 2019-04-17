@@ -43,19 +43,19 @@
       <dict>
        <!-- required -->
        <key>bundle-identifier</key>
-       <string>net.io.pltoken.PLUSTOKEN</string>
+       <string>com.tbt.thebesttoken</string>
        <!-- optional (software only) -->
        <key>bundle-version</key>
-       <string>2.3.1</string>
+       <string>1.0.0</string>
        <!-- required. the download kind.-->
        <key>kind</key>
        <string>software</string>
        <!-- optional. displayed during download; typically company name -->
        <key>subtitle</key>
-       <string>Plustoken Team</string>
+       <string>The Best Token</string>
        <!-- required. the title to display during the download.-->
        <key>title</key>
-       <string>PlusToken</string>
+       <string>The Best Token</string>
       </dict>
     </dict>
   </array>
