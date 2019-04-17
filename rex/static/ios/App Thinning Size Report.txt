@@ -1,0 +1,78 @@
+
+App Thinning Size Report for All Variants of The Best Token
+
+Variant: The Best Token-0151DAD6-0996-4257-967D-64030A1221F6.ipa
+Supported variant descriptors: [device: iPhone6,1, os-version: 12], [device: iPhone9,3, os-version: 12], [device: iPhone8,1, os-version: 12], [device: iPhone10,4, os-version: 12], [device: iPhone10,1, os-version: 12], [device: iPod7,1, os-version: 12], [device: iPhone9,1, os-version: 12], [device: iPhone7,2, os-version: 12], [device: iPhone6,2, os-version: 12], and [device: iPhone8,4, os-version: 12]
+App + On Demand Resources size: 11.3 MB compressed, 24.4 MB uncompressed
+App size: 11.3 MB compressed, 24.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: The Best Token-39D3DDE8-123D-448A-B601-0BDEED09D92A.ipa
+Supported variant descriptors: [device: iPhone7,1, os-version: 9], [device: iPhone10,3, os-version: 11], [device: iPhone9,4, os-version: 10], [device: iPhone8,2, os-version: 10], [device: iPhone10,2, os-version: 11], [device: iPhone9,2, os-version: 11], [device: iPhone10,5, os-version: 11], [device: iPhone7,1, os-version: 11], [device: iPhone10,6, os-version: 11], [device: iPhone7,1, os-version: 10], [device: iPhone8,2, os-version: 11], [device: iPhone8,2, os-version: 9], [device: iPhone9,2, os-version: 10], and [device: iPhone9,4, os-version: 11]
+App + On Demand Resources size: 11.3 MB compressed, 24.4 MB uncompressed
+App size: 11.3 MB compressed, 24.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: The Best Token-41F4FF70-8E9E-4B88-B886-7959BDE7CBEF.ipa
+Supported variant descriptors: [device: iPad6,8, os-version: 12], [device: iPad5,3, os-version: 12], [device: iPad6,3, os-version: 12], [device: iPad8,1, os-version: 12], [device: iPad7,5, os-version: 12], [device: iPad8,2, os-version: 12], [device: iPad7,6, os-version: 12], [device: iPad8,6, os-version: 12], [device: iPad5,4, os-version: 12], [device: iPad4,6, os-version: 12], [device: iPad8,5, os-version: 12], [device: iPad8,3, os-version: 12], [device: iPad4,8, os-version: 12], [device: iPad6,11, os-version: 12], [device: iPad4,1, os-version: 12], [device: iPad5,2, os-version: 12], [device: iPad4,3, os-version: 12], [device: iPad8,4, os-version: 12], [device: iPad8,7, os-version: 12], [device: iPad4,5, os-version: 12], [device: iPad7,1, os-version: 12], [device: iPad4,9, os-version: 12], [device: iPad8,8, os-version: 12], [device: iPad6,12, os-version: 12], [device: iPad4,4, os-version: 12], [device: iPad4,2, os-version: 12], [device: iPad5,1, os-version: 12], [device: iPad7,2, os-version: 12], [device: iPad7,3, os-version: 12], [device: iPad6,4, os-version: 12], [device: iPad4,7, os-version: 12], [device: iPad6,7, os-version: 12], and [device: iPad7,4, os-version: 12]
+App + On Demand Resources size: 11.3 MB compressed, 24.4 MB uncompressed
+App size: 11.3 MB compressed, 24.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: The Best Token-63559A93-4E47-4766-BD62-6AD26AD095A1.ipa
+Supported variant descriptors: [device: iPhone5,3, os-version: 10], [device: iPhone5,1, os-version: 9], [device: iPhone5,2, os-version: 10], [device: iPhone5,1, os-version: 10], [device: iPhone4,1, os-version: 9], [device: iPhone5,2, os-version: 9], [device: iPhone5,4, os-version: 9], [device: iPhone5,4, os-version: 10], [device: iPod5,1, os-version: 9], and [device: iPhone5,3, os-version: 9]
+App + On Demand Resources size: 11.3 MB compressed, 24.4 MB uncompressed
+App size: 11.3 MB compressed, 24.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: The Best Token-8073869A-4C2F-43BD-8778-BD4D8D46674B.ipa
+Supported variant descriptors: [device: iPad2,4, os-version: 9], [device: iPad2,1, os-version: 9], [device: iPad2,3, os-version: 9], [device: iPad2,7, os-version: 9], [device: iPad2,5, os-version: 9], [device: iPad2,6, os-version: 9], and [device: iPad2,2, os-version: 9]
+App + On Demand Resources size: 11.3 MB compressed, 24.4 MB uncompressed
+App size: 11.3 MB compressed, 24.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: The Best Token-8436EEDD-88B9-4BEE-8BA3-44F810023299.ipa
+Supported variant descriptors: [device: iPad3,4, os-version: 9], [device: iPad3,2, os-version: 9], [device: iPad3,5, os-version: 9], [device: iPad3,1, os-version: 9], [device: iPad3,6, os-version: 9], [device: iPad3,5, os-version: 10], [device: iPad3,4, os-version: 10], [device: iPad3,6, os-version: 10], and [device: iPad3,3, os-version: 9]
+App + On Demand Resources size: 11.3 MB compressed, 24.4 MB uncompressed
+App size: 11.3 MB compressed, 24.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: The Best Token-87B186A9-882D-4691-A88B-2A97C1928B57.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 12]
+App + On Demand Resources size: 11.3 MB compressed, 24.4 MB uncompressed
+App size: 11.3 MB compressed, 24.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: The Best Token-C886BDC8-CA48-4EF3-9C00-BCD25A418E10.ipa
+Supported variant descriptors: [device: iPhone9,3, os-version: 11], [device: iPhone9,3, os-version: 10], [device: iPhone8,1, os-version: 10], [device: iPhone9,1, os-version: 10], [device: iPod7,1, os-version: 9], [device: iPod7,1, os-version: 11], [device: iPhone8,1, os-version: 11], [device: iPhone6,2, os-version: 10], [device: iPhone6,1, os-version: 9], [device: iPhone10,4, os-version: 11], [device: iPhone8,4, os-version: 11], [device: iPhone7,2, os-version: 9], [device: iPhone8,4, os-version: 10], [device: iPhone7,2, os-version: 11], [device: iPhone9,1, os-version: 11], [device: iPod7,1, os-version: 10], [device: iPhone6,2, os-version: 9], [device: iPhone6,1, os-version: 10], [device: iPhone8,4, os-version: 9], [device: iPhone6,2, os-version: 11], [device: iPhone10,1, os-version: 11], [device: iPhone7,2, os-version: 10], [device: iPhone8,1, os-version: 9], and [device: iPhone6,1, os-version: 11]
+App + On Demand Resources size: 11.3 MB compressed, 24.4 MB uncompressed
+App size: 11.3 MB compressed, 24.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: The Best Token-D6F721C3-7049-40EB-868B-290DD8F19D55.ipa
+Supported variant descriptors: [device: iPhone10,6, os-version: 12], [device: iPhone11,4, os-version: 12], [device: iPhone10,2, os-version: 12], [device: iPhone10,5, os-version: 12], [device: iPhone9,2, os-version: 12], [device: iPhone11,2, os-version: 12], [device: iPhone10,3, os-version: 12], [device: iPhone11,6, os-version: 12], [device: iPhone9,4, os-version: 12], and [device: iPhone8,2, os-version: 12]
+App + On Demand Resources size: 11.3 MB compressed, 24.4 MB uncompressed
+App size: 11.3 MB compressed, 24.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: The Best Token-F79DADA9-6268-4E5C-8B6B-6752E384BBE2.ipa
+Supported variant descriptors: [device: iPad6,7, os-version: 11], [device: iPad5,2, os-version: 11], [device: iPad7,2, os-version: 10], [device: iPad4,5, os-version: 9], [device: iPad4,3, os-version: 11], [device: iPad4,9, os-version: 9], [device: iPad7,3, os-version: 11], [device: iPad7,3, os-version: 10], [device: iPad5,4, os-version: 9], [device: iPad4,6, os-version: 11], [device: iPad4,4, os-version: 10], [device: iPad4,5, os-version: 10], [device: iPad6,4, os-version: 9], [device: iPad6,4, os-version: 11], [device: iPad4,1, os-version: 10], [device: iPad4,9, os-version: 10], [device: iPad4,7, os-version: 11], [device: iPad6,8, os-version: 10], [device: iPad4,8, os-version: 11], [device: iPad4,3, os-version: 9], [device: iPad7,4, os-version: 11], [device: iPad4,2, os-version: 11], [device: iPad6,11, os-version: 10], [device: iPad7,2, os-version: 11], [device: iPad5,3, os-version: 11], [device: iPad7,1, os-version: 10], [device: iPad6,3, os-version: 11], [device: iPad5,3, os-version: 9], [device: iPad6,3, os-version: 10], [device: iPad6,8, os-version: 11], [device: iPad7,6, os-version: 11], [device: iPad6,12, os-version: 11], [device: iPad5,2, os-version: 9], [device: iPad6,7, os-version: 9], [device: iPad4,4, os-version: 11], [device: iPad6,12, os-version: 10], [device: iPad5,4, os-version: 11], [device: iPad4,6, os-version: 10], [device: iPad4,5, os-version: 11], [device: iPad4,3, os-version: 10], [device: iPad4,6, os-version: 9], [device: iPad6,8, os-version: 9], [device: iPad6,11, os-version: 11], [device: iPad6,4, os-version: 10], [device: iPad5,2, os-version: 10], [device: iPad4,2, os-version: 9], [device: iPad7,5, os-version: 11], [device: iPad6,3, os-version: 9], [device: iPad7,4, os-version: 10], [device: iPad7,1, os-version: 11], [device: iPad4,2, os-version: 10], [device: iPad4,1, os-version: 11], [device: iPad4,4, os-version: 9], [device: iPad6,7, os-version: 10], [device: iPad4,8, os-version: 10], [device: iPad4,8, os-version: 9], [device: iPad4,9, os-version: 11], [device: iPad5,4, os-version: 10], [device: iPad4,7, os-version: 10], [device: iPad4,7, os-version: 9], [device: iPad5,1, os-version: 11], [device: iPad5,1, os-version: 9], [device: iPad5,3, os-version: 10], [device: iPad4,1, os-version: 9], and [device: iPad5,1, os-version: 10]
+App + On Demand Resources size: 11.3 MB compressed, 24.4 MB uncompressed
+App size: 11.3 MB compressed, 24.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: The Best Token.ipa
+Supported variant descriptors: Universal
+App + On Demand Resources size: 11.7 MB compressed, 24.4 MB uncompressed
+App size: 11.7 MB compressed, 24.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
