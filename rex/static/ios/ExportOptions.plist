@@ -2,17 +2,28 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>compileBitcode</key>
+	<false/>
 	<key>destination</key>
-	<string>upload</string>
+	<string>export</string>
+	<key>manifest</key>
+	<dict>
+		<key>appURL</key>
+		<string>https://thebesttoken.co/static/ios.ipa</string>
+		<key>displayImageURL</key>
+		<string>https://thebesttoken.co/static/57.png</string>
+		<key>fullSizeImageURL</key>
+		<string>https://thebesttoken.co/static/512.png</string>
+	</dict>
 	<key>method</key>
-	<string>app-store</string>
+	<string>development</string>
 	<key>signingStyle</key>
 	<string>automatic</string>
 	<key>stripSwiftSymbols</key>
 	<true/>
 	<key>teamID</key>
 	<string>45AM76Z934</string>
-	<key>uploadSymbols</key>
-	<true/>
+	<key>thinning</key>
+	<string>&lt;thin-for-all-variants&gt;</string>
 </dict>
 </plist>
