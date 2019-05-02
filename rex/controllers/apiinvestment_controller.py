@@ -65,7 +65,7 @@ def active_package():
 
     user = db.User.find_one({'customer_id': customer_id})
 
-    if check_password(user['password_transaction'], password_transaction) == True or 1==1:
+    if check_password(user['password_transaction'], password_transaction) == True:
 
         if user is not None:
             ticker = db.tickers.find_one({})
