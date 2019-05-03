@@ -134,85 +134,90 @@ def submit_exchange():
               balance_from = user['balance']['coin']['available']
 
             amount_usd_form = float(amount)*float(price_form)
+            if to != 'TBT':
+              if to == 'BTC': 
+                price_to = ticker['btc_usd']
+                string_to = 'balance.bitcoin.available'
+                balance_to = user['balance']['bitcoin']['available']
+              if to == 'ETH':
+                price_to = ticker['eth_usd']
+                string_to = 'balance.ethereum.available'
+                balance_to = user['balance']['ethereum']['available']
+              if to == 'LTC':
+                price_to = ticker['ltc_usd']
+                string_to = 'balance.litecoin.available'
+                balance_to = user['balance']['litecoin']['available']
+              if to == 'XRP':
+                price_to = ticker['xrp_usd']
+                string_to = 'balance.ripple.available'
+                balance_to = user['balance']['ripple']['available']
+              if to == 'USDT':
+                price_to = ticker['usdt_usd']
+                string_to = 'balance.tether.available'
+                balance_to = user['balance']['tether']['available']
+              if to == 'DASH':
+                price_to = ticker['dash_usd']
+                string_to = 'balance.dash.available'
+                balance_to = user['balance']['dash']['available']
+              if to == 'EOS':
+                price_to = ticker['eos_usd']
+                string_to = 'balance.eos.available'
+                balance_to = user['balance']['eos']['available']
 
-            if to == 'BTC': 
-              price_to = ticker['btc_usd']
-              string_to = 'balance.bitcoin.available'
-              balance_to = user['balance']['bitcoin']['available']
-            if to == 'ETH':
-              price_to = ticker['eth_usd']
-              string_to = 'balance.ethereum.available'
-              balance_to = user['balance']['ethereum']['available']
-            if to == 'LTC':
-              price_to = ticker['ltc_usd']
-              string_to = 'balance.litecoin.available'
-              balance_to = user['balance']['litecoin']['available']
-            if to == 'XRP':
-              price_to = ticker['xrp_usd']
-              string_to = 'balance.ripple.available'
-              balance_to = user['balance']['ripple']['available']
-            if to == 'USDT':
-              price_to = ticker['usdt_usd']
-              string_to = 'balance.tether.available'
-              balance_to = user['balance']['tether']['available']
-            if to == 'DASH':
-              price_to = ticker['dash_usd']
-              string_to = 'balance.dash.available'
-              balance_to = user['balance']['dash']['available']
-            if to == 'EOS':
-              price_to = ticker['eos_usd']
-              string_to = 'balance.eos.available'
-              balance_to = user['balance']['eos']['available']
+              if to == 'DOGE':
+                price_to = ticker['doge_usd']
+                string_to = 'balance.dogecoin.available'
+                balance_to = user['balance']['dogecoin']['available']
+              if to == 'BCH':
+                price_to = ticker['bch_usd']
+                string_to = 'balance.bitcoincash.available'
+                balance_to = user['balance']['bitcoincash']['available']
 
-            if to == 'DOGE':
-              price_to = ticker['doge_usd']
-              string_to = 'balance.dogecoin.available'
-              balance_to = user['balance']['dogecoin']['available']
-            if to == 'BCH':
-              price_to = ticker['bch_usd']
-              string_to = 'balance.bitcoincash.available'
-              balance_to = user['balance']['bitcoincash']['available']
+              if to == 'TBT':
+                price_to = ticker['coin_usd']
+                string_to = 'balance.coin.available'
+                balance_to = user['balance']['coin']['available']
 
-            if to == 'TBT':
-              price_to = ticker['coin_usd']
-              string_to = 'balance.coin.available'
-              balance_to = user['balance']['coin']['available']
+              balance_add = ((float(amount_usd_form)/float(price_to))*100000000)*0.9975
+              balance_sub = float(amount)*100000000
 
-            balance_add = ((float(amount_usd_form)/float(price_to))*100000000)*0.9975
-            balance_sub = float(amount)*100000000
+              new_balance_add = round((float(balance_add) + float(balance_to)),8)
+              new_balance_sub = round((float(balance_from) - float(balance_sub)),8)
 
-            new_balance_add = round((float(balance_add) + float(balance_to)),8)
-            new_balance_sub = round((float(balance_from) - float(balance_sub)),8)
+              new_coin_fee = round((float(user['balance']['coin']['available']) - 100000),8)
 
-            new_coin_fee = round((float(user['balance']['coin']['available']) - 100000),8)
+              db.users.update({ "customer_id" : customer_id }, { '$set': { string_from: float(new_balance_sub) ,string_to : float(new_balance_add) } })
+              
+              #save lich su
+              data_history = {
+                  'uid':  customer_id,
+                  'user_id': customer_id,
+                  'username': user['email'],
+                  'detail':  'exchange',
+                  'amount_form': round(float(amount),8),
+                  'amount_to' :  round((float(balance_add)/100000000),8),
+                  'currency_from' :  form,
+                  'currency_to' :  to,
+                  'price_form' : price_form,
+                  'price_to':  price_to,
+                  'date_added' : datetime.utcnow()
+              }
+              db.exchanges.insert(data_history)
 
-            db.users.update({ "customer_id" : customer_id }, { '$set': { string_from: float(new_balance_sub) ,string_to : float(new_balance_add) } })
-            
-            #save lich su
-            data_history = {
-                'uid':  customer_id,
-                'user_id': customer_id,
-                'username': user['email'],
-                'detail':  'exchange',
-                'amount_form': round(float(amount),8),
-                'amount_to' :  round((float(balance_add)/100000000),8),
-                'currency_from' :  form,
-                'currency_to' :  to,
-                'price_form' : price_form,
-                'price_to':  price_to,
-                'date_added' : datetime.utcnow()
-            }
-            db.exchanges.insert(data_history)
-
-            #fee
-            userss = db.User.find_one({'customer_id': customer_id})
-            new_coin_fee = round((float(userss['balance']['coin']['available']) - 100000),8)
-            db.users.update({ "customer_id" : customer_id }, { '$set': { 'balance.coin.available' : new_coin_fee } })
-           
-            return json.dumps({
-                'status': 'complete', 
-                'message': 'Account successfully created' 
-            })
+              #fee
+              userss = db.User.find_one({'customer_id': customer_id})
+              new_coin_fee = round((float(userss['balance']['coin']['available']) - 100000),8)
+              db.users.update({ "customer_id" : customer_id }, { '$set': { 'balance.coin.available' : new_coin_fee } })
+             
+              return json.dumps({
+                  'status': 'complete', 
+                  'message': 'Account successfully created' 
+              })
+            else:
+              return json.dumps({
+                  'status': 'error',
+                  'message': 'Cannot convert to TBT' 
+              })
           else:
             return json.dumps({
                 'status': 'error',

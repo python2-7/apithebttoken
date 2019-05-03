@@ -765,8 +765,17 @@ def upload_img_profile(customer_id):
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
+    localtime = time.localtime(time.time())
+    random_number = '%s%s%s'%(localtime.tm_hour,localtime.tm_min,localtime.tm_sec)
+
     name = upload.filename
-    #print name,save_path
+
+    check_name = name.split("?")
+    if len(check_name) >=2:
+      name = check_name[1]+'Pic.jpg'
+    
+    name = random_number+name
+
     file_path = "{path}/{file}".format(path=save_path, file=name)
     upload.save(file_path)
     
@@ -859,13 +868,20 @@ def upload_img_address(customer_id):
         'status': 'complete'
     })
 
-
+@api_ctrl.route('/verify-account-code/<codes>', methods=['GET', 'POST'])
+def verify_account_code(codes):
+    
+    user = db.users.find_one({'security.code_forgot': codes})
+    if user:
+        db.users.update({ "_id" : ObjectId(user['_id']) }, { '$set': {'security.email.status' : 1, 'security.code_forgot' : '' } })
+    
+    return redirect('https://thebesttoken.co') 
 
 def create_account(email,password_login,password_transaction,referees):
     
     localtime = time.localtime(time.time())
     customer_id = '%s%s%s%s%s%s'%(localtime.tm_mon,localtime.tm_year,localtime.tm_mday,localtime.tm_hour,localtime.tm_min,localtime.tm_sec)
-    
+    ramdomss = id_generator(40)
     datas = {
         'customer_id' : customer_id,
         'username': email,
@@ -928,7 +944,7 @@ def create_account(email,password_login,password_transaction,referees):
           }
         },
          'security' : {
-            'code_forgot' : '',
+            'code_forgot' : ramdomss,
             'email' : {
                 'code' : '',
                 'status' : 0
@@ -977,15 +993,16 @@ def create_account(email,password_login,password_transaction,referees):
         } 
     }
     customer = db.users.insert(datas)
-    send_mail_register(email)
+    send_mail_register(email,ramdomss)
     return customer_id
 
 
-def send_mail_register(email):
+def send_mail_register(email,codes):
     html = """ 
       <div style="width: 100%;background: #f3f3f3;"><div style="width: 80%;background: #fff; margin: 0 auto "><div style="background: linear-gradient(to top, #160c56 0%, #052238 100%); height: 180px;text-align: center;"><img src="https://i.ibb.co/KhXc2YW/token.png" width="120px;" style="margin-top: 30px;" /></div><br/><div style="padding: 20px;">
       <p style="color: #222; font-size: 14px;">Thank you for registering with The Best Token.</p>
       <p style="color: #222;  font-size: 14px;">Congratulations on successful account registration with email: <b>"""+str(email)+"""</b>. You can use our service now.</p>
+      <p style="color: #222;  font-size: 14px;">Please click on the following link to verify your account: <a target="_blank" href="https://thebesttoken.co/api/verify-account-code/"""+str(codes)+"""">Click here...</a></p>
       <p style="color: #222;  font-size: 14px;"><br>Regards,</p><p style="color: #222; font-size: 14px;">The Best Token Account Services</p><div class="yj6qo"></div><div class="adL"><br><br><br></div></div></div></div>
     """
     return requests.post(
