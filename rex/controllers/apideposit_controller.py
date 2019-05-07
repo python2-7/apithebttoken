@@ -463,6 +463,7 @@ def withdraw_currency():
                   if float(user['balance']['coin']['available']) >= 100000:
 
                     url_api = "http://192.254.73.26:59888/crypto-address-validator?wallet="+address+"&currency="+currency+""
+                    
                     r = requests.get(url_api)
                     response_dict = r.json()
                     if response_dict['message'] == True:
