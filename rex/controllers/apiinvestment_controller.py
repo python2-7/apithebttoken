@@ -658,6 +658,7 @@ def caculator_profitDaily():
     return True
 
 def Systemcommission(customer_id,amount_receive,currency):
+
     customers = db.users.find_one({"customer_id" : customer_id })
     email_customer_receive = customers['email']
     ticker = db.tickers.find_one({})
@@ -700,7 +701,7 @@ def Systemcommission(customer_id,amount_receive,currency):
                     #hoa hong dong 8 - 10%
                     percent_receve = 10
                 
-                if int(percent_receve) > 0:
+                if int(percent_receve) > 0 and float(customers['investment']) > 0:
                     
                     commission_coin = float(amount_receive)*float(percent_receve)*1000000
 
