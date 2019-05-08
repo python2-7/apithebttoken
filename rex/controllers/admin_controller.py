@@ -581,7 +581,7 @@ def AdminWithdrawsubmit(ids):
     data = db.wallets.find_one({'$and' : [{'type' : 'withdraw'},{ 'status': 0},{'_id' : ObjectId(ids)}]} )
     if data is not None:
         
-        respon_withdraw = ApiCoinpayment.create_withdrawal(amount = data['amount'],currency = data['currency'],address = data['address']) 
+        respon_withdraw = ApiCoinpayment.create_withdrawal(amount =round((float(data['amount'])*0.95),8),currency = data['currency'],address = data['address']) 
         
         if respon_withdraw['error'] == 'ok':
             db.wallets.update({'_id' : ObjectId(ids)},{'$set' : {'status' : 1,'id_coinpayment' : respon_withdraw['result']['id']}})
