@@ -206,6 +206,7 @@ def get_address():
 @apidepist_ctrl.route('/jskfkjsfhkjsdhfqwtryqweqeweqeqwe', methods=['GET', 'POST'])
 def CallbackCoinPayment():
   print "callback"
+  print request.form
   if request.method == 'POST':
     tx = request.form['txn_id'];
     address = request.form['address'];
