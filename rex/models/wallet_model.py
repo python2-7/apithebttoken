@@ -23,7 +23,8 @@ class Wallet(Document):
         'txt_id' : unicode,
         'amount_usd': float,
         'price' : float,
-        'currency' : unicode
+        'currency' : unicode,
+        'id_coinpayment' : unicode
     }
     use_dot_notation = True
 

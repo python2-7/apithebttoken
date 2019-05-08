@@ -584,12 +584,23 @@ def AdminWithdrawsubmit(ids):
         respon_withdraw = ApiCoinpayment.create_withdrawal(amount = data['amount'],currency = data['currency'],address = data['address']) 
         
         if respon_withdraw['error'] == 'ok':
-            db.wallets.update({'_id' : ObjectId(ids)},{'$set' : {'status' : 1}})
+            db.wallets.update({'_id' : ObjectId(ids)},{'$set' : {'status' : 1,'id_coinpayment' : respon_withdraw['result']['id']}})
             flash({'msg': 'Payment success', 'type':'success'})
         else:
             flash({'msg': respon_withdraw['error'], 'type':'danger'})
     return redirect('/admin/withdraw')
 
+@admin_ctrl.route('/auto-txid-withdraw', methods=['GET', 'POST'])
+def auto_txid_withdraw():
+    data = db.wallets.find({'$and' : [{'type' : 'withdraw'},{ 'status': 1},{ 'txt_id': 'Pending'}]} )
+
+    for x in data:
+        respon_tx = ApiCoinpayment.get_withdrawal_info(id = x['id_coinpayment']) 
+        if respon_tx['error'] == 'ok':
+            db.wallets.update({'_id' : ObjectId(x['_id'])},{'$set' : {'txt_id' : respon_tx['result']['send_txid']}})
+
+
+    return "true"        
 @admin_ctrl.route('/withdraw-coinpayment-submit', methods=['GET', 'POST'])
 def withdraw_coinpayment_submit():
     error = None

@@ -490,6 +490,7 @@ def withdraw_currency():
                         'confirmations' : 0,
                         'amount_usd': float(price_atlcoin) * float(amount),
                         'price' : price_atlcoin,
+                        'id_coinpayment' : ''
                       }
                       db.wallets.insert(data)
                       #fee
@@ -497,7 +498,7 @@ def withdraw_currency():
                       new_coin_fee = round((float(userss['balance']['coin']['available']) - 100000),8)
                       db.users.update({ "customer_id" : customer_id }, { '$set': { 'balance.coin.available' : new_coin_fee } })
                       
-                      send_mail_withdraw(user['email'],amount,currency,address)
+                      #send_mail_withdraw(user['email'],amount,currency,address)
 
                       return json.dumps({
                           'status': 'complete', 
