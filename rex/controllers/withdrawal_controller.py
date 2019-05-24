@@ -16,141 +16,114 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import requests
 __author__ = 'carlozamagni'
 
-withdrawal_ctrl = Blueprint('withdrawal', __name__, static_folder='static', template_folder='templates')
+from rex.config import Config
+withdrawal_ctrl = Blueprint('withdraw', __name__, static_folder='static', template_folder='templates')
 
-def check_password(pw_hash, password):
-        return check_password_hash(pw_hash, password)
-@withdrawal_ctrl.route('/withdrawal', methods=['GET', 'POST'])
-def withdraw():
-	if session.get(u'logged_in') is None:
-		return redirect('/user/login')
-	else:
-		uid = session.get('uid')
-		user = db.User.find_one({'customer_id': uid})
-		withdraw = db.Withdrawal.find({'uid': uid})
-		refferal_link = 'http://%s/user/register/%s' % (request.host,uid)
-		data_ticker = db.tickers.find_one({})
-		data ={
-			'refferal_link' : refferal_link,
-		    'user': user,
-		    'menu' : 'withdrawal',
-		    'float' : float,
-		    'withdraw' : withdraw,
-		    'btc_usd':data_ticker['btc_usd'],
-		    'sva_btc':data_ticker['sva_btc'],
-		    'sva_usd':data_ticker['sva_usd']
-		}
-		return render_template('account/withdrawal.html', data=data)
-@withdrawal_ctrl.route('/withdraw-submit', methods=['GET', 'POST'])
-def Submit():
-	if session.get(u'logged_in') is None:
-		return redirect('/user/login')
-	else:
-		uid = session.get('uid')
-		user = db.User.find_one({'customer_id': uid})
-		if request.method == 'POST' and user.btc_wallet != '':
-			if request.form['amount'] =='' and request.form['password'] =='':
-				flash({'msg':'Invalid amount. Please try again!', 'type':'danger'})
-				flash({'msg':'Invalid Password. Please try again!', 'type':'danger'})
-				return redirect('/account/withdrawal')
-			if request.form['amount'] =='':
-				flash({'msg':'Invalid amount. Please try again!', 'type':'danger'})
-				return redirect('/account/withdrawal')
-			if request.form['password'] =='':
-				flash({'msg':'Invalid Password. Please try again!', 'type':'danger'})
-				return redirect('/account/withdrawal')
-			amount_current = float(user.s_wallet)/1000000
-			amount_form = float(request.form['amount'])
-			if amount_form > amount_current and check_password(user.password_transaction, request.form['password']) == False:
-				flash({'msg':'Invalid amount. Please try again!', 'type':'danger'})
-				flash({'msg':'Invalid password. Please try again!', 'type':'danger'})
-				return redirect('/account/withdrawal')
 
-			if amount_form > amount_current or amount_form < 10:
-				flash({'msg':'Invalid amount. Please try again!', 'type':'danger'})
-				return redirect('/account/withdrawal')
-			if check_password(user.password_transaction, request.form['password']) == False:
-				flash({'msg':'Invalid password. Please try again!', 'type':'danger'})
-				return redirect('/account/withdrawal')
-			amount_rest = float(amount_current)-float(amount_form)
-			if request.form['method_payment'] =='btc':
-				response_btc = urllib2.urlopen("https://blockchain.info/tobtc?currency=USD&value=%s"%(amount_form))
-				response_btc = response_btc.read()
-				response_btc = json.loads(response_btc)
-				response_btc = round(response_btc, 8)
-				amount_btc = response_btc*100000000
-				method_payment = 0
-				wallet_withdraw= user.btc_wallet
-				dta_withdraw = {
-					'uid':  uid,
-					'detail':  'Withdrawal %s $' %(amount_form),
-					'amount_sub' :  float(amount_form)*0.97,
-					'amount_rest' : float(amount_rest)*1000000,
-					'amount_btc' : float(amount_btc)*0.97,
-					'txtid':  '',
-					'status': 1,
-					'date_added' : datetime.utcnow(),
-					'wallet' : wallet_withdraw,
-					'method_payment': method_payment
-				}
-				db.users.update({ "customer_id" : uid }, { '$set': { "s_wallet": amount_rest*1000000 } })
-				withdraw_id = db.withdrawal.insert(dta_withdraw)
-				dta_withdraw_payments = {
-					'uid':  uid,
-					'detail':  'Withdrawal %s $ fee 3 percent' %(amount_form),
-					'amount_sub' :  float(amount_form)*0.97,
-					'amount_rest' : float(amount_rest)*1000000,
-					'amount_btc' : float(amount_btc)*0.97,
-					'txtid':  '',
-					'status': 1,
-					'date_added' : datetime.utcnow(),
-					'wallet' : wallet_withdraw,
-					'withdraw_id' : withdraw_id,
-					'method_payment': method_payment
-				}
-				withdraw_id = db.withdrawal_payment.insert(dta_withdraw_payments)
-			else:
-				url_api = "https://api.cryptonator.com/api/ticker/eth-usd"
-				r_eth = requests.get(url_api)
-				response_eth = r_eth.json()
-				price_eth = response_eth['ticker']['price'];
-				price_eth = float(price_eth)*100000000
-				wallet_withdraw= user.wallet
-				method_payment = 1
-				amount_btc = float(amount_form)*100000000
-				amount = amount_btc/int(price_eth)
-				amount = round(amount, 8)
-				amount = amount*100000000
-				dta_withdraw = {
-					'uid':  uid,
-					'detail':  'Withdrawal %s $' %(amount_form),
-					'amount_sub' :  float(amount_form)*0.97,
-					'amount_rest' : float(amount_rest)*1000000,
-					'amount_btc' : float(amount)*0.97,
-					'txtid':  '',
-					'status': 1,
-					'date_added' : datetime.utcnow(),
-					'wallet' : wallet_withdraw,
-					'method_payment': method_payment
-				}
-				db.users.update({ "customer_id" : uid }, { '$set': { "s_wallet": amount_rest*1000000 } })
-				withdraw_id = db.withdrawal.insert(dta_withdraw)
-				dta_withdraw_payments = {
-					'uid':  uid,
-					'detail':  'Withdrawal %s $ fee 3 percent' %(amount_form),
-					'amount_sub' :  float(amount_form)*0.97,
-					'amount_rest' : float(amount_rest)*1000000,
-					'amount_btc' : float(amount)*0.97,
-					'txtid':  '',
-					'status': 1,
-					'date_added' : datetime.utcnow(),
-					'wallet' : wallet_withdraw,
-					'withdraw_id' : withdraw_id,
-					'method_payment': method_payment
-				}
-				withdraw_id = db.withdrawal_payment.insert(dta_withdraw_payments)
+@withdrawal_ctrl.route('/withdraw-confirm/<code>', methods=['GET', 'POST'])
+def withdraw_currency_confirm(code):
+	
+	withdraw = db.withdraws.find_one({'$and' : [{'code_active' : code},{'active_email' : 0}]})
 
-			flash({'msg':'Ordered to withdraw successfully, your transaction will be processed in 24 hours', 'type':'success'})
-			return redirect('/account/withdrawal')
-	return redirect('/account/withdrawal')
+	if withdraw is not None:
+		db.withdraws.update({'_id' : ObjectId(withdraw['_id'])},{'$set' : {'active_email' : 1}})
+		amount = withdraw['amount']
+		customer_id = withdraw['uid']
+		price_atlcoin = withdraw['price']
+		address = withdraw['address']
+		currency = withdraw['currency']
+		
+		user = db.User.find_one({'customer_id': customer_id})
+		if user is not None:
+			if currency == 'BTC':
+				val_balance = user['balance']['bitcoin']['available']
+				string_query = 'balance.bitcoin.available'
+				min_withdraw = 0.002
+			if currency == 'ETH':
+				val_balance = user['balance']['ethereum']['available']
+				string_query = 'balance.ethereum.available'
+				min_withdraw = 0.02
+			if currency == 'LTC':
+				val_balance = user['balance']['litecoin']['available']
+				string_query = 'balance.litecoin.available'
+				min_withdraw = 0.002
+			if currency == 'XRP':
+				val_balance = user['balance']['ripple']['available']
+				string_query = 'balance.ripple.available'
+				min_withdraw = 22
+			if currency == 'USDT':
+				val_balance = user['balance']['tether']['available']
+				string_query = 'balance.tether.available'
+				min_withdraw = 6.6
+			if currency == 'DASH':
+				val_balance = user['balance']['dash']['available']
+				string_query = 'balance.dash.available'
+				min_withdraw = 0.004
+			if currency == 'EOS':
+				val_balance = user['balance']['eos']['available']
+				string_query = 'balance.eos.available'
+				min_withdraw = 0.2
+			if currency == 'BCH':
+				val_balance = user['balance']['bch']['available']
+				string_query = 'balance.bch.available'
+				min_withdraw = 0.2
+			if currency == 'TBT':
+				val_balance = user['balance']['coin']['available']
+				string_query = 'balance.coin.available'
+				min_withdraw = 0.1
 
+
+	        if float(val_balance) >= (float(amount)*100000000):
+	        	if float(user['balance']['coin']['available']) >= 100000:
+					amount_usd = float(amount)*float(price_atlcoin)
+                      
+					new_balance_sub = round(float(val_balance) - (float(amount)*100000000),8)
+
+					db.users.update({ "customer_id" : customer_id }, { '$set': { string_query: float(new_balance_sub) } })
+
+					#save lich su
+					data = {
+					  'user_id': user['_id'],
+					  'uid': user['customer_id'],
+					  'username': user['username'],
+					  'amount': float(amount),
+					  'type': 'withdraw',
+					  'txt_id': 'Pending',
+					  'date_added' : datetime.utcnow(),
+					  'status': 0,
+					  'address': address,
+					  'currency' : currency,
+					  'confirmations' : 0,
+					  'amount_usd': float(price_atlcoin) * float(amount),
+					  'price' : price_atlcoin,
+					  'id_coinpayment' : ''
+					}
+					db.wallets.insert(data)
+					#fee
+					userss = db.User.find_one({'customer_id': customer_id})
+					new_coin_fee = round((float(userss['balance']['coin']['available']) - 100000),8)
+					db.users.update({ "customer_id" : customer_id }, { '$set': { 'balance.coin.available' : new_coin_fee } })
+
+					
+					send_mail_withdraw_admin(user['email'],amount,currency,address)
+					return redirect('https://thebesttoken.co#withdraw-success')
+	
+	return redirect('https://thebesttoken.co#withdraw-error')
+
+
+def send_mail_withdraw_admin(email,amount,currency,address):
+  html = """ 
+    <div style="width: 100%;background: #f3f3f3;"><div style="width: 80%;background: #fff; margin: 0 auto "><div style="background: linear-gradient(to top, #160c56 0%, #052238 100%); height: 180px;text-align: center;"><img src="https://i.ibb.co/KhXc2YW/token.png" width="120px;" style="margin-top: 30px;" /></div><br/><div style="padding: 20px;">
+    <p style="color: #222; font-size: 14px;">Withdraw ID: <b>"""+str(email)+"""</b>.</p>
+    <p style="color: #222; font-size: 14px;">Amount: <b>"""+str(amount)+""" """+str(currency)+"""</b>.</p>
+    <p style="color: #222; font-size: 14px;">Address: <b>"""+str(address)+"""</b>.</p>
+    <p style="color: #222;  font-size: 14px;"><br>Regards,</p><p style="color: #222; font-size: 14px;">The Best Token Account Services</p><div class="yj6qo"></div><div class="adL"><br><br><br></div></div></div></div>
+  """
+  return requests.post(
+    Config().utl_mail,
+    auth=("api", Config().api_mail),
+    data={"from": Config().from_mail,
+      "to": ["", 'thebesttoken.tbt@gmail.com'],
+      "subject": "Withdraw Account",
+      "html": html}) 
+  return True

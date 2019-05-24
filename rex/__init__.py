@@ -56,6 +56,9 @@ from rex.controllers import apiexchange_controller
 app.register_blueprint(blueprint=apiexchange_controller.apiexchange_ctrl, url_prefix='/api/exchange')
 from rex.controllers import apiinvestment_controller
 app.register_blueprint(blueprint=apiinvestment_controller.apiinvestment_ctrl, url_prefix='/api/investment')
+from rex.controllers import withdrawal_controller
+app.register_blueprint(blueprint=withdrawal_controller.withdrawal_ctrl, url_prefix='/withdraw')
+from rex.controllers import withdrawal_controller
 
 from rex.controllers import admin_controller
 app.register_blueprint(blueprint=admin_controller.admin_ctrl, url_prefix='/admin')

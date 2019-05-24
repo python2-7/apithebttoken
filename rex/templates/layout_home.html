@@ -83,6 +83,22 @@
 		<script src="static/home/js/venobox.min.js"></script>
 		<!-- main js -->
 		<script src="static/home/js/main.js"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script type="text/javascript">
+			
+			if(window.location.hash == '#withdraw-success') {
+			  	swal("Withdraw Success", "The system will complete your withdrawal order within 48 hours.", "success");
+			} else {
+			  	swal("Withdraw Error", "Please try again or contact admin through support system.", "error");
+			}
+			
+		</script>
+		<style type="text/css">
+			.swal-text{
+				text-align: center;
+    			font-size: 15px;
+			}
+		</style>
 	</body>
 	
 	

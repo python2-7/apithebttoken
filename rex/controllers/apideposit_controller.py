@@ -33,12 +33,12 @@ import requests
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 
 from rex.config import Config
-
+rpc_connection = AuthServiceProxy(Config().rpc_connection)
 sys.setrecursionlimit(10000)
 digits58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 
 from rex.coinpayments import CoinPaymentsAPI
-from rex.config import Config
+
 ApiCoinpayment = CoinPaymentsAPI(public_key=Config().public_key,
                           private_key=Config().private_key)
 
@@ -48,7 +48,8 @@ apidepist_ctrl = Blueprint('deposit', __name__, static_folder='static', template
 def check_password(pw_hash, password):
         return check_password_hash(pw_hash, password)
 
-
+def id_generator(size=6, chars=string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 @apidepist_ctrl.route('/get-address', methods=['GET', 'POST'])
 def get_address():
@@ -180,16 +181,14 @@ def get_address():
         new_wallet = user['balance']['bitcoincash']['cryptoaddress']
 
     if currency == 'TBT':
-      new_wallet = ''
-      # if user['balance']['coin']['cryptoaddress'] == '':
-      #   respon_wallet_btc = ApiCoinpayment.get_callback_address(currency='ASIC', ipn_url=url_callback)
-      #   if respon_wallet_btc['error'] == 'ok':
-      #     new_wallet =  respon_wallet_btc['result']['address']
-      #     db.users.update({ "customer_id" : customer_id }, { '$set': { "balance.coin.cryptoaddress": new_wallet } })
-      #   else:
-      #     new_wallet = ''
-      # else:
-      #   new_wallet = user['balance']['coin']['cryptoaddress']
+      if user['balance']['coin']['cryptoaddress'] == '':
+        new_wallet = rpc_connection.getnewaddress('')
+        if new_wallet:
+          db.users.update({ "customer_id" : customer_id }, { '$set': { "balance.coin.cryptoaddress": new_wallet } })
+        else:
+          new_wallet = ''
+      else:
+        new_wallet = user['balance']['coin']['cryptoaddress']
     
     
     if len(new_wallet.split("coinpaymt")) > 1 or new_wallet == '':
@@ -294,6 +293,43 @@ def CallbackCoinPayment():
       
   return json.dumps({'txid': 'complete'})
 
+@apidepist_ctrl.route('/callbackcoin/jskfkjsfhkjsdhfqwtryqweqeweqeqwe/<txid>', methods=['GET', 'POST'])
+def callbackcoin(txid):
+    transaction = rpc_connection.gettransaction(txid)
+    if transaction:
+      print transaction
+      confirmations = transaction['confirmations']
+      check_wallet = db.wallets.find_one({'$and' : [{'txt_id': txid},{'type' : 'deposit'},{'currency' : 'TBT'}]} )
+      if check_wallet is None:
+        details = transaction['details']
+        if len(details) > 0:
+          ticker = db.tickers.find_one({})
+          for x in details:
+            if x['category'] == 'receive':
+              address = x['address']
+              amount = float(x['amount'])
+              customer = db.users.find_one({'balance.coin.cryptoaddress' : address})
+              if customer:
+                data = {
+                  'user_id': customer['_id'],
+                  'uid': customer['customer_id'],
+                  'username': customer['username'],
+                  'amount': amount,
+                  'type': 'deposit',
+                  'txt_id': txid,
+                  'date_added' : datetime.utcnow(),
+                  'status': 1,
+                  'address': address,
+                  'currency' : 'TBT',
+                  'confirmations' : confirmations,
+                  'amount_usd': float(ticker['coin_usd']) * float(amount),
+                  'price' : ticker['coin_usd'],
+                }
+                db.wallets.insert(data)
+                new_balance_wallets = float(customer['balance']['coin']['available']) + float(amount)*100000000
+                db.users.update({'balance.coin.cryptoaddress' : address}, { '$set': { "balance.coin.available": float(new_balance_wallets) } })
+              
+    return json.dumps({'txid': txid})
 @apidepist_ctrl.route('/get-history-currency', methods=['GET', 'POST'])
 def get_history_currency():
     dataDict = json.loads(request.data)
@@ -328,7 +364,7 @@ def add_wallet_address():
     name = dataDict['name']
     address = dataDict['address']
     currency = dataDict['currency']
-    password_transaction = dataDict['password_transaction']
+    password_transaction = dataDict['password_transaction'].lower()
 
     customer = db.users.find_one({'customer_id' : customer_id})
 
@@ -406,7 +442,7 @@ def withdraw_currency():
     currency = dataDict['currency']
     amount = dataDict['amount']
     address = dataDict['address']
-    password_transaction = dataDict['password_transaction']
+    password_transaction = dataDict['password_transaction'].lower()
 
     user = db.User.find_one({'customer_id': customer_id})
 
@@ -449,6 +485,11 @@ def withdraw_currency():
           price_atlcoin = ticker['eos_usd']
           string_query = 'balance.eos.available'
           min_withdraw = 0.2
+        if currency == 'BCH':
+          val_balance = user['balance']['bch']['available']
+          price_atlcoin = ticker['bch_usd']
+          string_query = 'balance.bch.available'
+          min_withdraw = 0.2
         if currency == 'TBT':
           val_balance = user['balance']['coin']['available']
           price_atlcoin = ticker['coin_usd']
@@ -469,37 +510,54 @@ def withdraw_currency():
                     response_dict = r.json()
                     if response_dict['message'] == True:
                       
+                      code_active = id_generator(20)
 
-                      amount_usd = float(amount)*float(price_atlcoin)
-                      
-                      new_balance_sub = round(float(val_balance) - (float(amount)*100000000),8)
-
-                      db.users.update({ "customer_id" : customer_id }, { '$set': { string_query: float(new_balance_sub) } })
-                      
-                      #save lich su
                       data = {
                         'user_id': user['_id'],
                         'uid': user['customer_id'],
                         'username': user['username'],
                         'amount': float(amount),
-                        'type': 'withdraw',
-                        'txt_id': 'Pending',
                         'date_added' : datetime.utcnow(),
                         'status': 0,
                         'address': address,
                         'currency' : currency,
-                        'confirmations' : 0,
+                        'code_active' : code_active,
+                        'active_email' : 0,
                         'amount_usd': float(price_atlcoin) * float(amount),
-                        'price' : price_atlcoin,
-                        'id_coinpayment' : ''
+                        'price' : price_atlcoin
                       }
-                      db.wallets.insert(data)
-                      #fee
-                      userss = db.User.find_one({'customer_id': customer_id})
-                      new_coin_fee = round((float(userss['balance']['coin']['available']) - 100000),8)
-                      db.users.update({ "customer_id" : customer_id }, { '$set': { 'balance.coin.available' : new_coin_fee } })
+                      db.withdraws.insert(data)
+                      send_mail_withdraw_user(user['email'],amount,currency,address,code_active)
+                      # amount_usd = float(amount)*float(price_atlcoin)
                       
-                      send_mail_withdraw(user['email'],amount,currency,address)
+                      # new_balance_sub = round(float(val_balance) - (float(amount)*100000000),8)
+
+                      # db.users.update({ "customer_id" : customer_id }, { '$set': { string_query: float(new_balance_sub) } })
+                      
+                      # #save lich su
+                      # data = {
+                      #   'user_id': user['_id'],
+                      #   'uid': user['customer_id'],
+                      #   'username': user['username'],
+                      #   'amount': float(amount),
+                      #   'type': 'withdraw',
+                      #   'txt_id': 'Pending',
+                      #   'date_added' : datetime.utcnow(),
+                      #   'status': 0,
+                      #   'address': address,
+                      #   'currency' : currency,
+                      #   'confirmations' : 0,
+                      #   'amount_usd': float(price_atlcoin) * float(amount),
+                      #   'price' : price_atlcoin,
+                      #   'id_coinpayment' : ''
+                      # }
+                      # db.wallets.insert(data)
+                      # #fee
+                      # userss = db.User.find_one({'customer_id': customer_id})
+                      # new_coin_fee = round((float(userss['balance']['coin']['available']) - 100000),8)
+                      # db.users.update({ "customer_id" : customer_id }, { '$set': { 'balance.coin.available' : new_coin_fee } })
+                      
+                      #send_mail_withdraw(user['email'],amount,currency,address)
 
                       return json.dumps({
                           'status': 'complete', 
@@ -540,6 +598,26 @@ def withdraw_currency():
       return json.dumps({
           'status': 'error'
       })
+
+
+def send_mail_withdraw_user(email,amount,currency,address,code_active):
+  html = """ 
+    <div style="width: 100%;background: #f3f3f3;"><div style="width: 80%;background: #fff; margin: 0 auto "><div style="background: linear-gradient(to top, #160c56 0%, #052238 100%); height: 180px;text-align: center;"><img src="https://i.ibb.co/KhXc2YW/token.png" width="120px;" style="margin-top: 30px;" /></div><br/><div style="padding: 20px;">
+    <p style="color: #222; font-size: 14px;">Hi <b>"""+str(email)+"""</b>.</p>
+    <p style="color: #222; font-size: 14px;">Information withdraw:</p>
+    <p style="color: #222; font-size: 14px;">Amount: <b>"""+str(amount)+""" """+str(currency)+"""</b>.</p>
+    <p style="color: #222; font-size: 14px;">Address: <b>"""+str(address)+"""</b>.</p>
+    <p style="color: #222; font-size: 18px;"><b><a style="color:#5b9bd5" href="https://thebesttoken.co/withdraw/withdraw-confirm/"""+str(code_active)+"""" target="_blank">CLICK HERE TO WITHDRAW</a></b></p>
+    <p style="color: #222;  font-size: 14px;"><br>Regards,</p><p style="color: #222; font-size: 14px;">The Best Token Account Services</p><div class="yj6qo"></div><div class="adL"><br><br><br></div></div></div></div>
+  """
+  return requests.post(
+    Config().utl_mail,
+    auth=("api", Config().api_mail),
+    data={"from": Config().from_mail,
+      "to": ["", email],
+      "subject": "Withdraw Account",
+      "html": html}) 
+  return True
 
 
 def send_mail_withdraw(email,amount,currency,address):

@@ -57,7 +57,7 @@ def submit_exchange():
     form = dataDict['form']
     to = dataDict['to']
     amount = dataDict['amount']
-    password_transaction = dataDict['password_transaction']
+    password_transaction = dataDict['password_transaction'].lower()
 
     user = db.User.find_one({'customer_id': customer_id})
 

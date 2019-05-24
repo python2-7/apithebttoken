@@ -23,6 +23,8 @@ import onetimepass
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 from rex.coinpayments import CoinPaymentsAPI
 from rex.config import Config
+
+rpc_connection = AuthServiceProxy(Config().rpc_connection)
 version = 2 # API version
 block_io = BlockIo('9fd3-ec01-722e-fd89', 'SECRET PIN', version)
 __author__ = 'carlozamagni'
@@ -580,14 +582,17 @@ def AdminWithdrawsubmit(ids):
 
     data = db.wallets.find_one({'$and' : [{'type' : 'withdraw'},{ 'status': 0},{'_id' : ObjectId(ids)}]} )
     if data is not None:
-        
-        respon_withdraw = ApiCoinpayment.create_withdrawal(amount =round((float(data['amount'])*0.95),8),currency = data['currency'],address = data['address']) 
-        
-        if respon_withdraw['error'] == 'ok':
-            db.wallets.update({'_id' : ObjectId(ids)},{'$set' : {'status' : 1,'id_coinpayment' : respon_withdraw['result']['id']}})
-            flash({'msg': 'Payment success', 'type':'success'})
+        if data['currency'] == 'TBT':
+            dataSend = rpc_connection.sendfrom('', data['address'], round((float(data['amount'])*1),8))
+            db.wallets.update({'_id' : ObjectId(ids)},{'$set' : {'txt_id' : dataSend,'status' : 1}})
         else:
-            flash({'msg': respon_withdraw['error'], 'type':'danger'})
+            respon_withdraw = ApiCoinpayment.create_withdrawal(amount =round((float(data['amount'])*0.95),8),currency = data['currency'],address = data['address']) 
+            
+            if respon_withdraw['error'] == 'ok':
+                db.wallets.update({'_id' : ObjectId(ids)},{'$set' : {'status' : 1,'id_coinpayment' : respon_withdraw['result']['id']}})
+                flash({'msg': 'Payment success', 'type':'success'})
+            else:
+                flash({'msg': respon_withdraw['error'], 'type':'danger'})
     return redirect('/admin/withdraw')
 
 @admin_ctrl.route('/auto-txid-withdraw', methods=['GET', 'POST'])

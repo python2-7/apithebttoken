@@ -61,11 +61,11 @@ def active_package():
     customer_id = dataDict['customer_id']
     currency = dataDict['currency']
     amount = dataDict['amount']
-    password_transaction = dataDict['password_transaction']
+    password_transaction = dataDict['password_transaction'].lower()
 
     user = db.User.find_one({'customer_id': customer_id})
 
-    if check_password(user['password_transaction'], password_transaction) == True or 1==1:
+    if check_password(user['password_transaction'], password_transaction) == True:
 
         if user is not None:
             ticker = db.tickers.find_one({})
@@ -203,7 +203,7 @@ def disable_package():
     dataDict = json.loads(request.data)
     customer_id = dataDict['customer_id']
     currency = dataDict['currency']
-    password_transaction = dataDict['password_transaction']
+    password_transaction = dataDict['password_transaction'].lower()
 
     user = db.User.find_one({'customer_id': customer_id})
     if check_password(user['password_transaction'], password_transaction) == True:
@@ -348,7 +348,7 @@ def submit_payment():
     address = dataDict['address']
     currency = dataDict['currency']
     amount = dataDict['amount']
-    password_transaction = dataDict['password_transaction']
+    password_transaction = dataDict['password_transaction'].lower()
 
     user = db.User.find_one({'customer_id': customer_id})
     if int(user['security']['email']['status']) == 1:
