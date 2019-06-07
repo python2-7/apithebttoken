@@ -290,6 +290,14 @@ def CallbackCoinPayment():
       if currency == 'DASH':
         new_balance_wallets = float(customer['balance']['dash']['available']) + float(amount)*100000000
         db.users.update(query_search, { '$set': { "balance.dash.available": float(new_balance_wallets) } })
+
+      if currency == 'BCH':
+        new_balance_wallets = float(customer['balance']['bitcoincash']['available']) + float(amount)*100000000
+        db.users.update(query_search, { '$set': { "balance.bitcoincash.available": float(new_balance_wallets) } })
+
+      if currency == 'DOGE':
+        new_balance_wallets = float(customer['balance']['dogecoin']['available']) + float(amount)*100000000
+        db.users.update(query_search, { '$set': { "balance.dogecoin.available": float(new_balance_wallets) } })
       
   return json.dumps({'txid': 'complete'})
 
