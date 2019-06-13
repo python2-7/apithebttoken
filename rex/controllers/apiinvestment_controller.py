@@ -216,7 +216,8 @@ def disable_package():
         for item in investment:
 
             sub_date = now_date - item['date_added']
-            if int(sub_date.days) < 20:
+            
+            if int(sub_date.days) <= 20:
                 percent_fee = 5
             if int(sub_date.days) >= 21:
                 percent_fee = 1
