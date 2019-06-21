@@ -602,7 +602,7 @@ def auto_txid_withdraw():
     for x in data:
         respon_tx = ApiCoinpayment.get_withdrawal_info(id = x['id_coinpayment']) 
         print respon_tx
-        if respon_tx['error'] == 'ok' and respon_tx['result']['result'] == 2:
+        if respon_tx['error'] == 'ok' and respon_tx['result']['status'] == 2:
             db.wallets.update({'_id' : ObjectId(x['_id'])},{'$set' : {'txt_id' : respon_tx['result']['send_txid']}})
 
 
