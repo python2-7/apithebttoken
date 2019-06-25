@@ -178,7 +178,7 @@ def submit_exchange():
                 string_to = 'balance.coin.available'
                 balance_to = user['balance']['coin']['available']
 
-              balance_add = ((float(amount_usd_form)/float(price_to))*100000000)*0.9975
+              balance_add = ((float(amount_usd_form)/float(price_to))*100000000)*0.9985
               balance_sub = float(amount)*100000000
 
               new_balance_add = round((float(balance_add) + float(balance_to)),8)
