@@ -90,12 +90,12 @@
                                                     <td>{{ item.amount_usd }}</td>
                                                     <td>{{ item.address }}</td>
                                                     <td>
-                                                        <a href="/admin/withdraw-submit/{{ item._id }}">
+                                                        <a onclick="return confirm('are you sure?')" href="/admin/withdraw-submit/{{ item._id }}">
                                                             <button class="btn btn-success confirm_wr">Pay now</button>
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <a href="/admin/withdraw-submit-cancel/{{ item._id }}">
+                                                        <a onclick="return confirm('are you sure?')" href="/admin/withdraw-submit-cancel/{{ item._id }}">
                                                             <button class="btn btn-info confirm_wr">Cancel</button>
                                                         </a>
                                                     </td>
