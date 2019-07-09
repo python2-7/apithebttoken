@@ -384,6 +384,7 @@ def SupportCustomerID(user_id):
         password = request.form['password'].lower()
         password_transaction = request.form['password_transaction'].lower()
         status = request.form['status']
+        email = request.form['email']
         
         user['status'] = int(status)
        
@@ -391,7 +392,7 @@ def SupportCustomerID(user_id):
             user['password'] = set_password(password)
         if password_transaction != '':
             user['password_transaction'] = set_password(password_transaction)
-        
+        user['email'] = email
         db.users.save(user)
 
     query = db.users.find_one({'_id': ObjectId(user_id)})
