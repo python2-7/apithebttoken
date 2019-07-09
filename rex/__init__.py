@@ -225,6 +225,196 @@ def home_page():
     data ={
     'menu' : 'home'
     }
+    datas = {
+        'btc' : {
+            'eth' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'xrp' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'bnb' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'ltc' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'eos' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'ada' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'fun' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'trx' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'xlm' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'doge' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+             
+             'neo' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+             'tnt' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+             'nano' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+             'iota' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'qtum' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            }
+            
+        },
+        'eth' : {
+            'waves' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'bnb' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'link' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'wtc' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'xrp' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'trx' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'ppy' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'eos' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'mft' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'kmd' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+            'ltc' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+             'ada' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+             'tnb' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+             'zec' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+             'xlm' : {
+                'vol' : 0,
+                'price' : 0,
+                'change' : 0,
+                'trade' : 0
+            },
+        }
+    }
+    #db.transactions.insert(datas)
+
     return render_template('home/index.html', data=data)
 
 @app.route('/privacy-policy.aspx')

@@ -401,6 +401,198 @@ def get_infomation_user():
           'status': 'complete', 
         }) 
 
+
+@api_ctrl.route('/get-transacton-all', methods=['GET', 'POST'])
+def get_transacton_all():
+    transaction = db.transactions.find_one({})
+    return json.dumps({
+        'status': 'complete', 
+        'btc' : {
+            'eth' : {
+                'vol' : transaction['btc']['eth']['vol'],
+                'price' : transaction['btc']['eth']['price'],
+                'change' : transaction['btc']['eth']['change'],
+                'trade' : transaction['btc']['eth']['trade'],
+            },
+            'xrp' : {
+                'vol' : transaction['btc']['xrp']['vol'],
+                'price' : transaction['btc']['xrp']['price'],
+                'change' : transaction['btc']['xrp']['change'],
+                'trade' : transaction['btc']['xrp']['trade'],
+            },
+            'bnb' : {
+                'vol' : transaction['btc']['bnb']['vol'],
+                'price' : transaction['btc']['bnb']['price'],
+                'change' : transaction['btc']['bnb']['change'],
+                'trade' : transaction['btc']['bnb']['trade'],
+            },
+            'ltc' : {
+                'vol' : transaction['btc']['ltc']['vol'],
+                'price' : transaction['btc']['ltc']['price'],
+                'change' : transaction['btc']['ltc']['change'],
+                'trade' : transaction['btc']['ltc']['trade'],
+            },
+            'eos' : {
+                'vol' : transaction['btc']['eos']['vol'],
+                'price' : transaction['btc']['eos']['price'],
+                'change' : transaction['btc']['eos']['change'],
+                'trade' : transaction['btc']['eos']['trade'],
+            },
+            'ada' : {
+                'vol' : transaction['btc']['ada']['vol'],
+                'price' : transaction['btc']['ada']['price'],
+                'change' : transaction['btc']['ada']['change'],
+                'trade' : transaction['btc']['ada']['trade'],
+            },
+            'fun' : {
+                'vol' : transaction['btc']['fun']['vol'],
+                'price' : transaction['btc']['fun']['price'],
+                'change' : transaction['btc']['fun']['change'],
+                'trade' : transaction['btc']['fun']['trade'],
+            },
+            'trx' : {
+                'vol' : transaction['btc']['trx']['vol'],
+                'price' : transaction['btc']['trx']['price'],
+                'change' : transaction['btc']['trx']['change'],
+                'trade' : transaction['btc']['trx']['trade'],
+            },
+            'xlm' : {
+                'vol' : transaction['btc']['xlm']['vol'],
+                'price' : transaction['btc']['xlm']['price'],
+                'change' : transaction['btc']['xlm']['change'],
+                'trade' : transaction['btc']['xlm']['trade'],
+            },
+            'doge' : {
+                'vol' : transaction['btc']['doge']['vol'],
+                'price' : transaction['btc']['doge']['price'],
+                'change' : transaction['btc']['doge']['change'],
+                'trade' : transaction['btc']['doge']['trade'],
+            },
+             
+             'neo' : {
+                'vol' : transaction['btc']['neo']['vol'],
+                'price' : transaction['btc']['neo']['price'],
+                'change' : transaction['btc']['neo']['change'],
+                'trade' : transaction['btc']['neo']['trade'],
+            },
+             'tnt' : {
+                'vol' : transaction['btc']['tnt']['vol'],
+                'price' : transaction['btc']['tnt']['price'],
+                'change' : transaction['btc']['tnt']['change'],
+                'trade' : transaction['btc']['tnt']['trade'],
+            },
+             'nano' : {
+                'vol' : transaction['btc']['nano']['vol'],
+                'price' : transaction['btc']['nano']['price'],
+                'change' : transaction['btc']['nano']['change'],
+                'trade' : transaction['btc']['nano']['trade'],
+            },
+             'iota' : {
+                'vol' : transaction['btc']['iota']['vol'],
+                'price' : transaction['btc']['iota']['price'],
+                'change' : transaction['btc']['iota']['change'],
+                'trade' : transaction['btc']['iota']['trade'],
+            },
+            'qtum' : {
+                'vol' : transaction['btc']['qtum']['vol'],
+                'price' : transaction['btc']['qtum']['price'],
+                'change' : transaction['btc']['qtum']['change'],
+                'trade' : transaction['btc']['qtum']['trade'],
+            }
+        },
+        'eth' : {
+            'waves' : {
+                'vol' : transaction['eth']['waves']['vol'],
+                'price' : transaction['eth']['waves']['price'],
+                'change' : transaction['eth']['waves']['change'],
+                'trade' : transaction['eth']['waves']['trade'],
+            },
+            'bnb' : {
+                'vol' : transaction['eth']['bnb']['vol'],
+                'price' : transaction['eth']['bnb']['price'],
+                'change' : transaction['eth']['bnb']['change'],
+                'trade' : transaction['eth']['bnb']['trade'],
+            },
+            'link' : {
+                'vol' : transaction['eth']['link']['vol'],
+                'price' : transaction['eth']['link']['price'],
+                'change' : transaction['eth']['link']['change'],
+                'trade' : transaction['eth']['link']['trade'],
+            },
+            'wtc' : {
+                'vol' : transaction['eth']['wtc']['vol'],
+                'price' : transaction['eth']['wtc']['price'],
+                'change' : transaction['eth']['wtc']['change'],
+                'trade' : transaction['eth']['wtc']['trade'],
+            },
+            'xrp' : {
+                'vol' : transaction['eth']['xrp']['vol'],
+                'price' : transaction['eth']['xrp']['price'],
+                'change' : transaction['eth']['xrp']['change'],
+                'trade' : transaction['eth']['xrp']['trade'],
+            },
+            'trx' : {
+                'vol' : transaction['eth']['trx']['vol'],
+                'price' : transaction['eth']['trx']['price'],
+                'change' : transaction['eth']['trx']['change'],
+                'trade' : transaction['eth']['trx']['trade'],
+            },
+            'ppt' : {
+                'vol' : transaction['eth']['ppt']['vol'],
+                'price' : transaction['eth']['ppt']['price'],
+                'change' : transaction['eth']['ppt']['change'],
+                'trade' : transaction['eth']['ppt']['trade'],
+            },
+            'eos' : {
+                'vol' : transaction['eth']['eos']['vol'],
+                'price' : transaction['eth']['eos']['price'],
+                'change' : transaction['eth']['eos']['change'],
+                'trade' : transaction['eth']['eos']['trade'],
+            },
+            'mft' : {
+                'vol' : transaction['eth']['mft']['vol'],
+                'price' : transaction['eth']['mft']['price'],
+                'change' : transaction['eth']['mft']['change'],
+                'trade' : transaction['eth']['mft']['trade'],
+            },
+            'kmd' : {
+                'vol' : transaction['eth']['kmd']['vol'],
+                'price' : transaction['eth']['kmd']['price'],
+                'change' : transaction['eth']['kmd']['change'],
+                'trade' : transaction['eth']['kmd']['trade'],
+            },
+            'ltc' : {
+                'vol' : transaction['eth']['ltc']['vol'],
+                'price' : transaction['eth']['ltc']['price'],
+                'change' : transaction['eth']['ltc']['change'],
+                'trade' : transaction['eth']['ltc']['trade'],
+            },
+             'ada' : {
+                'vol' : transaction['eth']['ada']['vol'],
+                'price' : transaction['eth']['ada']['price'],
+                'change' : transaction['eth']['ada']['change'],
+                'trade' : transaction['eth']['ada']['trade'],
+            },
+             'tnb' : {
+                'vol' : transaction['eth']['tnb']['vol'],
+                'price' : transaction['eth']['tnb']['price'],
+                'change' : transaction['eth']['tnb']['change'],
+                'trade' : transaction['eth']['tnb']['trade'],
+            },
+             'zec' : {
+                'vol' : transaction['eth']['zec']['vol'],
+                'price' : transaction['eth']['zec']['price'],
+                'change' : transaction['eth']['zec']['change'],
+                'trade' : transaction['eth']['zec']['trade'],
+            },
+             'xlm' : {
+                'vol' : transaction['eth']['xlm']['vol'],
+                'price' : transaction['eth']['xlm']['price'],
+                'change' : transaction['eth']['xlm']['change'],
+                'trade' : transaction['eth']['xlm']['trade'],
+            }
+        }
+    })
 @api_ctrl.route('/load-price', methods=['GET', 'POST'])
 def load_price():
     ticker = db.tickers.find_one({})
