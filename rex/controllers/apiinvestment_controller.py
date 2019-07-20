@@ -199,14 +199,17 @@ def active_package():
 
 @apiinvestment_ctrl.route('/disable-package', methods=['GET', 'POST'])
 def disable_package():
-
+    return json.dumps({
+        'status': 'error', 
+        'message': 'Wrong password transaction. Please try again' 
+    })
     dataDict = json.loads(request.data)
     customer_id = dataDict['customer_id']
     currency = dataDict['currency']
     password_transaction = dataDict['password_transaction'].lower()
 
     user = db.User.find_one({'customer_id': customer_id})
-    if check_password(user['password_transaction'], password_transaction) == True:
+    if check_password(user['password_transaction'], password_transaction) == True and 1==2:
 
         val_add_balance = 0
         amount_usd_sub = 0
@@ -620,40 +623,51 @@ def FnRefferalProgram(customer_id, amount_invest, currency):
     return True
 
 def caculator_profitDaily():
-    get_invest = db.investments.find({ "status": 1});
-    ticker = db.tickers.find_one({})
-    price_coin = ticker['coin_usd']
-    
-    
-    for x in get_invest:
-        percent = x['percent_daily']
-        customer = db.users.find_one({'customer_id': x['uid']})
-        if customer is not None:
 
-            commission = float(x['amount_usd'])*float(percent)/100
+    if int(date.weekday(date.today())) != 6: 
 
-            d_wallet = float(customer['d_wallet'])
-            new_d_wallet = float(d_wallet) + float(commission)
-            new_d_wallet = float(new_d_wallet)
+        get_invest = db.investments.find({ "status": 1});
+        ticker = db.tickers.find_one({})
+        price_coin = ticker['coin_usd']
+        
+        
+        for x in get_invest:
+            #percent = x['percent_daily']
+            percent = 0.2
+            customer = db.users.find_one({'customer_id': x['uid']})
+            if customer is not None:
+                check_profit = False
+                if float(x['amount_frofit']) > 0:
+                    check_50 = float(x['amount_usd'])/(float(x['amount_frofit'])*float(ticker['coin_usd']))
+                    if float(check_50) >=2 :
+                        check_profit = True
+                else:
+                    check_profit = True
+                if check_profit == True:
+                    commission = float(x['amount_usd'])*float(percent)/100
 
-            total_earn = float(customer['total_earn'])
-            new_total_earn = float(total_earn) + float(commission)
-            new_total_earn = float(new_total_earn)
+                    d_wallet = float(customer['d_wallet'])
+                    new_d_wallet = float(d_wallet) + float(commission)
+                    new_d_wallet = float(new_d_wallet)
+
+                    total_earn = float(customer['total_earn'])
+                    new_total_earn = float(total_earn) + float(commission)
+                    new_total_earn = float(new_total_earn)
 
 
-            new_balance_wallet = float(commission)/float(ticker['coin_usd'])
-            new_balance_wallet = round((float(customer['balance']['coin']['available']) + (float(new_balance_wallet)*100000000)),8)
+                    new_balance_wallet = float(commission)/float(ticker['coin_usd'])
+                    new_balance_wallet = round((float(customer['balance']['coin']['available']) + (float(new_balance_wallet)*100000000)),8)
 
-            db.users.update({ "_id" : ObjectId(customer['_id']) }, { '$set': {'balance.coin.available' : new_balance_wallet,'total_earn': new_total_earn, 'd_wallet' :new_d_wallet } })
-            
+                    db.users.update({ "_id" : ObjectId(customer['_id']) }, { '$set': {'balance.coin.available' : new_balance_wallet,'total_earn': new_total_earn, 'd_wallet' :new_d_wallet } })
+                    
 
-            db.investments.update({ "_id" : ObjectId(x['_id']) }, { '$set': {'amount_frofit' : float(x['amount_frofit'])+(float(commission)/float(ticker['coin_usd'])) } })
-            detail = str(percent) + '% - Ai-dog '+ str(x['package']) + ' ' + str( x['currency'])
-            SaveHistory(customer['customer_id'],customer['email'],detail, round(float(commission)/float(ticker['coin_usd']),8), 'TBT', 'Profit day')
-            
-            #print customer['customer_id'],round((float(commission)/float(ticker['coin_usd'])),8),'TOKEN'
+                    db.investments.update({ "_id" : ObjectId(x['_id']) }, { '$set': {'amount_frofit' : float(x['amount_frofit'])+(float(commission)/float(ticker['coin_usd'])) } })
+                    detail = str(percent) + '% - Ai-dog '+ str(x['package']) + ' ' + str( x['currency'])
+                    SaveHistory(customer['customer_id'],customer['email'],detail, round(float(commission)/float(ticker['coin_usd']),8), 'TBT', 'Profit day')
+                    
+                    #print customer['customer_id'],round((float(commission)/float(ticker['coin_usd'])),8),'TOKEN'
 
-            Systemcommission(customer['customer_id'],round((float(commission)/float(ticker['coin_usd'])),8),'TBT')
+                    #Systemcommission(customer['customer_id'],round((float(commission)/float(ticker['coin_usd'])),8),'TBT')
 
 
     return True
