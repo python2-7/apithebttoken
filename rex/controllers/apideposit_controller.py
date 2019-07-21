@@ -445,167 +445,175 @@ def get_contact_currency():
 
 @apidepist_ctrl.route('/withdraw-currency', methods=['GET', 'POST'])
 def withdraw_currency():
-    dataDict = json.loads(request.data)
-    customer_id = dataDict['customer_id']
-    currency = dataDict['currency']
-    amount = dataDict['amount']
-    address = dataDict['address']
-    password_transaction = dataDict['password_transaction'].lower()
+    
+    if int(date.weekday(date.today())) != 0: 
+      return json.dumps({
+          'status': 'error',
+          'message': 'Withdraw on every Monday.' 
+      })
+    else:
 
-    user = db.User.find_one({'customer_id': customer_id})
+      dataDict = json.loads(request.data)
+      customer_id = dataDict['customer_id']
+      currency = dataDict['currency']
+      amount = dataDict['amount']
+      address = dataDict['address']
+      password_transaction = dataDict['password_transaction'].lower()
 
-    if user is not None:
-      if int(user['security']['email']['status']) == 1:
+      user = db.User.find_one({'customer_id': customer_id})
 
-        ticker = db.tickers.find_one({})
-        if currency == 'BTC':
-          val_balance = user['balance']['bitcoin']['available']
-          price_atlcoin = ticker['btc_usd']
-          string_query = 'balance.bitcoin.available'
-          min_withdraw = 0.002
-        if currency == 'ETH':
-          val_balance = user['balance']['ethereum']['available']
-          price_atlcoin = ticker['eth_usd']
-          string_query = 'balance.ethereum.available'
-          min_withdraw = 0.02
-        if currency == 'LTC':
-          val_balance = user['balance']['litecoin']['available']
-          price_atlcoin = ticker['ltc_usd']
-          string_query = 'balance.litecoin.available'
-          min_withdraw = 0.002
-        if currency == 'XRP':
-          val_balance = user['balance']['ripple']['available']
-          price_atlcoin = ticker['xrp_usd']
-          string_query = 'balance.ripple.available'
-          min_withdraw = 22
-        if currency == 'USDT':
-          val_balance = user['balance']['tether']['available']
-          price_atlcoin = ticker['usdt_usd']
-          string_query = 'balance.tether.available'
-          min_withdraw = 6.6
-        if currency == 'DASH':
-          val_balance = user['balance']['dash']['available']
-          price_atlcoin = ticker['dash_usd']
-          string_query = 'balance.dash.available'
-          min_withdraw = 0.004
-        if currency == 'EOS':
-          val_balance = user['balance']['eos']['available']
-          price_atlcoin = ticker['eos_usd']
-          string_query = 'balance.eos.available'
-          min_withdraw = 0.2
-        if currency == 'BCH':
-          val_balance = user['balance']['bch']['available']
-          price_atlcoin = ticker['bch_usd']
-          string_query = 'balance.bch.available'
-          min_withdraw = 0.2
-        if currency == 'TBT':
-          val_balance = user['balance']['coin']['available']
-          price_atlcoin = ticker['coin_usd']
-          string_query = 'balance.coin.available'
-          min_withdraw = 0.1
+      if user is not None:
+        if int(user['security']['email']['status']) == 1:
 
-        if float(amount) > min_withdraw:
+          ticker = db.tickers.find_one({})
+          if currency == 'BTC':
+            val_balance = user['balance']['bitcoin']['available']
+            price_atlcoin = ticker['btc_usd']
+            string_query = 'balance.bitcoin.available'
+            min_withdraw = 0.002
+          if currency == 'ETH':
+            val_balance = user['balance']['ethereum']['available']
+            price_atlcoin = ticker['eth_usd']
+            string_query = 'balance.ethereum.available'
+            min_withdraw = 0.02
+          if currency == 'LTC':
+            val_balance = user['balance']['litecoin']['available']
+            price_atlcoin = ticker['ltc_usd']
+            string_query = 'balance.litecoin.available'
+            min_withdraw = 0.002
+          if currency == 'XRP':
+            val_balance = user['balance']['ripple']['available']
+            price_atlcoin = ticker['xrp_usd']
+            string_query = 'balance.ripple.available'
+            min_withdraw = 22
+          if currency == 'USDT':
+            val_balance = user['balance']['tether']['available']
+            price_atlcoin = ticker['usdt_usd']
+            string_query = 'balance.tether.available'
+            min_withdraw = 6.6
+          if currency == 'DASH':
+            val_balance = user['balance']['dash']['available']
+            price_atlcoin = ticker['dash_usd']
+            string_query = 'balance.dash.available'
+            min_withdraw = 0.004
+          if currency == 'EOS':
+            val_balance = user['balance']['eos']['available']
+            price_atlcoin = ticker['eos_usd']
+            string_query = 'balance.eos.available'
+            min_withdraw = 0.2
+          if currency == 'BCH':
+            val_balance = user['balance']['bch']['available']
+            price_atlcoin = ticker['bch_usd']
+            string_query = 'balance.bch.available'
+            min_withdraw = 0.2
+          if currency == 'TBT':
+            val_balance = user['balance']['coin']['available']
+            price_atlcoin = ticker['coin_usd']
+            string_query = 'balance.coin.available'
+            min_withdraw = 0.1
 
-            if check_password(user['password_transaction'], password_transaction) == True:
-                
-                if float(val_balance) >= (float(amount)*100000000):
+          if float(amount) > min_withdraw:
+
+              if check_password(user['password_transaction'], password_transaction) == True:
                   
-                  if float(user['balance']['coin']['available']) >= 100000:
-
-                    url_api = "http://192.254.73.26:59888/crypto-address-validator?wallet="+address+"&currency="+currency+""
+                  if float(val_balance) >= (float(amount)*100000000):
                     
-                    r = requests.get(url_api)
-                    response_dict = r.json()
-                    if response_dict['message'] == True:
-                      
-                      code_active = id_generator(20)
+                    if float(user['balance']['coin']['available']) >= 100000:
 
-                      data = {
-                        'user_id': user['_id'],
-                        'uid': user['customer_id'],
-                        'username': user['username'],
-                        'amount': float(amount),
-                        'date_added' : datetime.utcnow(),
-                        'status': 0,
-                        'address': address,
-                        'currency' : currency,
-                        'code_active' : code_active,
-                        'active_email' : 0,
-                        'amount_usd': float(price_atlcoin) * float(amount),
-                        'price' : price_atlcoin
-                      }
-                      db.withdraws.insert(data)
-                      send_mail_withdraw_user(user['email'],amount,currency,address,code_active)
-                      # amount_usd = float(amount)*float(price_atlcoin)
+                      url_api = "http://192.254.73.26:59888/crypto-address-validator?wallet="+address+"&currency="+currency+""
                       
-                      # new_balance_sub = round(float(val_balance) - (float(amount)*100000000),8)
+                      r = requests.get(url_api)
+                      response_dict = r.json()
+                      if response_dict['message'] == True:
+                        
+                        code_active = id_generator(20)
 
-                      # db.users.update({ "customer_id" : customer_id }, { '$set': { string_query: float(new_balance_sub) } })
-                      
-                      # #save lich su
-                      # data = {
-                      #   'user_id': user['_id'],
-                      #   'uid': user['customer_id'],
-                      #   'username': user['username'],
-                      #   'amount': float(amount),
-                      #   'type': 'withdraw',
-                      #   'txt_id': 'Pending',
-                      #   'date_added' : datetime.utcnow(),
-                      #   'status': 0,
-                      #   'address': address,
-                      #   'currency' : currency,
-                      #   'confirmations' : 0,
-                      #   'amount_usd': float(price_atlcoin) * float(amount),
-                      #   'price' : price_atlcoin,
-                      #   'id_coinpayment' : ''
-                      # }
-                      # db.wallets.insert(data)
-                      # #fee
-                      # userss = db.User.find_one({'customer_id': customer_id})
-                      # new_coin_fee = round((float(userss['balance']['coin']['available']) - 100000),8)
-                      # db.users.update({ "customer_id" : customer_id }, { '$set': { 'balance.coin.available' : new_coin_fee } })
-                      
-                      #send_mail_withdraw(user['email'],amount,currency,address)
+                        data = {
+                          'user_id': user['_id'],
+                          'uid': user['customer_id'],
+                          'username': user['username'],
+                          'amount': float(amount),
+                          'date_added' : datetime.utcnow(),
+                          'status': 0,
+                          'address': address,
+                          'currency' : currency,
+                          'code_active' : code_active,
+                          'active_email' : 0,
+                          'amount_usd': float(price_atlcoin) * float(amount),
+                          'price' : price_atlcoin
+                        }
+                        db.withdraws.insert(data)
+                        send_mail_withdraw_user(user['email'],amount,currency,address,code_active)
+                        # amount_usd = float(amount)*float(price_atlcoin)
+                        
+                        # new_balance_sub = round(float(val_balance) - (float(amount)*100000000),8)
 
-                      return json.dumps({
-                          'status': 'complete', 
-                          'message': 'Withdraw successfully' 
-                      })
+                        # db.users.update({ "customer_id" : customer_id }, { '$set': { string_query: float(new_balance_sub) } })
+                        
+                        # #save lich su
+                        # data = {
+                        #   'user_id': user['_id'],
+                        #   'uid': user['customer_id'],
+                        #   'username': user['username'],
+                        #   'amount': float(amount),
+                        #   'type': 'withdraw',
+                        #   'txt_id': 'Pending',
+                        #   'date_added' : datetime.utcnow(),
+                        #   'status': 0,
+                        #   'address': address,
+                        #   'currency' : currency,
+                        #   'confirmations' : 0,
+                        #   'amount_usd': float(price_atlcoin) * float(amount),
+                        #   'price' : price_atlcoin,
+                        #   'id_coinpayment' : ''
+                        # }
+                        # db.wallets.insert(data)
+                        # #fee
+                        # userss = db.User.find_one({'customer_id': customer_id})
+                        # new_coin_fee = round((float(userss['balance']['coin']['available']) - 100000),8)
+                        # db.users.update({ "customer_id" : customer_id }, { '$set': { 'balance.coin.available' : new_coin_fee } })
+                        
+                        #send_mail_withdraw(user['email'],amount,currency,address)
+
+                        return json.dumps({
+                            'status': 'complete', 
+                            'message': 'Withdraw successfully' 
+                        })
+                      else:
+                        return json.dumps({
+                            'status': 'error',
+                            'message': 'The wrong '+str(currency)+' address. Please try again.' 
+                        })
                     else:
                       return json.dumps({
                           'status': 'error',
-                          'message': 'The wrong '+str(currency)+' address. Please try again.' 
+                          'message': 'You do not have enough 0.001 TBT to make transaction fees.' 
                       })
                   else:
                     return json.dumps({
                         'status': 'error',
-                        'message': 'You do not have enough 0.001 TBT to make transaction fees.' 
+                        'message': 'Your account balance is not enough.' 
                     })
-                else:
+              else:
                   return json.dumps({
-                      'status': 'error',
-                      'message': 'Your account balance is not enough.' 
+                    'status': 'error', 
+                    'message': 'Wrong password transaction. Please try again.' 
                   })
-            else:
-                return json.dumps({
-                  'status': 'error', 
-                  'message': 'Wrong password transaction. Please try again.' 
-                })
-        else:
-            return json.dumps({
-                'status': 'error',
-                'message': 'The withdrawal number must be greater than '+str(round(min_withdraw,8))+' '+currency
-            })
+          else:
+              return json.dumps({
+                  'status': 'error',
+                  'message': 'The withdrawal number must be greater than '+str(round(min_withdraw,8))+' '+currency
+              })
 
+        else:
+          return json.dumps({
+              'status': 'error',
+              'message': 'Your account has not been verify.' 
+          })
       else:
         return json.dumps({
-            'status': 'error',
-            'message': 'Your account has not been verify.' 
+            'status': 'error'
         })
-    else:
-      return json.dumps({
-          'status': 'error'
-      })
 
 
 def send_mail_withdraw_user(email,amount,currency,address,code_active):
