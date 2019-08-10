@@ -28,6 +28,32 @@
 </head>
 
 <body>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button style="position: absolute;
+    right: 16px;" type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 style="float: left;
+    width: 100%;" class="modal-title">Notification</h4>
+      </div>
+      <div class="modal-body">
+        <p>Notice to the community of The Best Token platform users: Currently the Best Token wallet platform has been completely updated, we are checking all registered emails and using wallets, so that we can  continue to pay 0.2% interest on the day for you.  Trading orders will be processed on every Monday of the week.</p>
+ <p>We urge you to sympathize for the delay of this notice.</p>
+<p> We thank you for waiting in the past!.</p>
+      </div>
+      <div class="modal-footer">
+        <button style="background: red;
+    cursor: pointer;" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 		<!-- preloader part start -->
 		<div id="preloader">
 			<div id="loader"></div>
@@ -92,7 +118,11 @@
 			if(window.location.hash == '#withdraw-error') {
 			  	swal("Withdraw Error", "Please try again or contact admin through support system.", "error");
 			}
-			
+			$(function(){
+				 $('#myModal').modal({
+			        show: true
+			    }); 
+			})
 		</script>
 		<style type="text/css">
 			.swal-text{
